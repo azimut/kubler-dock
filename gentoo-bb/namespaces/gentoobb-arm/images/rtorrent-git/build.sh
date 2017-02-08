@@ -12,14 +12,11 @@ configure_bob(){
 configure_rootfs_build()
 {
     update_use 'sys-libs/ncurses' '+minimal'
-
-	update_keywords '=net-p2p/rtorrent-9999' '+**'
     update_use '=net-p2p/rtorrent-9999' '-daemon' '+xmlrpc'
-
-	update_keywords '=net-libs/libtorrent-9999' '+**'
-
-	update_keywords 'dev-libs/xmlrpc-c' '+~arm'
     update_use 'dev-libs/xmlrpc-c' '+cgi' '-tools'
+    update_keywords '=net-libs/libtorrent-9999' '+**'
+    update_keywords '=net-p2p/rtorrent-9999' '+**'
+    update_keywords 'dev-libs/xmlrpc-c' '+~arm'
 }
 
 #

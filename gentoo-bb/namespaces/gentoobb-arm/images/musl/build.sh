@@ -12,10 +12,10 @@ configure_bob() {
 #        echo "$LOCALE" >> /etc/locale.gen
 #    done
 #    locale-gen
-#    mkdir -p $EMERGE_ROOT/usr/lib${BOB_BITS}/locale
-#    cp /usr/lib${BOB_BUILDER_BITS}/locale/locale-archive $EMERGE_ROOT/usr/lib${BOB_BITS}/locale/
+#    mkdir -p "${EMERGE_ROOT}"/usr/lib${BOB_BITS}/locale
+#    cp /usr/lib${BOB_BUILDER_BITS}/locale/locale-archive "${EMERGE_ROOT}"/usr/lib${BOB_BITS}/locale/
 #    # set timezone
-    echo $TIMEZONE > /etc/timezone
+    echo "${TIMEZONE}" > /etc/timezone
 }
 
 #
@@ -30,11 +30,11 @@ configure_rootfs_build()
     # fake portage install
     provide_package sys-apps/portage
     # set locales
-    mkdir -p $EMERGE_ROOT/etc
-#    cp /etc/locale.gen $EMERGE_ROOT/etc/
+    mkdir -p "${EMERGE_ROOT}"/etc
+#    cp /etc/locale.gen "${EMERGE_ROOT}"/etc/
     # set timezone
-    cp /etc/timezone $EMERGE_ROOT/etc/
-    #cp /usr/share/zoneinfo/$TIMEZONE $EMERGE_ROOT/etc/localtime
+    cp /etc/timezone "${EMERGE_ROOT}"/etc/
+    #cp /usr/share/zoneinfo/$TIMEZONE "${EMERGE_ROOT}"/etc/localtime
 }
 
 #
@@ -49,12 +49,12 @@ finish_rootfs_build()
 #        locales_filter+=('!' '-name' "${locale[0]}")
 #        charmaps_filter+=('!' '-name' "${locale[1]}.gz")
 #    done
-#    find $EMERGE_ROOT/usr/share/i18n/locales -type f "${locales_filter[@]}" -exec rm -f {} \;
-#    find $EMERGE_ROOT/usr/share/i18n/charmaps -type f "${charmaps_filter[@]}" -exec rm -f {} \;
+#    find "${EMERGE_ROOT}"/usr/share/i18n/locales -type f "${locales_filter[@]}" -exec rm -f {} \;
+#    find "${EMERGE_ROOT}"/usr/share/i18n/charmaps -type f "${charmaps_filter[@]}" -exec rm -f {} \;
     # backup iconv encodings so other images can pull them in again via ICONV_FROM=glibc
-#    tar -cpf $ROOTFS_BACKUP/glibc-ICONV.tar $EMERGE_ROOT/usr/lib${BOB_BITS}/gconv/
+#    tar -cpf $ROOTFS_BACKUP/glibc-ICONV.tar "${EMERGE_ROOT}"/usr/lib${BOB_BITS}/gconv/
     # purge iconv
-#    rm -f $EMERGE_ROOT/usr/lib${BOB_BITS}/gconv/*
+#    rm -f "${EMERGE_ROOT}"/usr/lib${BOB_BITS}/gconv/*
     # add entry to purged section in PACKAGES.md
 #    write_checkbox_line "Glibc Iconv Encodings" "checked" "${DOC_FOOTER_PURGED}"
 }
