@@ -12,7 +12,7 @@ configure_bob(){
 configure_rootfs_build()
 {
     update_use 'sys-libs/ncurses' '+minimal'
-    update_use '=net-p2p/rtorrent-9999' '-daemon' '+xmlrpc'
+    update_use 'net-p2p/rtorrent' '-daemon' '+xmlrpc'
     update_use 'dev-libs/xmlrpc-c' '+cgi' '-tools'
     update_keywords '=net-libs/libtorrent-9999' '+**'
     update_keywords '=net-p2p/rtorrent-9999' '+**'
@@ -24,11 +24,5 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    # https://git.busybox.net/buildroot/tree/package/ncurses/ncurses.mk?id=e4ead9c13ccad1b89743fdd46e8675f45758aec3
-#    find "${EMERGE_ROOT}"/usr/share/terminfo/ \! \
-#                                  -name 'xterm' -o -name xterm-color -o -name xterm-xfree86 -o \
-#                                  -name vt100 -o -name vt102 -o -name vt200 -o -name vt220 -o \
-#                                  -name ansi -o -name linux \
-#                                  -delete
     copy_gcc_libs
 }
