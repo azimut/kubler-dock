@@ -1,0 +1,4 @@
+FROM ${NAMESPACE}/bob-musl
+MAINTAINER ${MAINTAINER}
+
+CMD ["/bin/bash"]

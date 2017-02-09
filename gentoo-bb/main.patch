@@ -1,0 +1,199 @@
+diff --git a/bob-core/Dockerfile.template b/bob-core/Dockerfile.template
+index 7ad2735..96aa848 100644
+--- a/bob-core/Dockerfile.template
++++ b/bob-core/Dockerfile.template
+@@ -1,6 +1,8 @@
+ FROM ${BOB_CURRENT_STAGE3_ID}
+ MAINTAINER ${MAINTAINER}
+ 
++ADD qemu-arm-static /usr/bin/qemu-arm-static
++
+ RUN set -x && \
+     echo 'GENTOO_MIRRORS="http://distfiles.gentoo.org/"' >> /etc/portage/make.conf && \
+     mkdir -p /etc/portage/repos.conf /usr/portage && \
+diff --git a/bob-core/build-root.sh b/bob-core/build-root.sh
+index fb7e42c..d0012ef 100755
+--- a/bob-core/build-root.sh
++++ b/bob-core/build-root.sh
+@@ -25,12 +25,12 @@ IMAGE_NS="${REPO%%/*}"
+ IMAGE_ID="${REPO##*/}"
+ 
+ copy_gcc_libs() {
+-    mkdir -p ${EMERGE_ROOT}/lib64
++    mkdir -p ${EMERGE_ROOT}/lib"${BOB_BITS}"
+     LIBGCC="$(find /usr/lib/ -name libgcc_s.so.1)"
+     LIBSTDC="$(find /usr/lib/ -name libstdc++.so.6)"
+ 
+     for lib in ${LIBGCC} ${LIBSTDC}; do
+-        cp $lib ${EMERGE_ROOT}/lib64/
++        cp $lib ${EMERGE_ROOT}/lib"${BOB_BITS}"/
+     done
+ }
+ 
+@@ -343,8 +343,8 @@ if [ -n "$PACKAGES" ]; then
+         find $EMERGE_ROOT/usr/include -type f -name '*.h' | \
+             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-HEADERS.tar --files-from -
+     fi
+-    if [ -d $EMERGE_ROOT/usr/lib64 ]; then
+-        find $EMERGE_ROOT/usr/lib64 -type f -name '*.a' | \
++    if [ -d $EMERGE_ROOT/usr/lib"${BOB_BITS}" ]; then
++        find $EMERGE_ROOT/usr/lib"${BOB_BITS}" -type f -name '*.a' | \
+             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-STATIC_LIBS.tar --files-from -
+     fi
+ 
+@@ -378,11 +378,11 @@ rm -rf $EMERGE_ROOT/var/lib/portage $EMERGE_ROOT/var/cache/edb $EMERGE_ROOT/usr/
+ if [ -z "$KEEP_HEADERS" ]; then
+     rm -rf $EMERGE_ROOT/usr/include/*
+ fi
+-if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib64 ] && [ "$(ls -A $EMERGE_ROOT/lib64)" ]; then
+-    find $EMERGE_ROOT/lib64/* -type f -name "*.a" -exec rm -f {} \;
++if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib"${BOB_BITS}" ] && [ "$(ls -A $EMERGE_ROOT/lib"${BOB_BITS}")" ]; then
++    find $EMERGE_ROOT/lib"${BOB_BITS}"/* -type f -name "*.a" -exec rm -f {} \;
+ fi
+-if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib64 ] && [ "$(ls -A $EMERGE_ROOT/usr/lib64)" ]; then
+-    find $EMERGE_ROOT/usr/lib64/* -type f -name "*.a" -exec rm -f {} \;
++if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib"${BOB_BITS}" ] && [ "$(ls -A $EMERGE_ROOT/usr/lib"${BOB_BITS}")" ]; then
++    find $EMERGE_ROOT/usr/lib"${BOB_BITS}"/* -type f -name "*.a" -exec rm -f {} \;
+ fi
+ 
+ if [ -n "$INSTALL_DOCKER_GEN" ]; then
+diff --git a/build.conf b/build.conf
+index 980a868..0c187bb 100644
+--- a/build.conf
++++ b/build.conf
+@@ -23,15 +23,27 @@ BOB_TIMEZONE="${BOB_TIMEZONE:-UTC}"
+ 
+ # make.conf defaults
+ 
+-# active in configure_rootfs_build() hook and during the rest of the build
+-BOB_CFLAGS="${BOB_CFLAGS:--mtune=generic -O2 -pipe}"
+-BOB_CXXFLAGS="${BOB_CXXFLAGS:-${BOB_CFLAGS}}"
+-BOB_CHOST="${BOB_CHOST:-x86_64-pc-linux-gnu}"
++# important: changing any of the below requires core image rebuild (pass -c on rebuild)
++BOB_CFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_CXXFLAGS="${BOB_CFLAGS}"
++BOB_CHOST="armv7a-hardfloat-linux-musleabi"
++BOB_BITS=""
+ 
+ # active in configure_bob() hook, generally only differs when using crossdev
+-BOB_BUILDER_CFLAGS="${BOB_BUILDER_CFLAGS:-${BOB_CFLAGS}}"
+-BOB_BUILDER_CXXFLAGS="${BOB_BUILDER_CXXFLAGS:-${BOB_CXXFLAGS}}"
+-BOB_BUILDER_CHOST="${BOB_BUILDER_CHOST:-${BOB_CHOST}}"
++BOB_BUILDER_CFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_BUILDER_CXXFLAGS="${BOB_CFLAGS}"
++BOB_BUILDER_CHOST="armv7a-hardfloat-linux-musleabi"
++
++
++# active in configure_rootfs_build() hook and during the rest of the build
++#BOB_CFLAGS="${BOB_CFLAGS:--mtune=generic -O2 -pipe}"
++#BOB_CXXFLAGS="${BOB_CXXFLAGS:-${BOB_CFLAGS}}"
++#BOB_CHOST="${BOB_CHOST:-x86_64-pc-linux-gnu}"
++#
++## active in configure_bob() hook, generally only differs when using crossdev
++#BOB_BUILDER_CFLAGS="${BOB_BUILDER_CFLAGS:-${BOB_CFLAGS}}"
++#BOB_BUILDER_CXXFLAGS="${BOB_BUILDER_CXXFLAGS:-${BOB_CXXFLAGS}}"
++#BOB_BUILDER_CHOST="${BOB_BUILDER_CHOST:-${BOB_CHOST}}"
+ 
+ BOB_GENTOO_MIRRORS="${BOB_GENTOO_MIRRORS:-ftp://ftp.wh2.tu-dresden.de/pub/mirrors/gentoo ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/gentoo/}"
+ BOB_SYNC_URI="${BOB_SYNC_URI:-rsync://rsync.europe.gentoo.org/gentoo-portage}"
+diff --git a/dock/gentoobb/builder/bob-musl/build.conf b/dock/gentoobb/builder/bob-musl/build.conf
+index 1bc2387..406f275 100644
+--- a/dock/gentoobb/builder/bob-musl/build.conf
++++ b/dock/gentoobb/builder/bob-musl/build.conf
+@@ -2,20 +2,21 @@
+ #BUILDER="${NAMESPACE}/foo"
+ 
+ # ..or bootstrap a fresh stage3, overrides BUILDER if defined
+-STAGE3_DATE="20170104"
+-STAGE3_BASE="stage3-amd64-musl-hardened"
+-ARCH="amd64"
++STAGE3_DATE="20161207"
++STAGE3_BASE="stage3-armv7a_hardfp-musl-hardened"
++ARCH="arm"
+ ARCH_URL="${MIRROR}experimental/${ARCH}/musl/"
+ 
+ # run build container in privileged mode, defaults to false
+ BUILD_PRIVILEGED=true
+ 
+ # important: changing any of the below requires core image rebuild (pass -c on rebuild)
+-BOB_CHOST="x86_64-gentoo-linux-musl"
+-#BOB_CFLAGS="${BOB_CFLAGS:--mtune=generic -O2 -pipe}"
+-#BOB_CXXFLAGS="${BOB_CXXFLAGS:-${BOB_CFLAGS}}"
++BOB_CFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_CXXFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_CHOST="armv7a-hardfloat-linux-musleabi"
++BOB_BITS=""
+ 
+ # active in configure_bob() hook, generally only differs when using crossdev
+-#BOB_BUILDER_CHOST="${BOB_BUILDER_CHOST:-${BOB_CHOST}}"
+-#BOB_BUILDER_CFLAGS="${BOB_BUILDER_CFLAGS:-${BOB_CFLAGS}}"
+-#BOB_BUILDER_CXXFLAGS="${BOB_BUILDER_CXXFLAGS:-${BOB_CXXFLAGS}}"
++BOB_BUILDER_CFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_BUILDER_CXXFLAGS="-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard"
++BOB_BUILDER_CHOST="armv7a-hardfloat-linux-musleabi"
+diff --git a/dock/gentoobb/builder/bob-musl/build.sh b/dock/gentoobb/builder/bob-musl/build.sh
+index db5b85d..155da13 100644
+--- a/dock/gentoobb/builder/bob-musl/build.sh
++++ b/dock/gentoobb/builder/bob-musl/build.sh
+@@ -8,6 +8,8 @@ EMERGE_BIN="emerge"
+ # this hook can be used to configure the build container itself, install packages, etc
+ #
+ configure_bob() {
++    gcc-config 1
++    gcc-config -c
+     # install flaggie, required for update_use() helper
+     emerge app-portage/flaggie
+     # migrate from files to directories at /etc/portage/package.*
+@@ -27,9 +29,9 @@ configure_bob() {
+     # install default packages
+     update_use 'dev-vcs/git' '-perl'
+     update_use 'app-crypt/pinentry' '+ncurses'
+-    update_keywords 'app-portage/layman' '+~amd64'
+-    update_keywords 'dev-python/ssl-fetch' '+~amd64'
+-    emerge dev-vcs/git app-portage/layman sys-devel/distcc
++    update_keywords 'app-portage/layman' '+~arm'
++    update_keywords 'dev-python/ssl-fetch' '+~arm'
++    emerge dev-vcs/git app-portage/layman 
+     # setup layman
+     sed -i 's/^check_official : Yes/check_official : No/g' /etc/layman/layman.cfg # no pesky prompts please
+     layman -L
+diff --git a/dock/gentoobb/images/busybox/PACKAGES.md b/dock/gentoobb/images/busybox/PACKAGES.md
+index 177fe16..fff3d7f 100644
+--- a/dock/gentoobb/images/busybox/PACKAGES.md
++++ b/dock/gentoobb/images/busybox/PACKAGES.md
+@@ -1,7 +1,7 @@
+ ### gentoobb/busybox:20170127
+ 
+-Built: Fri Jan 27 00:57:41 CET 2017
+-Image Size: 1.25 MB
++Built: Thu Feb  9 03:57:18 ART 2017
++Image Size: 1.257 MB
+ #### Installed
+ Package | USE Flags
+ --------|----------
+diff --git a/dock/gentoobb/images/busybox/build.sh b/dock/gentoobb/images/busybox/build.sh
+index 8b75762..bd699be 100644
+--- a/dock/gentoobb/images/busybox/build.sh
++++ b/dock/gentoobb/images/busybox/build.sh
+@@ -2,7 +2,7 @@
+ # build config
+ #
+ PACKAGES="sys-apps/busybox"
+-
++EMERGE_BIN=emerge
+ #
+ # this method runs in the bb builder container just before starting the build of the rootfs
+ # 
+diff --git a/inc/engine/docker.sh b/inc/engine/docker.sh
+index 0324c64..1eb8ac4 100644
+--- a/inc/engine/docker.sh
++++ b/inc/engine/docker.sh
+@@ -209,7 +209,7 @@ build_core() {
+     mkdir -p "${CORE_BUILDER_PATH}"
+ 
+     # copy build-root.sh and emerge defaults so we can access it via dockerfile context
+-    cp ${PROJECT_ROOT}/bob-core/{build-root.sh,make.conf,portage-defaults.sh,Dockerfile.template} ${CORE_BUILDER_PATH}/
++    cp ${PROJECT_ROOT}/bob-core/* ${CORE_BUILDER_PATH}/
+ 
+     generate_dockerfile ${CORE_BUILDER_PATH}
+     build_image "${1}-core" "${BUILDER_PATH}"
