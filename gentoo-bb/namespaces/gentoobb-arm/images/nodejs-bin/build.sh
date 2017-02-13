@@ -2,13 +2,14 @@
 # build config
 #
 PACKAGES="sys-apps/baselayout"
-EMERGE_BIN=emerge
+EMERGE_BIN="emerge"
+NODE_VERSION="6.9.4"
 set -x
 configure_bob()
 {
-    wget -c -O /distfiles/node-v6.9.4-linux-armv7l.tar.gz -S http://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-armv7l.tar.gz
+    wget -c -O /distfiles/node-v"${NODE_VERSION}"-linux-armv7l.tar.gz -S http://nodejs.org/dist/v"${NODE_VERSION}"/node-v"${NODE_VERSION}"-linux-armv7l.tar.gz
     mkdir -p "${EMERGE_ROOT}"/usr/
-    tar xzvf /distfiles/node-v6.9.4-linux-armv7l.tar.gz -C "${EMERGE_ROOT}"/usr/ --strip-components=1
+    tar xzvf /distfiles/node-v"${NODE_VERSION}"-linux-armv7l.tar.gz -C "${EMERGE_ROOT}"/usr/ --strip-components=1
 }
 
 #

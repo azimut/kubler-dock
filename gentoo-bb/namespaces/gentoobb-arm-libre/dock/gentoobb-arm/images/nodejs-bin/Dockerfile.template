@@ -1,6 +1,0 @@
-FROM ${NAMESPACE}/busybox
-MAINTAINER ${MAINTAINER}
-
-ADD rootfs.tar /
-
-CMD ["/bin/sh"]

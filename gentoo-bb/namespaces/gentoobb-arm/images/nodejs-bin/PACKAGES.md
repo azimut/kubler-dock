@@ -1,6 +1,6 @@
-### gentoobb-arm-musl-libressl/nodejs-bin:20161207
+### gentoobb-arm/nodejs-bin:20170127
 
-Built: Sun Jan 22 19:58:51 ART 2017
+Built: Fri Feb 10 00:33:27 ART 2017
 Image Size: 37.86 MB
 #### Installed
 Package | USE Flags
@@ -10,7 +10,7 @@ sys-apps/baselayout-2.3 | `-build`
 #### Inherited
 Package | USE Flags
 --------|----------
-**FROM gentoobb-arm-musl-libressl/busybox** |
+**FROM gentoobb-arm/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 
 #### Purged

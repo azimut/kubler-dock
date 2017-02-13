@@ -1,7 +1,7 @@
 ### gentoobb-arm/musl:20170127
 
-Built: Tue Feb  7 21:07:27 ART 2017
-Image Size: 1.942 MB
+Built: Sun Feb 12 22:13:54 ART 2017
+Image Size: 1.916 MB
 #### Installed
 Package | USE Flags
 --------|----------
@@ -11,7 +11,7 @@ Package | USE Flags
 --------|----------
 **FROM gentoobb/busybox** |
 **FROM gentoobb-arm/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
+sys-apps/busybox-1.26.0 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
 - [x] Headers
 - [x] Static Libs

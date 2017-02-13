@@ -1,6 +1,0 @@
-FROM ${NAMESPACE}/libressl
-MAINTAINER ${MAINTAINER}
-
-ADD rootfs.tar /
-
-#RUN ldconfig

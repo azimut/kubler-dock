@@ -1,13 +1,18 @@
 #
 # build config
 #
-PACKAGES="dev-libs/libressl"
+PACKAGES="dev-libs/openssl"
 EMERGE_BIN="emerge"
 
 configure_bob()
 {
+    # enable ECDH
+    emerge -C net-misc/openssh
+    update_use 'dev-libs/openssl' '-bindist' '-sslv3' '-zlib' '-tls-heartbeat'
     update_use 'app-misc/ca-certificates' '-cacert' '-insecure_certs'
     update_keywords 'app-misc/ca-certificates' '+~arm'
+    unprovide_package 'dev-libs/openssl'
+    emerge dev-libs/openssl
 }
 
 #
