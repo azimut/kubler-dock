@@ -1,98 +1,95 @@
-diff --git a/bob-core/Dockerfile.template b/bob-core/Dockerfile.template
-index 7ad2735..96aa848 100644
---- a/bob-core/Dockerfile.template
-+++ b/bob-core/Dockerfile.template
+diff --git a/lib/bob-core/Dockerfile.template b/lib/bob-core/Dockerfile.template
+index 3e56fdb..51309dc 100644
+--- a/lib/bob-core/Dockerfile.template
++++ b/lib/bob-core/Dockerfile.template
 @@ -1,6 +1,8 @@
  FROM ${BOB_CURRENT_STAGE3_ID}
- MAINTAINER ${MAINTAINER}
+ LABEL maintainer ${MAINTAINER}
  
 +ADD qemu-arm-static /usr/bin/qemu-arm-static
 +
  RUN set -x && \
      echo 'GENTOO_MIRRORS="http://distfiles.gentoo.org/"' >> /etc/portage/make.conf && \
      mkdir -p /etc/portage/repos.conf /usr/portage && \
-diff --git a/bob-core/build-root.sh b/bob-core/build-root.sh
-index fb7e42c..d0012ef 100755
---- a/bob-core/build-root.sh
-+++ b/bob-core/build-root.sh
-@@ -25,12 +25,12 @@ IMAGE_NS="${REPO%%/*}"
- IMAGE_ID="${REPO##*/}"
+diff --git a/lib/bob-core/build-root.sh b/lib/bob-core/build-root.sh
+index 9705d43..478828b 100755
+--- a/lib/bob-core/build-root.sh
++++ b/lib/bob-core/build-root.sh
+@@ -29,12 +29,12 @@ _image_id="${_image##*/}"
+ # Copy libgcc/libstdc++ libs
+ function copy_gcc_libs() {
+     local lib_gcc lib_stdc lib
+-    mkdir -p "${_EMERGE_ROOT}/lib64"
++    mkdir -p "${_EMERGE_ROOT}/lib"
+     lib_gcc="$(find /usr/lib/ -name libgcc_s.so.1)"
+     lib_stdc="$(find /usr/lib/ -name libstdc++.so.6)"
  
- copy_gcc_libs() {
--    mkdir -p ${EMERGE_ROOT}/lib64
-+    mkdir -p ${EMERGE_ROOT}/lib"${BOB_BITS}"
-     LIBGCC="$(find /usr/lib/ -name libgcc_s.so.1)"
-     LIBSTDC="$(find /usr/lib/ -name libstdc++.so.6)"
- 
-     for lib in ${LIBGCC} ${LIBSTDC}; do
--        cp $lib ${EMERGE_ROOT}/lib64/
-+        cp $lib ${EMERGE_ROOT}/lib"${BOB_BITS}"/
+     for lib in "${lib_gcc}" "${lib_stdc}"; do
+-        cp "${lib}" "${_EMERGE_ROOT}"/lib64/
++        cp "${lib}" "${_EMERGE_ROOT}"/lib/
      done
  }
  
-@@ -343,8 +343,8 @@ if [ -n "$PACKAGES" ]; then
-         find $EMERGE_ROOT/usr/include -type f -name '*.h' | \
-             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-HEADERS.tar --files-from -
+@@ -438,8 +438,8 @@ if [ -n "${_packages}" ]; then
+         find "${_EMERGE_ROOT}/usr/include" -type f -name '*.h' | \
+             tar -cpf "${_ROOTFS_BACKUP}/${_image_ns}_${_image_id}-headers.tar" --files-from -
      fi
--    if [ -d $EMERGE_ROOT/usr/lib64 ]; then
--        find $EMERGE_ROOT/usr/lib64 -type f -name '*.a' | \
-+    if [ -d $EMERGE_ROOT/usr/lib"${BOB_BITS}" ]; then
-+        find $EMERGE_ROOT/usr/lib"${BOB_BITS}" -type f -name '*.a' | \
-             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-STATIC_LIBS.tar --files-from -
+-    if [[ -d "${_EMERGE_ROOT}/usr/lib64" ]]; then
+-        find "${_EMERGE_ROOT}/usr/lib64" -type f -name '*.a' | \
++    if [[ -d "${_EMERGE_ROOT}/usr/lib" ]]; then
++        find "${_EMERGE_ROOT}/usr/lib" -type f -name '*.a' | \
+             tar -cpf "${_ROOTFS_BACKUP}/${_image_ns}_${_image_id}-static_libs.tar" --files-from -
      fi
  
-@@ -378,11 +378,11 @@ rm -rf $EMERGE_ROOT/var/lib/portage $EMERGE_ROOT/var/cache/edb $EMERGE_ROOT/usr/
- if [ -z "$KEEP_HEADERS" ]; then
-     rm -rf $EMERGE_ROOT/usr/include/*
+@@ -470,7 +470,7 @@ fi
+ 
+ # clean up
+ if [ -z "${BOB_SKIP_LIB_CLEANUP}" ]; then
+-    for lib_dir in "${_EMERGE_ROOT}"/{lib64,usr/lib64}; do
++    for lib_dir in "${_EMERGE_ROOT}"/{lib,usr/lib}; do
+         [[ -d "${lib_dir}" ]] && find "${lib_dir}" -type f \( -name '*.[co]' -o -name '*.prl' \) -delete
+     done
  fi
--if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib64 ] && [ "$(ls -A $EMERGE_ROOT/lib64)" ]; then
--    find $EMERGE_ROOT/lib64/* -type f -name "*.a" -exec rm -f {} \;
-+if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib"${BOB_BITS}" ] && [ "$(ls -A $EMERGE_ROOT/lib"${BOB_BITS}")" ]; then
-+    find $EMERGE_ROOT/lib"${BOB_BITS}"/* -type f -name "*.a" -exec rm -f {} \;
- fi
--if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib64 ] && [ "$(ls -A $EMERGE_ROOT/usr/lib64)" ]; then
--    find $EMERGE_ROOT/usr/lib64/* -type f -name "*.a" -exec rm -f {} \;
-+if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib"${BOB_BITS}" ] && [ "$(ls -A $EMERGE_ROOT/usr/lib"${BOB_BITS}")" ]; then
-+    find $EMERGE_ROOT/usr/lib"${BOB_BITS}"/* -type f -name "*.a" -exec rm -f {} \;
+@@ -478,9 +478,9 @@ fi
+ rm -rf \
+     "${_EMERGE_ROOT}"/etc/ld.so.cache \
+     "${_EMERGE_ROOT}"/usr/bin/*-config \
+-    "${_EMERGE_ROOT}"/usr/lib64/cmake/ \
+-    "${_EMERGE_ROOT}"/usr/lib64/pkgconfig/ \
+-    "${_EMERGE_ROOT}"/usr/lib64/qt*/mkspecs/ \
++    "${_EMERGE_ROOT}"/usr/lib/cmake/ \
++    "${_EMERGE_ROOT}"/usr/lib/pkgconfig/ \
++    "${_EMERGE_ROOT}"/usr/lib/qt*/mkspecs/ \
+     "${_EMERGE_ROOT}"/usr/share/aclocal/ \
+     "${_EMERGE_ROOT}"/usr/share/gettext/ \
+     "${_EMERGE_ROOT}"/usr/share/gir-[0-9]*/ \
+@@ -497,7 +497,7 @@ if [[ -z "${_keep_headers}" ]]; then
+     rm -rf "${_EMERGE_ROOT}"/usr/include/*
  fi
  
- if [ -n "$INSTALL_DOCKER_GEN" ]; then
-diff --git a/dock/gentoobb/builder/bob-musl/build.sh b/dock/gentoobb/builder/bob-musl/build.sh
-index db5b85d..155da13 100644
---- a/dock/gentoobb/builder/bob-musl/build.sh
-+++ b/dock/gentoobb/builder/bob-musl/build.sh
-@@ -8,6 +8,8 @@ EMERGE_BIN="emerge"
- # this hook can be used to configure the build container itself, install packages, etc
- #
- configure_bob() {
-+    gcc-config 1
-+    gcc-config -c
-     # install flaggie, required for update_use() helper
-     emerge app-portage/flaggie
-     # migrate from files to directories at /etc/portage/package.*
-@@ -27,9 +29,9 @@ configure_bob() {
-     # install default packages
-     update_use 'dev-vcs/git' '-perl'
-     update_use 'app-crypt/pinentry' '+ncurses'
--    update_keywords 'app-portage/layman' '+~amd64'
--    update_keywords 'dev-python/ssl-fetch' '+~amd64'
--    emerge dev-vcs/git app-portage/layman sys-devel/distcc
-+    update_keywords 'app-portage/layman' '+~arm'
-+    update_keywords 'dev-python/ssl-fetch' '+~arm'
-+    emerge dev-vcs/git app-portage/layman 
-     # setup layman
-     sed -i 's/^check_official : Yes/check_official : No/g' /etc/layman/layman.cfg # no pesky prompts please
-     layman -L
-diff --git a/inc/engine/docker.sh b/inc/engine/docker.sh
-index 0324c64..1eb8ac4 100644
---- a/inc/engine/docker.sh
-+++ b/inc/engine/docker.sh
-@@ -209,7 +209,7 @@ build_core() {
-     mkdir -p "${CORE_BUILDER_PATH}"
+-for lib_dir in "${_EMERGE_ROOT}"/{lib64,usr/lib64}; do
++for lib_dir in "${_EMERGE_ROOT}"/{lib,usr/lib}; do
+     if [[ -z "${_keep_static_libs}" ]] && [[ -d "${lib_dir}" ]] && [[ "$(ls -A "${lib_dir}")" ]]; then
+         find "${lib_dir}"/* -type f -name "*.a" -delete
+     fi
+diff --git a/lib/engine/docker.sh b/lib/engine/docker.sh
+index cf357eb..cbf2909 100644
+--- a/lib/engine/docker.sh
++++ b/lib/engine/docker.sh
+@@ -263,6 +263,7 @@ function run_image() {
+     [[ ! -z "${container_name}" ]] && docker_args+=("--name" "${container_name//\//-}")
+     [[ "${BUILD_PRIVILEGED}" == "true" ]] && docker_args+=("--privileged")
+     [[ "${_container_mount_portage}" == "true" ]] && docker_args+=("--volumes-from" "${_PORTAGE_IMAGE//\//-}")
++    #[[ "${_container_mount_portage}" == "true" ]] && docker_args+=("--volumes-from" "${_PORTAGE_IMAGE}")
+     # gogo
+     "${DOCKER}" run "${docker_args[@]}" "${docker_mounts[@]}" "${docker_env[@]}" "${image_id}" "${_container_cmd[@]}" ||
+         die "Error, failed to run image ${image_id}"
+@@ -336,7 +337,7 @@ function build_core() {
+     mkdir -p "${__expand_image_id}"
  
      # copy build-root.sh and emerge defaults so we can access it via dockerfile context
--    cp ${PROJECT_ROOT}/bob-core/{build-root.sh,make.conf,portage-defaults.sh,Dockerfile.template} ${CORE_BUILDER_PATH}/
-+    cp ${PROJECT_ROOT}/bob-core/* ${CORE_BUILDER_PATH}/
+-    cp -r "${_script_dir}"/lib/bob-core/{*.sh,etc,Dockerfile.template} "${__expand_image_id}/"
++    cp -r "${_script_dir}"/lib/bob-core/* "${__expand_image_id}/"
  
-     generate_dockerfile ${CORE_BUILDER_PATH}
-     build_image "${1}-core" "${BUILDER_PATH}"
+     generate_dockerfile "${__expand_image_id}"
+     build_image "${builder_id}-core" "${_BUILDER_PATH}"
