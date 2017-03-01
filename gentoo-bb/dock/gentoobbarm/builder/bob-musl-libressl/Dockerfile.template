@@ -1,0 +1,4 @@
+FROM ${NAMESPACE}/bob-musl-libressl
+MAINTAINER ${MAINTAINER}
+
+CMD ["/bin/bash"]
