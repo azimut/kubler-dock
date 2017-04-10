@@ -1,7 +1,7 @@
 ### kubler-spin/glibc:20170326
 
-Built: Thu Apr  6 23:35:45 ART 2017
-Image Size: 18.84 MB
+Built: Mon Apr 10 19:03:53 ART 2017
+Image Size: 10.27 MB
 
 #### Installed
 Package | USE Flags

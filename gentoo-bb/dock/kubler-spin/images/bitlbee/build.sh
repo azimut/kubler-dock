@@ -21,7 +21,7 @@ configure_bob(){
     update_keywords 'net-im/bitlbee'              '+**'
     update_keywords 'x11-plugins/pidgin-skypeweb' '+**'
 
-    update_use 'dev-libs/glib'      '-mime' '-xattr'
+    update_use 'dev-libs/glib'      '-mime' '-xattr' '-kernel_linux'
     update_use 'dev-libs/json-glib' '-introspection'
     update_use 'net-im/bitlbee'     '-gnutls' '+plugins' '+purple' '+xmpp'
     update_use 'net-im/pidgin'      '-xscreensaver' '-gstreamer'
@@ -37,7 +37,8 @@ configure_bob(){
 #
 configure_rootfs_build()
 {
-    :
+    # https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=c4a2ee848f7151bb12d262f97633537925b17a20
+    provide_package 'sys-apps/util-linux'
 }
 
 #

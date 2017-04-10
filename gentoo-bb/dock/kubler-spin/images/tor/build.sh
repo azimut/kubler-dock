@@ -2,27 +2,21 @@
 # build config
 #
 
-# direct dependencies
-# libpcap dependencies
+# libpcap
 #     apparently used to drop caps https://trac.torproject.org/projects/tor/ticket/8195
 #     caps dropped here https://github.com/torproject/tor/blob/7505f452c865ef9ca5be35647032f93bfb392762/src/common/compat.c#L2000
 #     docker caps kept https://github.com/docker/docker/blob/master/oci/defaults_linux.go#L62-L77
 #     alpine is missing this...
-_packages="sys-libs/zlib dev-libs/libevent
-           sys-libs/libcap sys-apps/attr
-           net-vpn/tor"
 _packages="sys-libs/libcap net-vpn/tor"
+
 # force native compilation
 _emerge_bin="emerge"
 
 set -x
 
 configure_bob(){
-    # Use stable branch
-    update_keywords '=net-vpn/tor-0.2*' '+~amd64' 
-    # FIXME: docker has seccomp, if this change I need to change the deps
-    update_use 'net-vpn/tor' '-seccomp'
-    # FIXME: I think it would be an overkill
+    update_keywords '=net-vpn/tor-0.3*' '+~amd64' 
+    update_keywords 'sys-libs/libseccomp' '+~amd64'
     update_use 'sys-libs/libcap' '-pam'
 }
 

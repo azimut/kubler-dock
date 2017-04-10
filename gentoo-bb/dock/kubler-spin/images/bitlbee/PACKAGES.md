@@ -1,16 +1,16 @@
 ### kubler-spin/bitlbee:20170326
 
-Built: Sun Apr  9 12:54:13 ART 2017
-Image Size: 24.82 MB
+Built: Mon Apr 10 08:11:25 ART 2017
+Image Size: 24.95 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-dev-db/sqlite-3.16.2 | `readline -debug -doc -icu -secure-delete -static-libs -tcl {-test} -tools`
-dev-libs/glib-2.48.2 | `-dbus -debug (-fam) -mime (-selinux) -static-libs (-systemtap) {-test} -utils -xattr`
-dev-libs/json-glib-1.2.2 | `-debug -introspection`
+dev-db/sqlite-3.17.0 | `readline -debug -doc -icu -secure-delete -static-libs -tcl {-test} -tools`
+dev-libs/glib-2.50.3-r1 | `-dbus -debug (-fam) -mime (-selinux) -static-libs (-systemtap) {-test} -utils -xattr`
+dev-libs/json-glib-1.2.8 | `-debug -introspection`
 dev-libs/libffi-3.2.1 | `pax`
-dev-libs/libpcre-8.39 | `cxx readline recursion-limit (unicode) zlib -bzip2 -jit -libedit -pcre16 -pcre32 -static-libs`
+dev-libs/libpcre-8.40-r1 | `cxx readline recursion-limit (unicode) zlib -bzip2 -jit -libedit -pcre16 -pcre32 -static-libs`
 dev-libs/libxml2-2.9.4-r1 | `readline -debug -examples -icu -ipv6 -lzma -python -static-libs {-test}`
 dev-libs/nspr-4.13.1 | `-debug`
 dev-libs/nss-3.28.1 | `nss-pem -cacert -utils`
@@ -25,7 +25,7 @@ Package | USE Flags
 --------|----------
 **FROM kubler-spin/libressl** |
 app-misc/c_rehash-1.7-r1 | ``
-app-misc/ca-certificates-20161130.3.29.3 | `-cacert -insecure`
+app-misc/ca-certificates-20161130.3.30.1 | `-cacert -insecure`
 dev-libs/libressl-2.4.5 | `asm -static-libs`
 sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/musl** |

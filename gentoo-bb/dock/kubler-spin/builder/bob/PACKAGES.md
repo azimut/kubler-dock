@@ -1,7 +1,7 @@
 ### kubler-spin/bob:20170326
 
-Built: Thu Apr  6 23:25:38 ART 2017
-Image Size: 1.184 GB
+Built: Mon Apr 10 07:09:34 ART 2017
+Image Size: 1.185 GB
 
 #### Installed
 None.

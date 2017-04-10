@@ -2,3 +2,5 @@ FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
+
+CMD ["/bin/sh"]
