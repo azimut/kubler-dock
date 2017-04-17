@@ -1,7 +1,7 @@
 ### kubler-spin/nodejs-glibc:20170326
 
-Built: Mon Apr 10 19:09:01 ART 2017
-Image Size: 47.2 MB
+Built: Fri Apr 14 22:55:35 ART 2017
+Image Size: 46.54 MB
 
 #### Installed
 Package | USE Flags
@@ -25,5 +25,5 @@ sys-libs/timezone-data-2017a | `nls -leaps`
 **FROM gentoobb/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged
-- [ ] Headers
+- [x] Headers
 - [x] Static Libs

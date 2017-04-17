@@ -24,13 +24,13 @@ configure_bob()
     # dependency install
     # installation fails otherwise, running the init scripts
     cd ${_EMERGE_ROOT}/opt/flood/
-    npm install --verbose --ignore-scripts geoip-country-only
+      npm install --ignore-scripts geoip-country-only
     cd node_modules/geoip-country-only
-    npm run-script updatedb-debug
+      npm run-script updatedb-debug
 
     # Flood install
     cd ${_EMERGE_ROOT}/opt/flood/
-    npm install --production --verbose
+      npm install --production
 }
 
 #
@@ -46,5 +46,29 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
+    SECRET="$(openssl rand -base64 64 | tr -d '\n' | rev | cut -b3-)"
+
+    cat > ${_EMERGE_ROOT}/opt/flood/config.js <<EOF
+const CONFIG = {
+  baseURI: '/',
+  dbCleanInterval: 1000 * 60 * 60,
+  dbPath: './server/db/',
+  floodServerPort: 3000,
+  maxHistoryStates: 30,
+  pollInterval: 1000 * 5,
+  secret: '${SECRET}',
+  scgi: {
+    host: 'rtorrent',
+    port: 5000,
+    socket: false,
+    socketPath: '/tmp/rtorrent.sock'
+  },
+  ssl: false,
+  sslKey: '/absolute/path/to/key/',
+  sslCert: '/absolute/path/to/certificate/'
+};
+
+module.exports = CONFIG;
+EOF
     log_as_installed "manual install" "flood" "https://github.com/jfurrow/flood"
 }

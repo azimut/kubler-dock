@@ -1,0 +1,7 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+ENTRYPOINT ["/opt/flexget/bin/flexget"]
+CMD ["-L","debug","daemon","start"]

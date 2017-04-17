@@ -2,7 +2,6 @@
 # build config
 #
 _packages="sys-libs/zlib net-libs/http-parser dev-libs/libuv net-libs/nodejs"
-_keep_headers=yes
 configure_bob()
 {
     #update_use net-libs/nodejs +icu

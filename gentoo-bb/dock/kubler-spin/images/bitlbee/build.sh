@@ -13,19 +13,25 @@ set -x
 configure_bob(){
 
     mask_package '=net-im/bitlbee-9999'
-    mask_package '=x11-plugins/pidgin-skypeweb-9999'
+    #mask_package '=x11-plugins/pidgin-skypeweb-9999'
 
+    # http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html
+    # The GNU Readline library provides a set of functions for use by applications
+    # that allow users to edit command lines as they are typed in. 
+    echo 'USE="${USE} -readline"' >> /etc/portage/make.conf
+    
     provide_package 'dev-util/desktop-file-utils'
     provide_package 'virtual/logger'
 
     update_keywords 'net-im/bitlbee'              '+**'
     update_keywords 'x11-plugins/pidgin-skypeweb' '+**'
 
-    update_use 'dev-libs/glib'      '-mime' '-xattr' '-kernel_linux'
-    update_use 'dev-libs/json-glib' '-introspection'
-    update_use 'net-im/bitlbee'     '-gnutls' '+plugins' '+purple' '+xmpp'
-    update_use 'net-im/pidgin'      '-xscreensaver' '-gstreamer'
-    update_use 'sys-libs/ncurses'   '+minimal'
+    update_use 'sys-apps/util-linux' '-suid' '-cramfs' '-pam'
+    update_use 'dev-libs/glib'       '-mime' '-xattr'
+    update_use 'dev-libs/json-glib'  '-introspection'
+    update_use 'net-im/bitlbee'      '-gnutls' '+plugins' '+purple' '+xmpp'
+    update_use 'net-im/pidgin'       '-xscreensaver' '-gstreamer'
+    #update_use 'sys-libs/ncurses'    '+minimal'
 
     # pkg-postinstall of nss needs a binary of the same package. Not a bug
     #   in itself but it doesn't play well with ROOT and precompiled binaries.
@@ -38,7 +44,10 @@ configure_bob(){
 configure_rootfs_build()
 {
     # https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=c4a2ee848f7151bb12d262f97633537925b17a20
-    provide_package 'sys-apps/util-linux'
+    # https://bugs.gentoo.org/show_bug.cgi?id=599586
+    # provide_package 'sys-apps/util-linux'
+    #_emerge_opts='--prefix='"${}"
+    :
 }
 
 #
@@ -46,17 +55,17 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    rm -rvf "${_EMERGE_ROOT}"/usr/share/bash-completion/ \
-            "${_EMERGE_ROOT}"/usr/share/sounds/ \
+    rm -rvf "${_EMERGE_ROOT}"/usr/share/bash-completion \
+            "${_EMERGE_ROOT}"/usr/share/sounds \
             "${_EMERGE_ROOT}"/usr/share/pixmaps \
             "${_EMERGE_ROOT}"/usr/lib/systemd/ 
 
     find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ -type f -name '*.[ah]' -delete -print
 
     # When mounting a docker volume we need this gone
-    rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
-    cp -a "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf \
-           "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.default.conf
+    #rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
+    #cp -a "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf \
+    #       "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.default.conf
     # Note: You cannot enable ssl CA authentication without gnutls
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]

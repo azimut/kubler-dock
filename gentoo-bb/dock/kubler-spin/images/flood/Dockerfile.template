@@ -3,4 +3,9 @@ MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
 
-CMD ["/bin/sh"]
+EXPOSE 3000/tcp
+WORKDIR /opt/flood
+VOLUME /opt/flood/server/db
+
+ENTRYPOINT ["npm"]
+CMD ["start"]
