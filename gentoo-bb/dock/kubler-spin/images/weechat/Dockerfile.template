@@ -1,0 +1,10 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+ENV PYTHONDONTWRITEBYTECODE x
+
+#USER newsbeuter
+
+#ENTRYPOINT [ "tor "]
+#CMD [ "-f", "/etc/tor/torrc.default" ]

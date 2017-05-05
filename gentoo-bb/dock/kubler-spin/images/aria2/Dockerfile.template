@@ -1,0 +1,11 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+#USER tor
+
+VOLUME /data
+
+ENTRYPOINT [ "/usr/bin/aria2c"]
+CMD [ "--conf-path=/etc/aria2.conf" ]

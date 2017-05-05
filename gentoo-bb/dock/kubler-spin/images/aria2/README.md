@@ -1,0 +1,1 @@
+$ docker run --rm --name aria2 --hostname aria2 -v $HOME/podcast:/data kubler-spin/aria2 --dir=/data --disable-ipv6 --log-level=warn --log=- --enable-rpc=true --rpc-allow-origin-all=true --rpc-listen-all=true --rpc-listen-port=6800 --rpc-secret=***SECRET***
