@@ -5,7 +5,6 @@
 _packages="sys-libs/glibc"
 _timezone="${BOB_TIMEZONE:-UTC}"
 _glibc_locales=("en_US ISO-8859-1")
-export BOB_LIB=$(portageq envvar LIBDIR_$(portageq envvar ARCH))
 BOB_SKIP_LIB_CLEANUP=true
 
 configure_bob()
@@ -16,8 +15,8 @@ configure_bob()
         echo "${locale}" >> /etc/locale.gen
     done
     locale-gen
-    mkdir -p "${_EMERGE_ROOT}"/usr/$BOB_LIB/locale
-    cp /usr/$BOB_LIB/locale/locale-archive "${_EMERGE_ROOT}"/usr/$BOB_LIB/locale/
+    mkdir -p "${_EMERGE_ROOT}"/usr/"${_LIB}"/locale
+    cp /usr/"${_LIB}"/locale/locale-archive "${_EMERGE_ROOT}"/usr/"${_LIB}"/locale/
     # set timezone
     echo $_timezone > /etc/timezone
 }
@@ -28,12 +27,12 @@ configure_bob()
 configure_rootfs_build()
 {
     # make sure lib symlink exists before gentoofunctions package creates a dir during install
-    if [[ $BOB_LIB == 'lib64' ]]; then
-    mkdir -p "${_EMERGE_ROOT}"/lib64
-    ln -sr "${_EMERGE_ROOT}"/lib64 "${_EMERGE_ROOT}"/lib
+    if [[ $_LIB == 'lib64' ]]; then
+      mkdir -p "${_EMERGE_ROOT}"/lib64
+      ln -sr "${_EMERGE_ROOT}"/lib64 "${_EMERGE_ROOT}"/lib
     fi
     # as we broke the normal builder chain, recreate the docs for the busybox image
-    init_docs 'gentoobb/busybox'
+    init_docs 'kubler-spin/busybox'
     update_use 'sys-apps/busybox' '+static +make-symlinks'
     generate_doc_package_installed 'sys-apps/busybox'
     # fake portage install
@@ -61,9 +60,9 @@ finish_rootfs_build()
     find "${_EMERGE_ROOT}"/usr/share/i18n/locales -type f "${locales_filter[@]}" -delete
     find "${_EMERGE_ROOT}"/usr/share/i18n/charmaps -type f "${charmaps_filter[@]}" -delete
     # backup iconv encodings so other images can pull them in again via _iconv_from=glibc
-    tar -cpf "${_ROOTFS_BACKUP}"/glibc-iconv.tar "${_EMERGE_ROOT}"/usr/$BOB_LIB/gconv/
+    tar -cpf "${_ROOTFS_BACKUP}"/glibc-iconv.tar "${_EMERGE_ROOT}"/usr/"${_LIB}"/gconv/
     # purge iconv
-    rm -f "${_EMERGE_ROOT}"/usr/$BOB_LIB/gconv/*
+    rm -f "${_EMERGE_ROOT}"/usr/"${_LIB}"/gconv/*
     # add entry to purged section in PACKAGES.md
     write_checkbox_line "Glibc Iconv Encodings" "checked" "${_DOC_FOOTER_PURGED}"
 }

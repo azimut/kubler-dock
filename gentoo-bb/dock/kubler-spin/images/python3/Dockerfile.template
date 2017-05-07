@@ -1,4 +1,7 @@
 FROM ${IMAGE_PARENT}
 LABEL maintainer ${MAINTAINER}
 
+# https://docs.python.org/2/using/cmdline.html#miscellaneous-options
+ENV PYTHONDONTWRITEBYTECODE x
+
 ADD rootfs.tar /

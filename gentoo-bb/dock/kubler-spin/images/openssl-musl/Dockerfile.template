@@ -1,6 +1,4 @@
-FROM ${IMAGE_PARENT}
+FROM ${NAMESPACE}/musl
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
-
-CMD ["/bin/sh"]

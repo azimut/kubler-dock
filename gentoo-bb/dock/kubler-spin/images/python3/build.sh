@@ -13,7 +13,7 @@ configure_bob(){
     echo 'USE_PYTHON="3.4"'                 >> /etc/portage/make.conf
     echo 'USE="${USE} sqlite -readline"'           >> /etc/portage/make.conf
     update_use 'sys-apps/coreutils' '-xattr'
-    emerge -q1 dev-lang/python
+    emerge -q1 dev-lang/python dev-python/pip dev-python/virtualenv
 }
 configure_rootfs_build()
 {
@@ -28,8 +28,8 @@ finish_rootfs_build()
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
 	find ${_EMERGE_ROOT}/usr -depth \
 			\( \
-				\( -type d -a -name test -o -name tests \) \
+				\( -type d -a -name test -o -name tests -o -name testing \) \
 				-o \
-				\( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
+				\( -type f -a -name '*.pyo' -o -name '*.pyc' \) \
 	        \) -print -exec rm -rf '{}' + 
 }

@@ -6,4 +6,5 @@ ADD rootfs.tar /
 USER bitlbee
 EXPOSE 6667/tcp
 VOLUME /var/lib/bitlbee
-ENTRYPOINT ["bitlbee", "-F", "-n", "-v"]
+ENTRYPOINT [ "bitlbee" ]
+CMD [ "-F", "-n", "-v" ]

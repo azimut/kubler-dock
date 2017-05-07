@@ -1,14 +1,14 @@
 ### kubler-spin/nodejs-glibc:20170326
 
-Built: Fri Apr 14 22:55:35 ART 2017
-Image Size: 46.54 MB
+Built: Sat Apr 22 19:52:12 ART 2017
+Image Size: 46.67 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 dev-libs/libuv-1.10.2 | `-static-libs`
 net-libs/http-parser-2.6.2 | `-static-libs`
-net-libs/nodejs-6.10.0 | `npm snapshot ssl -debug -doc -icu {-test}`
+net-libs/nodejs-6.10.2 | `npm snapshot ssl -debug -doc -icu {-test}`
 sys-libs/zlib-1.2.11 | `-minizip -static-libs`
 #### Inherited
 Package | USE Flags

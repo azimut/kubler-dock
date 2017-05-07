@@ -27,9 +27,9 @@ configure_bob(){
 
 configure_rootfs_build()
 {
-    useradd -s /bin/false -U -d /home/newsbeuter -m newsbeuter
-    mkdir -p ${_EMERGE_ROOT}/home/newsbeuter/.newsbeuter
-    chown -R newsbeuter:newsbeuter ${_EMERGE_ROOT}/home/newsbeuter
+    useradd --shell /bin/false --user-group --home-dir /home/user --create-home user
+    mkdir -p ${_EMERGE_ROOT}/home/user/.newsbeuter
+    chown -R user:user ${_EMERGE_ROOT}/home/user
 }
 
 #

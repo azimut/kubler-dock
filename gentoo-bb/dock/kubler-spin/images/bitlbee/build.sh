@@ -6,7 +6,7 @@ _packages="x11-plugins/pidgin-skypeweb
            net-im/bitlbee"
 
 # force native build
-_emerge_bin="emerge"
+#_emerge_bin="emerge"
 
 set -x
 
@@ -23,15 +23,18 @@ configure_bob(){
     provide_package 'dev-util/desktop-file-utils'
     provide_package 'virtual/logger'
 
+    # core
     update_keywords 'net-im/bitlbee'              '+**'
     update_keywords 'x11-plugins/pidgin-skypeweb' '+**'
 
-    update_use 'sys-apps/util-linux' '-suid' '-cramfs' '-pam'
-    update_use 'dev-libs/glib'       '-mime' '-xattr'
-    update_use 'dev-libs/json-glib'  '-introspection'
-    update_use 'net-im/bitlbee'      '-gnutls' '+plugins' '+purple' '+xmpp'
-    update_use 'net-im/pidgin'       '-xscreensaver' '-gstreamer'
-    #update_use 'sys-libs/ncurses'    '+minimal'
+    # core
+    update_use 'net-im/bitlbee'      -gnutls +plugins +purple +xmpp
+    update_use 'net-im/pidgin'       -xscreensaver -gstreamer
+
+    # misc
+    update_use 'dev-libs/glib'       -mime -xattr
+    update_use 'dev-libs/json-glib'  -introspection
+    update_use 'sys-apps/util-linux' -suid -cramfs -pam
 
     # pkg-postinstall of nss needs a binary of the same package. Not a bug
     #   in itself but it doesn't play well with ROOT and precompiled binaries.
@@ -46,7 +49,6 @@ configure_rootfs_build()
     # https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=c4a2ee848f7151bb12d262f97633537925b17a20
     # https://bugs.gentoo.org/show_bug.cgi?id=599586
     # provide_package 'sys-apps/util-linux'
-    #_emerge_opts='--prefix='"${}"
     :
 }
 

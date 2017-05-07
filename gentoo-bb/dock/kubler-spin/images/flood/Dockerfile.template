@@ -6,6 +6,7 @@ ADD rootfs.tar /
 EXPOSE 3000/tcp
 WORKDIR /opt/flood
 VOLUME /opt/flood/server/db
+VOLUME /opt/flood/server/temp
 
 ENTRYPOINT ["npm"]
 CMD ["start"]

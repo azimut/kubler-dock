@@ -15,30 +15,42 @@ _emerge_bin="emerge"
 set -x
 
 configure_bob(){
-    update_keywords '=net-vpn/tor-0.3*' '+~amd64' 
-    update_keywords 'sys-libs/libseccomp' '+~amd64'
+    update_keywords '=net-vpn/tor-0.3*' '+~'$(portageq envvar ARCH)
+    update_keywords 'sys-libs/libseccomp' '+~'$(portageq envvar ARCH)
     update_use 'sys-libs/libcap' '-pam'
 }
 
 configure_rootfs_build()
 {
+    # needed for tor docs
     provide_package 'app-text/asciidoc'
 }
 
 #
 # this method runs in the bb builder container just before tar'ing the rootfs
 #
-finish_rootfs_build()
-{
+finish_rootfs_build(){
+
     # install custom minimal config - we do it here to be arch independent
-    cp -v /config/etc/tor/torrc.default "${_EMERGE_ROOT}"/etc/tor/
+    cat > "${_EMERGE_ROOT}"/etc/tor/torrc.default <<EOF
+SocksPort 0.0.0.0:9050
+Log notice stderr
+DataDirectory /var/lib/tor/data
+AvoidDiskWrites 1
+Sandbox 1
+EOF
     chown -R tor "${_EMERGE_ROOT}"/etc/tor/
 
-    # clean up
-    rm -rvf "${_EMERGE_ROOT}"/usr/lib/tmpfiles.d \
-            "${_EMERGE_ROOT}"/usr/lib/systemd \
-            "${_EMERGE_ROOT}"/etc/init.d \
-            "${_EMERGE_ROOT}"/etc/conf.d
+    # rm ipv6 geoip due I not support it
+    rmlist=(
+        /usr/share/tor/geoip6
+        /usr/lib/tmpfiles.d
+        /lib64/gentoo/functions.sh
+        /usr/lib/systemd
+        /etc/init.d
+        /etc/conf.d
+    )
+    rm -rvf ${rmlist[@]/#/${_EMERGE_ROOT}}
 
-#    find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ -type f -name '*.[ah]' -delete -print
+#   find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ -type f -name '*.[ah]' -delete -print
 }

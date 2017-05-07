@@ -5,7 +5,8 @@ _packages="sys-libs/zlib net-libs/http-parser dev-libs/libuv net-libs/nodejs"
 configure_bob()
 {
     #update_use net-libs/nodejs +icu
-    update_keywords '=net-libs/nodejs-6.10.0' '+~amd64'
+    #update_keywords '=net-libs/nodejs-6.10.2' '+~amd64'
+    update_keywords '=net-libs/nodejs-6*' '+**'
     # build binary packages first to avoid pulling in python in the next phase
     emerge -v sys-libs/zlib net-libs/http-parser dev-libs/libuv net-libs/nodejs
 }

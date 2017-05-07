@@ -3,5 +3,7 @@ LABEL maintainer ${MAINTAINER}
 
 ADD rootfs.tar /
 
+VOLUME ["/root/.config/flexget"]
+
 ENTRYPOINT ["/opt/flexget/bin/flexget"]
-CMD ["-L","debug","daemon","start"]
+CMD ["-L","debug","-l","/dev/null","daemon","start"]

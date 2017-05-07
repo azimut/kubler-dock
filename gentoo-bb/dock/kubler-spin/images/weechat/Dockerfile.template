@@ -2,9 +2,16 @@ FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
+
+# User setup
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+# Python setup
 ENV PYTHONDONTWRITEBYTECODE x
 
-#USER newsbeuter
+VOLUME /home/user/.weechat
+EXPOSE 9001
 
-#ENTRYPOINT [ "tor "]
-#CMD [ "-f", "/etc/tor/torrc.default" ]
+ENTRYPOINT [ "weechat"]

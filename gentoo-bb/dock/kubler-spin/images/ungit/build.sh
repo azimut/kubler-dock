@@ -7,17 +7,13 @@ _emerge_bin="emerge"
 set -x
 configure_bob()
 {
-    ls -ld /var/db/pkg/dev-libs/openssl*/
-    ldd /usr/bin/node
-    npm rebuild
     mkdir -p /distfiles/npm-cache
     npm config set cache /distfiles/npm-cache/.npm
 
-    mkdir -p ${_EMERGE_ROOT}/opt/ungit
-
     # Flood install
-    cd ${_EMERGE_ROOT}/opt/unit
-    npm install -g ungit
+    mkdir -p ${_EMERGE_ROOT}/opt/ungit
+    cd ${_EMERGE_ROOT}/opt/ungit
+    npm install ungit
 }
 
 #

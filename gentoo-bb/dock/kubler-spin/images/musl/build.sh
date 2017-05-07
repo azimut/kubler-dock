@@ -2,7 +2,8 @@
 # build config
 #
 _packages="sys-libs/musl"
-_emerge_bin="emerge"
+#_emerge_bin="emerge"
+BOB_SKIP_LIB_CLEANUP=true
 TIMEZONE="${BOB_TIMEZONE:-UTC}"
 set -x
 configure_bob() {

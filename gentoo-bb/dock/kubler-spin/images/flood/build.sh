@@ -46,6 +46,7 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
+    # This might not work if you change your db.
     SECRET="$(openssl rand -base64 64 | tr -d '\n' | rev | cut -b3-)"
 
     cat > ${_EMERGE_ROOT}/opt/flood/config.js <<EOF
@@ -70,5 +71,5 @@ const CONFIG = {
 
 module.exports = CONFIG;
 EOF
-    log_as_installed "manual install" "flood" "https://github.com/jfurrow/flood"
+    log_as_installed "manual install"'('"$(du -sh ${_EMERGE_ROOT}/opt/flood | cut -f1)"')' "flood" "https://github.com/jfurrow/flood"
 }

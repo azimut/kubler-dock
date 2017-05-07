@@ -2,7 +2,7 @@
 # build config
 #
 
-_packages="net-irc/weechat"
+_packages="net-irc/weechat dev-python/websocket-client"
 
 # force native compilation
 _emerge_bin="emerge"
@@ -10,12 +10,16 @@ _emerge_bin="emerge"
 set -x
 
 configure_bob(){
+    #[[ ! -d /distfiles/scripts ]] && { cd /distfiles; git clone https://github.com/weechat/scripts; }
+    #[[   -d /distfiles/scripts ]] && { cd /distfiles/scripts; git pull --rebase; }
+
     update_keywords 'net-irc/weechat' '+**'
     mask_package '=net-irc/weechat-9999'
     update_use 'sys-libs/ncurses' +minimal
     update_use 'net-irc/weechat'  -exec -fifo -xfer \
-                                  -spell -python_single_target_python2_7 \
-                                  -python_targets_python2_7 +python_single_target_python3_4
+                                  -spell \
+                                  +python_targets_python2_7 \
+                                  +python_targets_python3_4
 
     # http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html
     # The GNU Readline library provides a set of functions for use by applications
@@ -33,9 +37,10 @@ configure_rootfs_build()
     provide_package 'app-admin/perl-cleaner'
     provide_package 'app-eselect/eselect-python'
 
-    #useradd -s /bin/false -U -d /home/newsbeuter -m newsbeuter
-    #mkdir -p ${_EMERGE_ROOT}/home/newsbeuter/.newsbeuter
-    #chown -R newsbeuter:newsbeuter ${_EMERGE_ROOT}/home/newsbeuter
+    # add user
+    useradd --shell /bin/false --user-group --home-dir /home/user --create-home user
+    mkdir -p ${_EMERGE_ROOT}/home/user
+    chown -R user:user ${_EMERGE_ROOT}/home/user
 }
 
 #

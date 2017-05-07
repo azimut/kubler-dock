@@ -22,12 +22,10 @@ configure_rootfs_build()
       access
       auth_basic
       charset
-      fastcgi
       gzip
       gzip_static
       limit_req
       map
-      proxy
       rewrite
       stub_status
     )

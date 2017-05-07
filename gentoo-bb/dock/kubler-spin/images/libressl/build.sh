@@ -2,10 +2,12 @@
 # build config
 #
 _packages="dev-libs/libressl"
-_emerge_bin="emerge"
+#_emerge_bin="emerge"
 
 configure_bob()
 {
+    layman -l | grep -q libressl && layman -d libressl
+    layman -a libressl
     # libressl
     # https://wiki.gentoo.org/wiki/Project:LibreSSL
     echo 'USE="${USE} libressl"'   >> /etc/portage/make.conf 

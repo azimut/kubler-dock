@@ -1,14 +1,13 @@
 #
 # build config
 #
-_packages="=net-p2p/rtorrent-9999"
+_packages="=net-p2p/rtorrent-9999
+           app-misc/screen"
 _emerge_bin="emerge"
 set -x
 configure_bob(){
-    set +e
+    layman -l | grep -q pg_overlay && layman -d pg_overlay
     layman -a pg_overlay
-    set -e
-    layman -E pg_overlay
     eix-update
 }
 #
@@ -16,15 +15,16 @@ configure_bob(){
 #
 configure_rootfs_build()
 {
-    update_use 'sys-libs/ncurses'  '+minimal'
-    update_use 'net-p2p/rtorrent'  '-daemon' '+xmlrpc'
-    update_use 'dev-libs/xmlrpc-c' '+cgi' '-tools'
+    update_use 'dev-libs/xmlrpc-c' +cgi     -tools
+    update_use 'net-p2p/rtorrent'  -daemon  +xmlrpc
+    update_use 'sys-libs/ncurses'  +minimal
+    update_use 'app-misc/screen'   -pam
 
+    # latest rtorrent release was on sep 2015
+    # https://github.com/rakshasa/rtorrent/tree/feature-bind
     update_keywords 'net-libs/libtorrent' '+**'
     update_keywords 'net-p2p/rtorrent'    '+**'
     update_keywords 'dev-libs/xmlrpc-c'   '+~amd64'
-    #echo '=net-libs/libtorrent-9999 **' >> /etc/portage/package.accept_keywords/rtorrent
-    #echo '=net-p2p/rtorrent-9999 **'    >> /etc/portage/package.accept_keywords/rtorrent
 }
 
 #

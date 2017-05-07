@@ -8,7 +8,6 @@ set -x
 # This hook is called just before starting the build of the root fs
 #
 configure_bob(){
-    emerge -q1 dev-python/pip dev-python/virtualenv
     virtualenv /opt/flexget
     source /opt/flexget/bin/activate
     mkdir -p /distfiles/pip
@@ -24,9 +23,10 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    mkdir -p ${_EMERGE_ROOT}/opt
+    mkdir -p ${_EMERGE_ROOT}/opt \
+             ${_EMERGE_ROOT}/root/.config/flexget
     cp -ar /opt/flexget ${_EMERGE_ROOT}/opt
-    cat > ${_EMERGE_ROOT}/opt/flexget/config.yml <<EOF
+    cat > ${_EMERGE_ROOT}/root/.config/flexget/config.yml <<EOF
 tasks:
 
   weeabo:
@@ -63,8 +63,8 @@ EOF
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
 	find ${_EMERGE_ROOT}/opt -depth \
 			\( \
-				\( -type d -a -name test -o -name tests \) \
+				\( -type d -a -name test -o -name tests -o -name testing \) \
 				-o \
-				\( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
+				\( -type f -a -name '*.pyo' -o -name '*.pyc' \) \
 	        \) -print -exec rm -rf '{}' + 
 }

@@ -1,7 +1,7 @@
-### kubler-spin/glibc:20170326
+### kubler-spin/glibc:20170423
 
-Built: Fri Apr 14 22:50:02 ART 2017
-Image Size: 10.27 MB
+Built: Sat May  6 23:58:30 ART 2017
+Image Size: 10.22 MB
 
 #### Installed
 Package | USE Flags
@@ -12,7 +12,7 @@ sys-libs/timezone-data-2017a | `nls -leaps`
 #### Inherited
 Package | USE Flags
 --------|----------
-**FROM gentoobb/busybox** |
+**FROM kubler-spin/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 
 #### Purged
