@@ -1,17 +1,15 @@
 ### kubler-spin/weechat:20170423
 
-Built: Sun May  7 00:30:26 ART 2017
-Image Size: 101 MB
+Built: Sun May  7 02:56:39 ART 2017
+Image Size: 72.59 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 app-arch/bzip2-1.0.6-r7 | `-static -static-libs`
-app-arch/xz-utils-5.2.3 | `nls threads -static-libs`
 app-misc/mime-types-9 | ``
 dev-lang/perl-5.24.1-r1 | `-berkdb -debug -doc -gdbm -ithreads`
 dev-lang/python-2.7.12 | `hardened libressl ssl (threads) (wide-unicode) xml (-berkdb) -build -doc -examples -gdbm -ipv6 -ncurses -readline -sqlite -tk -wininst`
-dev-lang/python-3.4.5 | `hardened libressl ssl (threads) xml -build -examples -gdbm -ipv6 -ncurses -readline -sqlite -tk -wininst`
 dev-lang/python-exec-2.4.4 | ` `
 dev-libs/expat-2.2.0-r1 | `unicode -examples -static-libs`
 dev-libs/gmp-6.1.0 | `asm cxx -doc -pgo -static-libs`
@@ -38,11 +36,11 @@ Package | USE Flags
 --------|----------
 **FROM kubler-spin/libressl-musl** |
 app-misc/c_rehash-1.7-r1 | ``
-app-misc/ca-certificates-20161130.3.30.1 | `-cacert -insecure`
+app-misc/ca-certificates-20161130.3.30.2 | `-cacert -insecure`
 dev-libs/libressl-2.4.5 | `asm -static-libs`
 sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/musl** |
-sys-libs/musl-1.1.15-r2 | ``
+sys-libs/musl-1.1.16 | ``
 **FROM kubler-spin/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged

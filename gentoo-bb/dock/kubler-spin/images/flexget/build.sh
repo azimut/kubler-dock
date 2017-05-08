@@ -11,7 +11,7 @@ configure_bob(){
     virtualenv /opt/flexget
     source /opt/flexget/bin/activate
     mkdir -p /distfiles/pip
-    pip --cache-dir=/distfiles/pip install flexget
+    pip --cache-dir=/distfiles/pip install flexget youtube-dl
 }
 configure_rootfs_build()
 {
@@ -59,12 +59,14 @@ schedules:
       minutes: 60
 EOF
 
-    # cleanup
+    # flexgetui rm
+    rm -rf ${_EMERGE_ROOT}/opt/flexget/lib/python*/site-packages/flexget/ui/
+    # python-cleanup
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
-	find ${_EMERGE_ROOT}/opt -depth \
+	find ${_EMERGE_ROOT}/ -depth \
 			\( \
 				\( -type d -a -name test -o -name tests -o -name testing \) \
 				-o \
-				\( -type f -a -name '*.pyo' -o -name '*.pyc' \) \
+				\( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
 	        \) -print -exec rm -rf '{}' + 
 }

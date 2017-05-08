@@ -1,12 +1,12 @@
 ### kubler-spin/openssl:20170423
 
-Built: Sat May  6 14:44:11 ART 2017
-Image Size: 14.8 MB
+Built: Sun May  7 06:47:15 ART 2017
+Image Size: 14.79 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-app-misc/ca-certificates-20161130.3.30.1 | `-cacert -insecure`
+app-misc/ca-certificates-20161130.3.30.2 | `-cacert -insecure`
 app-misc/c_rehash-1.7-r1 | ``
 dev-libs/openssl-1.0.2k | `asm -bindist -gmp -kerberos -rfc3779 -sctp -sslv2 -sslv3 -static-libs {-test} -tls-heartbeat -vanilla -zlib`
 sys-apps/debianutils-4.7 | `-static`

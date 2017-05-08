@@ -13,13 +13,19 @@ configure_bob(){
     #[[ ! -d /distfiles/scripts ]] && { cd /distfiles; git clone https://github.com/weechat/scripts; }
     #[[   -d /distfiles/scripts ]] && { cd /distfiles/scripts; git pull --rebase; }
 
+    # https://wiki.gentoo.org/wiki/Project:Python/PYTHON_TARGETS
+    echo 'PYTHON_TARGETS="python2_7"'       >> /etc/portage/make.conf
+    echo 'PYTHON_SINGLE_TARGET="python2_7"' >> /etc/portage/make.conf
+    echo 'USE_PYTHON="2.7"'                 >> /etc/portage/make.conf
+
+    #mask_package '>'$(ls -d  /var/db/pkg/dev-lang/perl-*/ | cut -f5,6 -d/)
+
+    # grab latest version
     update_keywords 'net-irc/weechat' '+**'
     mask_package '=net-irc/weechat-9999'
+
+    update_use 'net-irc/weechat'  -exec -fifo -xfer -spell
     update_use 'sys-libs/ncurses' +minimal
-    update_use 'net-irc/weechat'  -exec -fifo -xfer \
-                                  -spell \
-                                  +python_targets_python2_7 \
-                                  +python_targets_python3_4
 
     # http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html
     # The GNU Readline library provides a set of functions for use by applications
@@ -27,6 +33,10 @@ configure_bob(){
     echo 'USE="${USE} -readline -xattr -acl -deprecated"' >> /etc/portage/make.conf
 
     emerge -1q ${_packages}
+
+    # perl get's a new version every new day and break libperl...
+    #   current stage3 has 5.22 but one of the new virtual/perl-Data-Dumper needs 5.24
+    perl-cleaner  --all
 }
 
 configure_rootfs_build()
@@ -53,11 +63,15 @@ finish_rootfs_build()
 
     # cleanup
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
+    # perl-cleanup
+    find ${_EMERGE_ROOT}/ -type f -name '*.h' -o -name '*.pod' -print -delete
+    # autobuild
     rm -rf ${_EMERGE_ROOT}/usr/share/{autogen,aclocal,pkgconfig}
+    # python-cleanup
 	find ${_EMERGE_ROOT}/ -depth \
 			\( \
 				\( -type d -a -name test -o -name tests -o -name testing \) \
 				-o \
-				\( -type f -a -name '*.pyo' -o -name '*.pyc' \) \
+				\( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
 	        \) -print -exec rm -rf '{}' + 
 }

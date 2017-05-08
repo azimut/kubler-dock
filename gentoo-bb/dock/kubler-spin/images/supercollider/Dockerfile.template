@@ -1,0 +1,11 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+RUN ldconfig
+
+#USER tor
+
+#ENTRYPOINT [ "tor "]
+#CMD [ "-f", "/etc/tor/torrc.default" ]
