@@ -65,7 +65,7 @@ finish_rootfs_build()
     find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ -type f -name '*.[ah]' -delete -print
 
     # When mounting a docker volume we need this gone
-    #rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
+    rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
     #cp -a "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf \
     #       "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.default.conf
     # Note: You cannot enable ssl CA authentication without gnutls
