@@ -7,17 +7,17 @@ DONE:
 * disable sslv3 on openssl
 * musl
 * rtorrent-git
+* nodejs
+* bitlbee
+* flood
 * libressl
 https://forums.gentoo.org/viewtopic-p-7942264.html?sid=ce507c627ab94218a8a346421d169b72
 
 IN PROGRESS:
-* nodejs
-* bitlbee
 
 TODO:
 * best practices
 https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
-* flood
 * kubernetes
 * grsecurity
 * cgroups (control groups)
@@ -35,3 +35,26 @@ http://man7.org/linux/man-pages/man7/capabilities.7.html
 Make a list of drop caps.
 * apparmor
 https://docs.docker.com/engine/security/apparmor/
+
+
+----
+
+# Desktop
+## CoreOS !?
+## redazul - iptables restricted
+### mutt
+### davmail
+### bitlbee
+### weechat
+### dnsmasq - adblock / tor?
+### tidal/supercollider
+
+# Server
+## redazul - iptables restricted
+### flexget
+### rtorrent
+### flood
+## vidalia - tor based network
+### newsbeuter? RSS
+- github - skypeweb,wee-slack
+
