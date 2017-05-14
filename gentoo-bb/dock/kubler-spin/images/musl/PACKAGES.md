@@ -1,6 +1,6 @@
 ### kubler-spin/musl:20170423
 
-Built: Sun May  7 01:11:39 ART 2017
+Built: Sat May 13 02:36:47 ART 2017
 Image Size: 1.892 MB
 
 #### Installed
@@ -11,8 +11,8 @@ sys-libs/musl-1.1.16 | ``
 Package | USE Flags
 --------|----------
 **FROM kubler-spin/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
-
+**FROM kubler-spin/busybox** |
+sys-apps/busybox-1.26.2-r1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
 - [x] Headers
 - [x] Static Libs

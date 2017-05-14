@@ -31,12 +31,15 @@ configure_bob(){
     # The GNU Readline library provides a set of functions for use by applications
     # that allow users to edit command lines as they are typed in. 
     echo 'USE="${USE} -readline -xattr -acl -deprecated"' >> /etc/portage/make.conf
-
-    emerge -1q ${_packages}
+    
+    emerge -1q perl
 
     # perl get's a new version every new day and break libperl...
     #   current stage3 has 5.22 but one of the new virtual/perl-Data-Dumper needs 5.24
     perl-cleaner  --all
+
+    emerge -q1 ${_packages}
+
 }
 
 configure_rootfs_build()

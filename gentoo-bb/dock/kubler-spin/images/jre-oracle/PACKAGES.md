@@ -1,16 +1,14 @@
-### kubler-spin/libressl:20170423
+### kubler-spin/jre-oracle:20170423
 
-Built: Tue May  9 18:51:46 ART 2017
-Image Size: 13.95 MB
-
+Built: Sat May 13 02:18:24 ART 2017
+Image Size: 143.9 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-app-misc/ca-certificates-20161130.3.30.2 | `-cacert -insecure`
-app-misc/c_rehash-1.7-r1 | ``
-dev-libs/libressl-2.4.5 | `asm -static-libs`
-sys-apps/debianutils-4.7 | `-static`
+dev-java/java-config-2.2.0-r3 | `{-test}`
+dev-java/oracle-jre-bin-1.8.0.131 | `headless-awt jce -alsa -commercial -cups -fontconfig -javafx -nsplugin (-selinux)`
+sys-apps/baselayout-java-0.1.0 | ``
 #### Inherited
 Package | USE Flags
 --------|----------

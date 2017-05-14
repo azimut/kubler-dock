@@ -2,13 +2,14 @@
 # build config
 #
 _packages="sys-libs/musl"
-#_emerge_bin="emerge"
+_timezone="${BOB_TIMEZONE:-UTC}"
 BOB_SKIP_LIB_CLEANUP=true
-TIMEZONE="${BOB_TIMEZONE:-UTC}"
-set -x
+
 configure_bob() {
     # set timezone
-    echo "${TIMEZONE}" > /etc/timezone
+    echo $_timezone > /etc/timezone
+    # install timezones
+    emerge -q1 sys-libs/timezone-data
 }
 
 #
@@ -22,10 +23,10 @@ configure_rootfs_build()
     generate_doc_package_installed 'sys-apps/busybox'
     # fake portage install
     provide_package sys-apps/portage
-    # set locales
+    # set localtime
     mkdir -p "${_EMERGE_ROOT}"/etc
-    # set timezone
     cp /etc/timezone "${_EMERGE_ROOT}"/etc/
+    cp /usr/share/zoneinfo/"${_timezone}" "${_EMERGE_ROOT}"/etc/localtime
 }
 
 #

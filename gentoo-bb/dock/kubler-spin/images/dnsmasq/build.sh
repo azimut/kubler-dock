@@ -7,11 +7,8 @@ _packages="net-dns/dnsmasq"
 # force native compilation
 _emerge_bin="emerge"
 
-set -x
-
 configure_bob(){
     update_use net-dns/dnsmasq '-dhcp' '-inotify' '-nls'
-    #nls#update_use sys-libs/ncurses '+minimal'
 }
 
 configure_rootfs_build()

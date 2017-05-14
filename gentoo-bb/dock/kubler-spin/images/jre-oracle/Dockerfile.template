@@ -3,4 +3,4 @@ LABEL maintainer ${MAINTAINER}
 
 ADD rootfs.tar /
 
-RUN eselect java-vm set system 1
+#RUN eselect java-vm set system 1
