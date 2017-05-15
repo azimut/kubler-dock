@@ -1,0 +1,14 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+# User setup
+USER dnscrypt
+ENV HOME /var/empty
+WORKDIR $HOME
+
+EXPOSE 5353/tcp 5353/udp
+
+ENTRYPOINT [ "/usr/sbin/dnscrypt-proxy" ]
+CMD [ "--local-address=0.0.0.0:5353", "--resolver-address=208.67.220.220:443", "--provider-name=2.dnscrypt-cert.opendns.com", "--provider-key=B735:1140:206F:225D:3E2B:D822:D7FD:691E:A1C3:3CC8:D666:8D0C:BE04:BFAB:CA43:FB79", "--loglevel=6"]
