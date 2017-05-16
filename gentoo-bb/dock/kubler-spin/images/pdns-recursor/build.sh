@@ -2,12 +2,11 @@
 # build config
 #
 
-_packages="www-client/lynx"
-export BOB_FEATURES="${BOB_FEATURES//nodoc/}"
+_packages="dev-lua/luasocket net-dns/pdns-recursor"
 
 configure_bob(){
-    update_use 'sys-libs/ncurses' +minimal
-    update_use 'www-client/lynx'  -nls
+    update_use net-dns/pdns-recursor +luajit
+    echo 'USE="${USE} -readline"' >> /etc/portage/make.conf
 }
 
 configure_rootfs_build()
@@ -23,6 +22,7 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
+    :
     # ncurses
-    copy_gcc_libs
+    #copy_gcc_libs
 }

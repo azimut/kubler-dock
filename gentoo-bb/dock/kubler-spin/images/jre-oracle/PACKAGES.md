@@ -1,14 +1,12 @@
 ### kubler-spin/jre-oracle:20170423
 
-Built: Sat May 13 02:18:24 ART 2017
-Image Size: 143.9 MB
+Built: Mon May 15 21:13:26 ART 2017
+Image Size: 143.5 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-dev-java/java-config-2.2.0-r3 | `{-test}`
 dev-java/oracle-jre-bin-1.8.0.131 | `headless-awt jce -alsa -commercial -cups -fontconfig -javafx -nsplugin (-selinux)`
-sys-apps/baselayout-java-0.1.0 | ``
 #### Inherited
 Package | USE Flags
 --------|----------

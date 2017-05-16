@@ -23,7 +23,7 @@ configure_rootfs_build()
     update_use 'dev-java/oracle-jre-bin' +headless-awt +jce -fontconfig
     update_use 'sys-libs/ncurses'        +minimal
     # skip python and iced-tea
-    provide_package dev-lang/python dev-java/icedtea-bin app-eselect/eselect-java
+    provide_package dev-lang/python dev-java/icedtea-bin app-eselect/eselect-java dev-java/java-config
 }
 
 #
@@ -32,5 +32,6 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     # gentoo's run-java-tool.bash wrapper expects which at /usr/bin
-    ln -rs "${_EMERGE_ROOT}"/bin/which "${_EMERGE_ROOT}"/usr/bin/which
+    :
+    #ln -rs "${_EMERGE_ROOT}"/bin/which "${_EMERGE_ROOT}"/usr/bin/which
 }

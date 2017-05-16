@@ -2,3 +2,12 @@ FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
+
+USER dnsmasq
+
+EXPOSE 5353/udp 5353/tcp
+
+ADD init.sh /
+
+ENTRYPOINT [ "/bin/sh" ]
+CMD [ "/init.sh"  ]
