@@ -47,6 +47,22 @@ https://docs.docker.com/engine/security/apparmor/
 ### bitlbee
 ### weechat
 ### dnsmasq - adblock / tor?
+## Crypt
+https://github.com/jedisct1/dnscrypt-proxy
+## Lists
+https://github.com/StevenBlack/hosts
+https://github.com/pi-hole/pi-hole
+https://github.com/zant95/hBlock
+https://github.com/oznu/docker-dns-ad-blocker
+https://github.com/quidsup/notrack
+https://gist.github.com/ahupowerdns/bb1a043ce453a9f9eeed
+https://github.com/mozilla-mobile/focus
+## Scripting
+https://doc.powerdns.com/md/recursor/scripting/
+
+$ dnsmasq --no-daemon --log-queries
+http://stackoverflow.com/questions/36360674/combining-log-entries-with-logstash
+
 ### tidal/supercollider
 
 # Server
@@ -55,6 +71,13 @@ https://docs.docker.com/engine/security/apparmor/
 ### rtorrent
 ### flood
 ## vidalia - tor based network
+https://wiki.archlinux.org/index.php/tor
+https://wiki.gentoo.org/wiki/Tor
 ### newsbeuter? RSS
 - github - skypeweb,wee-slack
+### RSS proxy
+https://github.com/RSS-Bridge/rss-bridge/blob/master/bridges/AmazonBridge.php
+https://www.last.fm/es/events
+http://nicetoclub.com/shows/internacionales
+http://www.ticketek.com.ar/musica
 
