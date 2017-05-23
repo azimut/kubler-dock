@@ -1,0 +1,14 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+# User setup
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+ADD browser.sh /home/user/
+
+ENTRYPOINT [ "newsbeuter"]
+CMD ["-u","/home/user/.newsbeuter/urls", "-C","/home/user/.newsbeuter/config", "-c","/home/user/.newsbeuter/cache.db", "-d", "/home/user/.newsbeuter/newsbeuter.log"]
