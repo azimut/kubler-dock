@@ -2,8 +2,7 @@
 # build config
 #
 
-_packages="net-news/newsbeuter
-           www-client/lynx"
+_packages="net-news/newsbeuter"
 
 # force native compilation
 _emerge_bin="emerge"
@@ -19,24 +18,32 @@ configure_bob(){
     # The GNU Readline library provides a set of functions for use by applications
     # that allow users to edit command lines as they are typed in. 
     echo 'USE="${USE} -readline"' >> /etc/portage/make.conf
-    
-    # lynx - doesn't work with musl (?
-    update_use 'www-client/lynx'  -nls
-    update_use 'sys-libs/ncurses' +minimal
 }
 
 configure_rootfs_build()
 {
-    useradd --shell /bin/false --user-group --home-dir /home/user --create-home user
-    mkdir -p ${_EMERGE_ROOT}/home/user/.newsbeuter
-    chown -R user:user ${_EMERGE_ROOT}/home/user
+    :
 }
 
-#
-# this method runs in the bb builder container just before tar'ing the rootfs
-#
 finish_rootfs_build()
 {
-    # ncurses
-    copy_gcc_libs
+    mkdir -p ${_EMERGE_ROOT}/home/user/.newsbeuter/
+    cat > ${_EMERGE_ROOT}/home/user/.newsbeuter/urls <<EOF
+https://github.com/EionRobb/skype4pidgin/commits/master.atom "kubler"
+https://github.com/Flexget/Flexget/commits/develop.atom "kubler"
+https://github.com/akrennmair/newsbeuter/commits/master.atom "kubler"
+https://github.com/edannenberg/kubler/commits/master.atom "kubler"
+https://github.com/wee-slack/wee-slack/commits/master.atom "kubler"
+EOF
+    cat > ${_EMERGE_ROOT}/home/user/.newsbeuter/config <<EOF
+auto-reload yes
+browser lynx
+cache-file ~/.newsbeuter/cache.db
+cleanup-on-quit no
+confirm-exit yes
+reload-threads 1
+reload-time 60
+suppress-first-reload yes
+EOF
+    chown -R user ${_EMERGE_ROOT}/home/user/
 }
