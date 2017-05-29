@@ -20,6 +20,7 @@ configure_bob() {
     source /etc/profile
     # install default packages
     update_use 'dev-vcs/git' '-perl'
+    update_use 'app-portage/layman' '+subversion'
     update_use 'app-crypt/pinentry' '+ncurses'
     update_keywords 'app-portage/layman' '+~amd64'
     update_keywords 'dev-python/ssl-fetch' '+~amd64'
@@ -27,6 +28,6 @@ configure_bob() {
     install_git_postsync_hooks
     configure_layman
     # install aci/oci requirements
-    emerge dev-lang/go
-    install_oci_deps
+    #emerge dev-lang/go
+    #install_oci_deps
 }
