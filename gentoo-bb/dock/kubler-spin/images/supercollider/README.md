@@ -1,4 +1,7 @@
 ```
+# sudo docker run   --privileged --cap-add=all -p 7771:7771/udp -p 57110:57110/udp -p  57120:57120/udp  -p 3000:3000/udp -p 3001:3001/udp -v /home/sendai/projects/git7/tmp/distfiles/quarks/:/data  --name supercollider   --rm -ti  kubler-spin/supercollide
+
+
 H # docker run -p 3000:3000/udp -p 3001:3001/udp  --name supercollider --rm -ti  kubler-spin/supercollider
 H # qjackctl # start jackd and check while working this that netsource is connected to the output
 H # jack_netsource -H 10.0.42.2
@@ -25,6 +28,7 @@ s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 0);
 s.sendMsg("/n_free", x);
 s.quit
 ```
+
 
 
 ```

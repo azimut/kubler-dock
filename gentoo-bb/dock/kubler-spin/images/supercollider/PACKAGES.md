@@ -1,6 +1,6 @@
 ### kubler-spin/supercollider:20170423
 
-Built: Sun May 28 03:55:35 ART 2017
+Built: Mon May 29 18:35:45 ART 2017
 Image Size: 64.55 MB
 
 #### Installed

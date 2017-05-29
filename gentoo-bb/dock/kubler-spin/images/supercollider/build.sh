@@ -5,6 +5,12 @@ _emerge_bin="emerge"
 
 set -x
 
+#	url = https://github.com/supercollider-quarks/BatLib.git
+#	url = https://github.com/tidalcycles/Dirt-Samples
+#	url = https://github.com/Qirky/FoxDotQuark.git
+#	url = https://github.com/musikinformatik/SuperDirt
+#	url = https://github.com/supercollider-quarks/Vowel
+
 configure_bob(){
 
     layman -l | grep -q proaudio && layman -d proaudio
