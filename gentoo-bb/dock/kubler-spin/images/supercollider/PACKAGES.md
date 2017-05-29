@@ -1,7 +1,7 @@
 ### kubler-spin/supercollider:20170423
 
-Built: Mon May  8 09:56:31 ART 2017
-Image Size: 54.37 MB
+Built: Sun May 28 03:55:35 ART 2017
+Image Size: 64.55 MB
 
 #### Installed
 Package | USE Flags
@@ -12,12 +12,13 @@ media-libs/alsa-lib-1.1.2 | `-alisp -debug -doc -python`
 media-libs/flac-1.3.2-r1 | `cxx (-altivec) -debug -ogg -static-libs`
 media-libs/libogg-1.3.2 | `-static-libs`
 media-libs/libsamplerate-0.1.9 | `-sndfile -static-libs`
-media-libs/libsndfile-1.0.26 | `-alsa -minimal -sqlite -static-libs {-test}`
+media-libs/libsndfile-1.0.28 | `-alsa -minimal -sqlite -static-libs {-test}`
 media-libs/libvorbis-1.3.5 | `-static-libs`
-media-sound/jack-audio-connection-kit-0.121.3-r1 | `-alsa (-altivec) (-coreaudio) -cpudetection -debug -doc -examples -oss -pam`
+media-sound/jack-audio-connection-kit-0.124.1 | `-alsa (-altivec) -celt (-coreaudio) -cpudetection -debug -doc -examples -ieee1394 -oss -pam -zalsa`
 media-sound/supercollider-3.8.0 | `fftw gpl3 jack server sndfile -avahi -debug -emacs -gedit -portaudio -qt5 -static-libs -vim -wiimote`
 sci-libs/fftw-3.3.4 | `openmp threads (-altivec) -doc -fortran -mpi (-neon) -quad -static-libs {-test} (-zbus)`
 sys-apps/util-linux-2.28.2 | `nls readline unicode -build -caps -cramfs -fdformat -kill -ncurses -pam -python (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
+sys-libs/db-5.3.28-r2 | `cxx -doc -examples -java -tcl {-test}`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
 x11-libs/libICE-1.0.9-r1 | `-doc -ipv6 -static-libs`
