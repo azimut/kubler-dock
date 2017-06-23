@@ -17,10 +17,6 @@ configure_bob() {
 #
 configure_rootfs_build()
 {
-    # as we broke the normal builder chain, recreate the docs for the busybox image
-    init_docs 'kubler-spin/busybox'
-    update_use 'sys-apps/busybox' '+static' '+make-symlinks'
-    generate_doc_package_installed 'sys-apps/busybox'
     # fake portage install
     provide_package sys-apps/portage
     # set localtime
