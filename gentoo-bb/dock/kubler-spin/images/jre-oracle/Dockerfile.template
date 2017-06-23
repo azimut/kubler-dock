@@ -3,4 +3,6 @@ LABEL maintainer ${MAINTAINER}
 
 ADD rootfs.tar /
 
-#RUN eselect java-vm set system 1
+#ENV PATH="/opt/oracle-jre-bin/bin:${PATH}"
+
+RUN eselect java-vm set system 1

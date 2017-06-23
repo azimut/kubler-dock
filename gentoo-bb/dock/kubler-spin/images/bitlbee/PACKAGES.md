@@ -1,7 +1,7 @@
 ### kubler-spin/bitlbee:20170423
 
-Built: Sun May  7 01:28:58 ART 2017
-Image Size: 25.75 MB
+Built: Thu Jun 22 17:40:26 ART 2017
+Image Size: 25.76 MB
 
 #### Installed
 Package | USE Flags
@@ -30,7 +30,8 @@ sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/musl** |
 sys-libs/musl-1.1.16 | ``
 **FROM kubler-spin/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
+**FROM kubler-spin/busybox** |
+sys-apps/busybox-1.26.2-r1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
 - [x] Headers
 - [x] Static Libs

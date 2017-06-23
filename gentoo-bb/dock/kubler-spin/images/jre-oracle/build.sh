@@ -2,11 +2,15 @@
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
 #_packages="app-shells/bash
-_packages="dev-java/oracle-jre-bin"
+_packages="dev-java/oracle-jre-bin app-shells/bash"
 
 #
 # This hook is called just before starting the build of the root fs
 #
+configure_bob(){
+    #emerge -q1 app-arch/advancecomp
+    :
+}
 configure_rootfs_build()
 {
     local jre_url jce_url jre_tar
@@ -23,7 +27,8 @@ configure_rootfs_build()
     update_use 'dev-java/oracle-jre-bin' +headless-awt +jce -fontconfig
     update_use 'sys-libs/ncurses'        +minimal
     # skip python and iced-tea
-    provide_package dev-lang/python dev-java/icedtea-bin app-eselect/eselect-java dev-java/java-config
+    provide_package dev-lang/python dev-java/icedtea-bin
+    #app-eselect/eselect-java dev-java/java-config
 }
 
 #
@@ -32,6 +37,8 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     # gentoo's run-java-tool.bash wrapper expects which at /usr/bin
-    :
-    #ln -rs "${_EMERGE_ROOT}"/bin/which "${_EMERGE_ROOT}"/usr/bin/which
+    ln -rs "${_EMERGE_ROOT}"/bin/which "${_EMERGE_ROOT}"/usr/bin/which
+    #find ${_EMERGE_ROOT}/ -type f -name 'rt.jar' -exec advzip -z -3 {} \;
+    find ${_EMERGE_ROOT}/ -type f -name 'classes.jsa' -delete
+    #mv ${_EMERGE_ROOT}/opt/oracle-jre-bin-* ${_EMERGE_ROOT}/opt/oracle-jre-bin
 }

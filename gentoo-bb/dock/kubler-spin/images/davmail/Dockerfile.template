@@ -1,0 +1,17 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+# User setup
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+VOLUME /opt/davmail/conf
+
+# POP LDAP IMAP CALDAV
+EXPOSE 1110/tcp 1389/tcp 1143/tcp 1080/tcp
+
+ENTRYPOINT [ "/bin/sh" ]
+CMD ["/opt/davmail/davmail.sh", "/opt/davmail/conf/davmail.properties"]

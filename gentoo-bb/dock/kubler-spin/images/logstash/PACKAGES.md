@@ -1,11 +1,17 @@
-### kubler-spin/jre-oracle:20170423
+### kubler-spin/logstash:20170423
 
-Built: Sun Jun 18 00:25:49 ART 2017
-Image Size: 139 MB
+Built: Wed Jun 21 05:48:17 ART 2017
+Image Size: 312.1 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
+app-admin/logstash-bin-5.4.0 | ``
+*manual install*: su-exec-0.2 | https://github.com/ncopa/su-exec/
+#### Inherited
+Package | USE Flags
+--------|----------
+**FROM kubler-spin/jre-oracle** |
 app-admin/eselect-1.4.8 | `-doc -emacs -vim-syntax`
 app-eselect/eselect-java-0.3.0 | ``
 app-shells/bash-4.3_p48-r1 | `net nls (readline) -afs -bashlogger -examples -mem-scramble -plugins`
@@ -20,9 +26,6 @@ sys-apps/sed-4.2.2 | `acl nls (-selinux) -static`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
 sys-libs/zlib-1.2.11 | `-minizip -static-libs`
-#### Inherited
-Package | USE Flags
---------|----------
 **FROM kubler-spin/glibc** |
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r3 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
