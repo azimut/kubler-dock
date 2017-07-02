@@ -2,18 +2,14 @@ FROM ${IMAGE_PARENT}
 LABEL maintainer ${MAINTAINER}
 
 ADD rootfs.tar /
+ADD config /opt/logstash/config
 
-ADD etc /etc
+RUN sh -c '{ DEBUG=1 JARS_SKIP="true" /opt/logstash/bin/logstash-plugin install logstash-input-rss ; }'
 
-ENV ES_CLASSPATH /usr/share/elasticsearch/lib/*
+VOLUME /opt/logstash/config
+VOLUME /opt/logstash/logs
 
-#USER elasticsearch
+USER logstash
 
-#RUN chmod +x $(find /etc/service -name run) && \
-#    ln -s /etc/s6_finish_default /etc/service/elasticsearch/finish && \
-#    ln -s /etc/service/elasticsearch /service
-
-EXPOSE 9200 9300
-
-CMD ["/etc/service/elasticsearch/run"]
-#CMD ["/bin/s6-svscan", "-t0", "/service"]
+ENTRYPOINT ["/opt/logstash/bin/logstash"]
+CMD ["-f","/etc/logstash/rss.conf","-r"]

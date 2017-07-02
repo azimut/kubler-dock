@@ -1,26 +1,12 @@
 ## JVM configuration
 
-################################################################
-## IMPORTANT: JVM heap size
-################################################################
-##
-## You should always set the min and max JVM heap
-## size to the same value. For example, to set
-## the heap to 4 GB, set:
-##
-## -Xms4g
-## -Xmx4g
-##
-## See https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html
-## for more information
-##
-################################################################
-
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
--Xms2g
--Xmx2g
+#-Xms256m
+#-Xmx1g
+-Xms256m
+-Xmx512m
 
 ################################################################
 ## Expert settings
@@ -33,6 +19,7 @@
 ################################################################
 
 ## GC configuration
+-XX:+UseParNewGC
 -XX:+UseConcMarkSweepGC
 -XX:CMSInitiatingOccupancyFraction=75
 -XX:+UseCMSInitiatingOccupancyOnly
@@ -42,13 +29,20 @@
 # disable calls to System#gc
 -XX:+DisableExplicitGC
 
-# pre-touch memory pages used by the JVM during initialization
--XX:+AlwaysPreTouch
+## Locale
+# Set the locale language
+#-Duser.language=en
+
+# Set the locale country
+#-Duser.country=US
+
+# Set the locale variant, if any
+#-Duser.variant=
 
 ## basic
 
-# force the server VM
--server
+# set the I/O temp directory
+#-Djava.io.tmpdir=$HOME
 
 # set to headless, just in case
 -Djava.awt.headless=true
@@ -57,16 +51,7 @@
 -Dfile.encoding=UTF-8
 
 # use our provided JNA always versus the system one
--Djna.nosys=true
-
-# flags to keep Netty from being unsafe
--Dio.netty.noUnsafe=true
--Dio.netty.noKeySetOptimization=true
-
-# log4j 2
--Dlog4j.shutdownHookEnabled=false
--Dlog4j2.disable.jmx=true
--Dlog4j.skipJansi=true
+#-Djna.nosys=true
 
 ## heap dumps
 
@@ -76,10 +61,9 @@
 
 # specify an alternative path for heap dumps
 # ensure the directory exists and has sufficient space
-#-XX:HeapDumpPath=${heap.dump.path}
+#-XX:HeapDumpPath=${LOGSTASH_HOME}/heapdump.hprof
 
 ## GC logging
-
 #-XX:+PrintGCDetails
 #-XX:+PrintGCTimeStamps
 #-XX:+PrintGCDateStamps
@@ -89,12 +73,4 @@
 
 # log GC status to a file with time stamps
 # ensure the directory exists
-#-Xloggc:${loggc}
-
-# Elasticsearch 5.0.0 will throw an exception on unquoted field names in JSON.
-# If documents were already indexed with unquoted fields in a previous version
-# of Elasticsearch, some operations may throw errors.
-#
-# WARNING: This option will be removed in Elasticsearch 6.0.0 and is provided
-# only for migration purposes.
-#-Delasticsearch.json.allow_unquoted_field_names=true
+#-Xloggc:${LS_GC_LOG_FILE}

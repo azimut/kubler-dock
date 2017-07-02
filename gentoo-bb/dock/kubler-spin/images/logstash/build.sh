@@ -1,7 +1,7 @@
 #
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
-_packages="app-shells/bash app-admin/logstash-bin"
+_packages="app-admin/logstash-bin"
 
 #
 # This hook is called just before starting the build of the root fs
@@ -9,10 +9,6 @@ _packages="app-shells/bash app-admin/logstash-bin"
 configure_rootfs_build()
 {
     update_keywords 'app-admin/logstash-bin' '+~amd64'
-    # elasticsearch ebuild still is wired to jre7 but we already use jre8
-    #echo 'dev-java/oracle-jre-bin-1.7.0.76' >> /etc/portage/profile/package.provided
-    # install bash again, needed at build time
-    unprovide_package app-shells/bash
 }
 
 #
@@ -20,7 +16,6 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    uninstall_package app-shells/bash
-    #virtual/jre-1.7.0
-    install_suexec
+    mkdir -p ${_EMERGE_ROOT}/opt/logstash/logs
+    chown -R logstash ${_EMERGE_ROOT}/opt/logstash
 }
