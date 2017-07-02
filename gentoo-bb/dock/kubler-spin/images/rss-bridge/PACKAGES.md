@@ -1,7 +1,7 @@
 ### kubler-spin/rss-bridge:20170423
 
-Built: Thu Jun 29 04:57:46 ART 2017
-Image Size: 62.84 MB
+Built: Thu Jun 29 23:53:08 ART 2017
+Image Size: 62.32 MB
 
 #### Installed
 Package | USE Flags
