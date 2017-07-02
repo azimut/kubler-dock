@@ -1,0 +1,11 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+USER user
+ADD in_rss.rb /home/user/.gem/ruby/2.4.0/gems/fluent-plugin-rss-0.0.1/lib/fluent/plugin/
+ENV HOME /home/user
+WORKDIR /home/user
+ENV PATH "$PATH:/home/user/.gem/ruby/2.4.0/bin"
+
+#RUN eselect ruby set ruby24 2> /dev/null
