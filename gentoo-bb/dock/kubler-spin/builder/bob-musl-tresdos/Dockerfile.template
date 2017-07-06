@@ -1,4 +1,4 @@
-FROM ${NAMESPACE}/bob-musl-libressl
+FROM ${NAMESPACE}/bob-musl-tresdos
 MAINTAINER ${MAINTAINER}
 
 CMD ["/bin/bash"]

@@ -1,0 +1,19 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+ADD etc /etc
+
+ENV ES_CLASSPATH /usr/share/elasticsearch/lib/*
+
+#USER elasticsearch
+
+#RUN chmod +x $(find /etc/service -name run) && \
+#    ln -s /etc/s6_finish_default /etc/service/elasticsearch/finish && \
+#    ln -s /etc/service/elasticsearch /service
+
+EXPOSE 9200 9300
+
+CMD ["/etc/service/elasticsearch/run"]
+#CMD ["/bin/s6-svscan", "-t0", "/service"]

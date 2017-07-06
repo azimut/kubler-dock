@@ -1,0 +1,4 @@
+FROM ${NAMESPACE}/bob-tresdos
+LABEL maintainer ${MAINTAINER}
+
+CMD ["/bin/bash"]
