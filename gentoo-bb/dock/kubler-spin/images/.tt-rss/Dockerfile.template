@@ -1,0 +1,11 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+#USER tor
+
+VOLUME /var/www/localhost/htdocs
+
+ENTRYPOINT ["apache2"]
+CMD ["-DFOREGROUND","-DDEFAULT_VHOST","-DPHP5"]
