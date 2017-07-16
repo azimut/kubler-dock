@@ -1,0 +1,14 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+EXPOSE 9117
+
+# https://github.com/Jackett/Jackett/issues/1285
+ENTRYPOINT ["mono"]
+CMD ["/home/user/Jackett/JackettConsole.exe","-c","libcurl"]
