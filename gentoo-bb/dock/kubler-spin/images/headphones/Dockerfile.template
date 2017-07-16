@@ -1,0 +1,15 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+#VOLUME ["/root/.config/flexget"]
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+VOLUME /home/user/data
+VOLUME /home/user/blackhole
+
+ENTRYPOINT ["python2.7"]
+CMD ["/home/user/headphones/Headphones.py","-p","8181","--datadir=/home/user/data","--host=0.0.0.0","-v"]
