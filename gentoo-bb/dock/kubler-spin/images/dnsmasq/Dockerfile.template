@@ -4,6 +4,7 @@ MAINTAINER ${MAINTAINER}
 ADD rootfs.tar /
 
 USER dnsmasq
+ENV SERVER=dnscrypt
 
 EXPOSE 5353/udp 5353/tcp
 

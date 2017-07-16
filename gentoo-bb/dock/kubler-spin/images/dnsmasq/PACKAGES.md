@@ -1,8 +1,7 @@
 ### kubler-spin/dnsmasq:20170423
 
-Built: Tue May 16 07:15:53 ART 2017
-Image Size: 36.67 MB
-
+Built: Tue May 16 21:53:42 ART 2017
+Image Size: 36.71 MB
 
 #### Installed
 Package | USE Flags
