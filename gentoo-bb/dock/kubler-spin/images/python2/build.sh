@@ -27,10 +27,10 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
-	find ${_EMERGE_ROOT}/usr -depth \
+	find ${_EMERGE_ROOT}/ -depth \
 			\( \
-				\( -type d -a -name test -o -name tests \) \
+				\( -type d -a -name test -o -name tests -o -name testing -o -name __pycache__ \) \
 				-o \
-				\( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
+				\( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
 	        \) -print -exec rm -rf '{}' + 
 }
