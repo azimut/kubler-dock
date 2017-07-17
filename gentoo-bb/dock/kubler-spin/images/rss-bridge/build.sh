@@ -83,7 +83,6 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     rsync --delete -av --exclude=.git /distfiles/rss-bridge ${_EMERGE_ROOT}/var/www/localhost/htdocs
-    chown -R apache:apache ${_EMERGE_ROOT}/var/www/localhost/htdocs
 
     # enable module
     ln -sf /usr/${_LIB}/php5.6/apache2/libphp5.so \
@@ -96,17 +95,17 @@ InstagramBridge
 DuckDuckGoBridge
 GoogleSearchBridge
 YoutubeBridge
+MeetupBridge
 EOF
-    chown apache:apache ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/whitelist.txt
     chmod 444 ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/whitelist.txt
     find ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/bridges/ -type f \! \( -name TwitterBridge.php -o -name InstagramBridge.php -o -name DuckDuckGoBridge.php -o -name GoogleSearchBridge.php -o -name YoutubeBridge.php \) -delete
 
+    cp /config/MeetupBridge.php ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/bridges/
     # apache pthreads
     copy_gcc_libs
 
     # logs
     mkdir -p ${_EMERGE_ROOT}/var/log/apache2/
-    chown apache:apache ${_EMERGE_ROOT}/var/log/apache2/
     ln -sf /dev/stdout ${_EMERGE_ROOT}/var/log/apache2/access_log
     ln -sf /dev/stderr ${_EMERGE_ROOT}/var/log/apache2/error_log
 
@@ -121,4 +120,5 @@ EOF
             "${_EMERGE_ROOT}"/usr/share/eselect \
             "${_EMERGE_ROOT}"/usr/share/build-1
     find "${_EMERGE_ROOT}"/${_LIB}/ "${_EMERGE_ROOT}"/usr/${_LIB}/ -type f -name '*.[ah]' -delete -print
+    chown -R apache:apache ${_EMERGE_ROOT}/var/www/localhost/htdocs  ${_EMERGE_ROOT}/var/log/apache2/
 }
