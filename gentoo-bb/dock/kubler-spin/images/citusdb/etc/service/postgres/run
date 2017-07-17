@@ -1,0 +1,83 @@
+#!/bin/sh
+# adapted from: https://github.com/docker-library/postgres/blob/e616341507a7beec3a161b0a366ba0d3400328fd/9.4/docker-entrypoint.sh
+
+set -x
+
+postgresql-config set 9.5
+
+chown -R postgres "$PGDATA"
+
+mkdir -p /run/postgresql
+chmod g+s /run/postgresql
+chown -R postgres:postgres /run/postgresql
+
+if [ -z "$(ls -A "$PGDATA")" ]; then
+    su-exec postgres initdb
+
+    sed -ri "s/^#(listen_addresses\s*=\s*)\S+/\1'*'/" "$PGDATA"/postgresql.conf
+    echo "shared_preload_libraries='citus'" >> "$PGDATA"/postgresql.conf
+
+    # check password first so we can ouptut the warning before postgres
+    # messes it up
+    if [ "$POSTGRES_PASSWORD" ]; then
+        pass="PASSWORD '$POSTGRES_PASSWORD'"
+        authMethod=md5
+    else
+        # The - option suppresses leading tabs but *not* spaces. :)
+        pass=
+        authMethod=trust
+    fi
+
+    : ${POSTGRES_USER:=postgres}
+    : ${POSTGRES_DB:=$POSTGRES_USER}
+
+    if [ "$POSTGRES_DB" != 'postgres' ]; then
+        su-exec postgres postgres --single -jE << EOSQL
+CREATE DATABASE "$POSTGRES_DB" ;
+EOSQL
+		su-exec postgres pg_ctl -D "$PGDATA" \
+			-o "-c listen_addresses='localhost'" \
+			-w start
+
+su-exec postgres psql -v ON_ERROR_STOP=1 --username postgres --dbname $POSTGRES_DB << EOSQL
+CREATE EXTENSION citus;
+create table entries (
+    timestamp timestamp not null,
+    content text not null,
+    feed text not null,
+    tags text not null,
+    title text not null,
+    url text not null,
+    fingerprint varchar(250) not null
+	);
+SELECT master_create_distributed_table(
+  'entries', 'feed', 'hash'
+  );
+SELECT master_create_worker_shards('entries', 16, 1);
+EOSQL
+su-exec postgres pg_ctl -D "$PGDATA" -m fast -w stop
+
+        echo
+    fi
+
+    if [ "$POSTGRES_USER" = 'postgres' ]; then
+        op='ALTER'
+    else
+        op='CREATE'
+    fi
+
+    su-exec postgres postgres --single -jE << EOSQL
+$op USER "$POSTGRES_USER" WITH SUPERUSER $pass ;
+EOSQL
+    echo
+
+    { echo; echo "host all all 0.0.0.0/0 $authMethod"; } >> "$PGDATA"/pg_hba.conf
+
+fi
+
+[ -n "${BACKUP_CRON_SCHEDULE}" ] && [ ! -f /var/spool/cron/crontabs/postgres ] &&
+    echo "${BACKUP_CRON_SCHEDULE} /etc/pg_backup_rotated.sh" >> /var/spool/cron/crontabs/postgres &&
+    chown postgres:postgres /backup
+
+exec 2>&1
+su-exec postgres postgres

@@ -1,7 +1,8 @@
 #
 # build config
 #
-_packages="sys-apps/busybox dev-db/postgresql"
+_packages="sys-apps/busybox dev-db/postgresql:9.6"
+
 _emerge_bin="emerge"
 
 #
@@ -9,6 +10,8 @@ _emerge_bin="emerge"
 #
 configure_rootfs_build()
 {
+    update_keywords 'dev-db/postgresql:9.6' '+~'$(portageq envvar ARCH)
+
     # Install /bin/sh
     unprovide_package sys-apps/busybox
     update_use 'sys-libs/ncurses' '+minimal'

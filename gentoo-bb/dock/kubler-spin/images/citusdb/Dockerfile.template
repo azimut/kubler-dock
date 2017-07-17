@@ -1,0 +1,14 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+ADD etc /etc
+
+ENV PGDATA /var/lib/postgresql/data
+
+VOLUME /var/lib/postgresql/data /backup
+
+EXPOSE 5432
+
+ENTRYPOINT ["/etc/service/postgres/run"]
