@@ -1,8 +1,0 @@
-FROM ${IMAGE_PARENT}
-LABEL maintainer ${MAINTAINER}
-
-ADD rootfs.tar /
-
-#ENV PATH="/opt/oracle-jre-bin/bin:${PATH}"
-
-RUN eselect java-vm set system 1

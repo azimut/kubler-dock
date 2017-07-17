@@ -1,7 +1,7 @@
-### kubler-spin/jre-oracle-tresdos:20170423
+### kubler-spin/jdk-oracle-tresdos:20170423
 
-Built: Wed Jul  5 04:29:20 ART 2017
-Image Size: 111.7 MB
+Built: Fri Jul  7 05:28:06 ART 2017
+Image Size: 152.8 MB
 
 #### Installed
 Package | USE Flags
@@ -10,13 +10,15 @@ app-admin/eselect-1.4.8 | `-doc -emacs -vim-syntax`
 app-eselect/eselect-java-0.3.0 | ``
 app-shells/bash-4.3_p48-r1 | `net nls (readline) -afs -bashlogger -examples -mem-scramble -plugins`
 dev-java/java-config-2.2.0-r3 | `{-test}`
-dev-java/oracle-jre-bin-1.8.0.131 | `headless-awt jce -alsa -commercial -cups -fontconfig -javafx -nsplugin (-selinux)`
-sys-apps/acl-2.2.52-r1 | `nls -static-libs`
+dev-java/jna-3.4.1 | `nio-buffers -awt -doc -source {-test}`
+dev-java/oracle-jdk-bin-1.8.0.131 | `headless-awt jce -alsa -commercial -cups -derby -doc -examples -fontconfig -javafx -nsplugin (-selinux) -source -visualvm`
+dev-lang/python-exec-2.4.4 | ` `
+dev-libs/libffi-3.2.1 | `pax`
 sys-apps/attr-2.4.47-r2 | `nls -static-libs`
 sys-apps/baselayout-java-0.1.0 | ``
-sys-apps/coreutils-8.25 | `acl nls (xattr) -caps -gmp -hostname -kill -multicall (-selinux) -static -vanilla`
+sys-apps/coreutils-8.25 | `nls (xattr) -acl -caps -gmp -hostname -kill -multicall (-selinux) -static -vanilla`
 sys-apps/file-5.30 | `zlib -python -static-libs`
-sys-apps/sed-4.2.2 | `acl nls (-selinux) -static`
+sys-apps/sed-4.2.2 | `nls -acl (-selinux) -static`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
 sys-libs/zlib-1.2.11 | `-minizip -static-libs`
