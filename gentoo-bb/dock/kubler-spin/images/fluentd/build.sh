@@ -6,7 +6,8 @@ set -x
 
 configure_bob()
 {
-    :
+    echo 'dev-db/postgresql:9.6 ~'$(portageq envvar ARCH) >> /etc/portage/package.accept_keywords/bb
+    emerge -1q dev-db/postgresql:9.6
 }
 configure_rootfs_build()
 {
@@ -26,6 +27,8 @@ finish_rootfs_build()
     #su - user -s /bin/sh -c 'gem install fluentd -v 0.14.18 --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-rss --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-elasticsearch --no-ri --no-rdoc'
+    su - user -s /bin/sh -c 'gem install fluent-plugin-sql --no-ri --no-rdoc'
+    su - user -s /bin/sh -c 'gem install pg --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install feedjira --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem list'
 

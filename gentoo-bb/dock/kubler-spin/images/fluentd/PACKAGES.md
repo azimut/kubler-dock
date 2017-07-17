@@ -1,7 +1,7 @@
 ### kubler-spin/fluentd:20170423
 
-Built: Sun Jul  2 05:37:08 ART 2017
-Image Size: 91.22 MB
+Built: Sun Jul 16 05:09:32 ART 2017
+Image Size: 97.71 MB
 
 #### Installed
 Package | USE Flags
