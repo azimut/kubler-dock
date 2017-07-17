@@ -22,7 +22,7 @@ configure_bob(){
 
     # grab latest version
     update_keywords 'net-irc/weechat' '+**'
-    mask_package '=net-irc/weechat-9999'
+    #mask_package '=net-irc/weechat-9999'
 
     update_use 'net-irc/weechat'  -exec -fifo -xfer -spell
     update_use 'sys-libs/ncurses' +minimal

@@ -1,6 +1,6 @@
 ### kubler-spin/bitlbee:20170423
 
-Built: Thu Jun 22 17:40:26 ART 2017
+Built: Fri Jun 23 18:46:27 ART 2017
 Image Size: 25.76 MB
 
 #### Installed
