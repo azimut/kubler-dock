@@ -2,17 +2,13 @@
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
 #_packages="app-shells/bash
-_packages="dev-java/oracle-jre-bin app-shells/bash"
+_packages="dev-java/oracle-jre-bin app-shells/bash dev-java/jna"
 
 #
 # This hook is called just before starting the build of the root fs
 #
 configure_bob(){
     emerge -q1 app-arch/advancecomp
-    :
-}
-configure_rootfs_build()
-{
     local jre_url jce_url jre_tar
     # download oracle jre bin
     jre_url=http://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jre-8u131-linux-x64.tar.gz
@@ -29,8 +25,11 @@ configure_rootfs_build()
     update_use 'dev-java/oracle-jre-bin' +headless-awt +jce -fontconfig
     update_use 'sys-libs/ncurses'        +minimal
     # skip python and iced-tea
-    provide_package dev-lang/python dev-java/icedtea-bin
-    #app-eselect/eselect-java dev-java/java-config
+    provide_package dev-lang/python dev-java/icedtea-bin virtual/jdk
+}
+configure_rootfs_build()
+{
+    :
 }
 
 #
@@ -42,5 +41,6 @@ finish_rootfs_build()
     ln -rs "${_EMERGE_ROOT}"/bin/which "${_EMERGE_ROOT}"/usr/bin/which
     find ${_EMERGE_ROOT}/ -type f -name 'rt.jar' -exec advzip -z -1 {} \;
     find ${_EMERGE_ROOT}/ -type f -name 'classes.jsa' -delete
+    rm -rf ${_EMERGE_ROOT}/opt/oracle-jre-bin-*/man ${_EMERGE_ROOT}/opt/oracle-jre-bin-*/lib/desktop
     #mv ${_EMERGE_ROOT}/opt/oracle-jre-bin-* ${_EMERGE_ROOT}/opt/oracle-jre-bin
 }
