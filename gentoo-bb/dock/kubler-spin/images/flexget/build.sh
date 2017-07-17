@@ -23,49 +23,22 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
+    # copy config
     mkdir -p ${_EMERGE_ROOT}/opt \
              ${_EMERGE_ROOT}/root/.config/flexget
+    cp /config/config.yml ${_EMERGE_ROOT}/root/.config/flexget/config.yml
+
+    # copy venv
     cp -ar /opt/flexget ${_EMERGE_ROOT}/opt
-    cat > ${_EMERGE_ROOT}/root/.config/flexget/config.yml <<EOF
-tasks:
-
-  weeabo:
-
-    # https://flexget.com/Plugins/rtorrent
-    rtorrent:
-        uri: scgi://rtorrent:5000
-
-    rss: https://www.nyaa.se/?page=rss&term=horriblesubs
-    quality: 720p
-    series:
-      - Alice to Zouroku
-      - Atom - The Beginning
-      - Eromanga-sensei
-      - Gin no Guardian
-      - Hinako Note
-      - Re-Creators
-      - Renai Bouken
-      - Roku de Nashi Majutsu Koushi to Akashic Records
-      - Sakura Quest
-      - Shuumatsu Nani Shitemasuka Isogashii Desuka Sukutte Moratte Ii Desuka
-      - Tsugumomo
-      - Warau Salesman NEW
-      - Zero kara Hajimeru Mahou no Sho
- 
-schedules:
-
-  - tasks: '*'
-    interval:
-      minutes: 60
-EOF
 
     # flexgetui rm
     rm -rf ${_EMERGE_ROOT}/opt/flexget/lib/python*/site-packages/flexget/ui/
+
     # python-cleanup
     # https://github.com/docker-library/python/blob/master/3.4/alpine/Dockerfile
 	find ${_EMERGE_ROOT}/ -depth \
 			\( \
-				\( -type d -a -name test -o -name tests -o -name testing \) \
+				\( -type d -a -name test -o -name tests -o -name testing -o -name __pycache__ \) \
 				-o \
 				\( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
 	        \) -print -exec rm -rf '{}' + 

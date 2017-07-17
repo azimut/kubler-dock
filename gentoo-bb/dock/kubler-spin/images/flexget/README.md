@@ -2,7 +2,7 @@
 
 Run this [Flexget][] image with:
 
-    $ docker run --rm -ti --name flexget --tmpfs /tmp --tmpfs /var/tmp --read-only kubler-spin/flexget
+    $ docker run --rm -ti --name flexget --tmpfs /tmp --tmpfs /var/tmp --read-only -v $HOME/flexget/:/root/.config/flexget kubler-spin/flexget
 
 Installed from [Pip][].
 

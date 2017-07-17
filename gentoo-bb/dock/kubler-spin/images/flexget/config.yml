@@ -1,0 +1,141 @@
+---
+templates:
+
+  # http://kaimi.cc/2014/09/16/youtube-im-offline-modus/
+  # https://kernelwho.wordpress.com/2012/10/19/winning-at-youtube-web-series-with-flexget/
+#  youtube-audio:
+#
+#    only_new: yes
+#    exec:
+#      on_output:
+#        for_accepted: /opt/flexget/bin/youtube-dl -r 50K -f bestaudio -o '/data/%(upload_date)s-%(title)s-%(ext)s' "{{url}}"
+
+#  podcasts:
+#
+#    all_series: yes
+#    only_new: yes
+#    aria2:
+#      path: /data
+#      server: 127.0.0.1
+#      port: 6800
+#      secret: AotFe1rYmBFW+gL8Yt3awYreImup0Tw5xHpuzWMV4RyAHv0inrvJERRMM3uwi8K2WZmSaZLwAluQ88fbaHE5gG
+#      options:
+#        max-download-limit: 50K
+
+  animu:
+
+    # https://flexget.com/Plugins/rtorrent
+    rtorrent:
+        uri: scgi://rtorrent:5000
+        path: "/opt/{{ series_name | replace(' ','..') }}"
+
+    quality: 720p
+    series:
+      settings:
+        anime:
+          propers: 12 hours
+          special_ids:
+            - OVA
+      anime:
+        # = Spring 2017
+        - Alice to Zouroku
+        - Atom - The Beginning
+        - Busou Shoujo Machiavellianism
+        - Eromanga-sensei
+        #- Gin no Guardian
+        #- Hinako Note
+        - Re-Creators
+        - Renai Boukun
+        - Roku de Nashi Majutsu Koushi to Akashic Records
+        - Sakura Quest
+        - Seikaisuru Kado
+        - DanMachi Gaiden - Sword Oratoria
+        - Shuumatsu Nani Shitemasuka Isogashii Desuka Sukutte Moratte Ii Desuka
+        - Tsugumomo
+        #- Warau Salesman NEW
+        - Zero kara Hajimeru Mahou no Sho
+        # = Summer 2017
+        - The Reflection Wave One
+        - Gamers!
+        - Hajimete no Gal
+        - Clione no Akari
+        - Isekai wa Smartphone to Tomo ni.
+        - Princess Principal
+        - Shoukoku no Altair
+        - Jikan no Shihaisha
+        - Vatican Kiseki Chousakan
+        - 18if
+        - Made in Abyss
+        - Action Heroine Cheer Fruits
+        - Saiyuuki Reload Blast
+        - Isekai Shokudou
+        - Katsugeki Touken Ranbu
+        - Youkai Apartment no Yuuga na Nichijou 
+        - Kakegurui 
+
+tasks:
+
+#  tpc:
+#    rss: https://www.youtube.com/feeds/videos.xml?channel_id=UC-6IzAdy_yVVwPgk0I59dOw
+#    regexp:
+#      accept:
+#        - "Pro Crastinators Podcast"
+#      rest: reject
+#      from: title
+#    template: youtube-audio
+#
+#  weebcast:
+#
+#    rss: http://feeds.soundcloud.com/users/soundcloud:users:116406291/sounds.rss
+#    template: podcasts
+#
+#  hacked:
+#
+#    rss: https://www.hackedpodcast.com/feed/podcast/
+#    template: podcasts
+
+#  nya:
+#
+#    rss:
+#      url: https://www.nyaa.se/?page=rss&term=horriblesubs
+#      all_entries: no
+#    template: animu
+
+  tokyotosho:
+
+    rss:
+      url: https://www.tokyotosho.info/rss.php?filter=1
+      all_entries: no
+    template: animu
+
+  horriblesub:
+
+    rss:
+      url: http://horriblesubs.info/rss.php?res=720
+      all_entries: no
+    template: animu
+
+  anitosho:
+
+    rss:
+      url: https://animetosho.org/feed/rss2
+      all_entries: no
+    template: animu
+    
+  nyaasi:
+
+    rss:
+      url: https://nyaa.si/?page=rss
+      all_entries: no
+    template: animu
+ 
+schedules:
+
+#  - tasks: [ weebcast , hacked, tpc ]
+#    interval:
+#      hours: 6
+
+  - tasks: [ tokyotosho, horriblesub, anitosho ]
+    schedule:
+      hour: 10-22
+      minute: "*/40"
