@@ -1,0 +1,78 @@
+---
+#
+#  curl -XPUT -H 'Content-type: application/yaml'
+#  --data-binary @a.yml http://10.196.43.148:9200/_template/template_1
+#
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/general-recommendations.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/norms.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/doc-values.html
+#
+# norms: used at query time in order to compute the score of a document relatively to a query.
+#        Disabled on keyword.
+# doc_values: Sorting, aggregations, and access to field values in scripts requires THIS data access pattern. 
+#             Less memory usage.
+# index: Should the field be searchable? 
+# index_opts:
+#            docs  (keyword)
+#            freqs
+
+template: logstash-*
+
+settings:
+
+  index:
+
+    # lower cpu/disk
+    translog:
+      durability: async
+
+    # non-ssd tunning
+    merge:
+      scheduler:
+        max_thread_count: 1
+
+    # singlenode and max indexing speed
+    number_of_shards: 1
+    number_of_replicas: 0
+    refresh_interval: 300s
+
+  analysis:
+
+    analyzer:
+
+      folding:
+
+        type: custom
+        tokenizer: standard
+        char_filter:
+          - html_strip
+        filter:
+          - lowercase
+          - asciifolding
+
+mappings:
+
+  feed:
+
+    _all:
+      enabled: false
+
+    properties:
+
+      '@timestamp':
+        type: date
+
+      content:
+        type: text
+        analyzer: folding
+      title:
+        type: keyword
+        index: false
+
+      feed: # (+index) Get all articles on site
+        type: keyword
+      tags: # (+index) Get all articles on a category
+        type: keyword
+      url:
+        type: keyword
+        index: false
