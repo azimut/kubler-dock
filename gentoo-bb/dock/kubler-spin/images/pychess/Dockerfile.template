@@ -1,0 +1,7 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+ENTRYPOINT ["pychess"]
+CMD ["--no-gettext"]
