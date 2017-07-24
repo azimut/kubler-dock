@@ -61,6 +61,7 @@ mappings:
 
       '@timestamp':
         type: date
+        format: epoch_second
 
       content:
         type: text
