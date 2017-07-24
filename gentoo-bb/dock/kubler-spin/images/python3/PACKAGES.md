@@ -1,17 +1,17 @@
 ### kubler-spin/python3:20170423
 
-Built: Sun May  7 04:01:23 ART 2017
-Image Size: 25.83 MB
+Built: Sun Jul 23 18:24:20 ART 2017
+Image Size: 25.68 MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-app-arch/bzip2-1.0.6-r7 | `-static -static-libs`
+app-arch/bzip2-1.0.6-r8 | `-static -static-libs`
 app-arch/xz-utils-5.2.3 | `nls threads -static-libs`
 app-misc/mime-types-9 | ``
-dev-db/sqlite-3.17.0 | `-debug -doc -icu -readline -secure-delete -static-libs -tcl {-test} -tools`
+dev-db/sqlite-3.19.3 | `-debug -doc -icu -readline -secure-delete -static-libs -tcl {-test} -tools`
 dev-lang/python-3.4.5 | `hardened libressl sqlite ssl (threads) xml -build -examples -gdbm -ipv6 -ncurses -readline -tk -wininst`
-dev-libs/expat-2.2.0-r1 | `unicode -examples -static-libs`
+dev-libs/expat-2.2.1 | `unicode -examples -static-libs`
 dev-libs/libffi-3.2.1 | `pax`
 sys-libs/zlib-1.2.11 | `-minizip -static-libs`
 #### Inherited
@@ -25,7 +25,8 @@ sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/musl** |
 sys-libs/musl-1.1.16 | ``
 **FROM kubler-spin/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
+**FROM kubler-spin/busybox** |
+sys-apps/busybox-1.26.2-r1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
 - [x] Headers
 - [x] Static Libs
