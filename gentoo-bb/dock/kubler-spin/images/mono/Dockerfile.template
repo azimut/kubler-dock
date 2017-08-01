@@ -1,0 +1,10 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+ENTRYPOINT ["mono"]
