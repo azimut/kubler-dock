@@ -1,7 +1,7 @@
 ### kubler-spin/bob-musl:20170423
 
-Built: Sun May 28 03:41:08 ART 2017
-Image Size: 706.6 MB
+Built: Wed Aug 23 09:35:56 ART 2017
+Image Size: 706MB
 
 #### Installed
 None.
