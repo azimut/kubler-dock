@@ -1,0 +1,8 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+ADD rootfs.tar /

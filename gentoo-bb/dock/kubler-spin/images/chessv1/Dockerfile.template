@@ -1,0 +1,9 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+WORKDIR /opt/ChessV
+
+ENTRYPOINT ["wine"]
+CMD ["ChessV.exe"]
