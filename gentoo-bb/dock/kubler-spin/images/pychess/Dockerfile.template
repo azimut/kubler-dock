@@ -4,4 +4,4 @@ LABEL maintainer ${MAINTAINER}
 ADD rootfs.tar /
 
 ENTRYPOINT ["pychess"]
-CMD ["--no-gettext"]
+CMD ["--no-gettext","--log-viewer"]
