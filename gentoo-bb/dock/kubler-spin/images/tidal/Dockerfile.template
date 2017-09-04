@@ -2,6 +2,8 @@ FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
+# https://raw.githubusercontent.com/tidalcycles/Tidal/master/tidal.el
+ADD rootfs /
 
 #USER tor
 
