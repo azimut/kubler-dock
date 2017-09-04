@@ -1,0 +1,12 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+ADD rootfs /
+
+ENV SBCL_HOME /usr/lib64/sbcl
+RUN sbcl --load /install.lisp
+
+#USER root
+ENV HOME /root
+WORKDIR $HOME
