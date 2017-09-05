@@ -34,6 +34,6 @@ configure_rootfs_build()
 
 finish_rootfs_build(){
     # slime needs this
-    ln -s ${_EMERGE_ROOT}/usr/bin/sbcl \
+    ln -sf /usr/bin/sbcl \
           ${_EMERGE_ROOT}/usr/bin/lisp
 }

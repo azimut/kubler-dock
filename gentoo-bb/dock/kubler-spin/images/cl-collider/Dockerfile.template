@@ -7,6 +7,9 @@ ADD rootfs /
 ENV SBCL_HOME /usr/lib64/sbcl
 RUN sbcl --load /install.lisp
 
+# We need to set it here again as direct scsynth calls does't get the startup file
+ENV SC_JACK_DEFAULT_OUTPUTS darkice:left,darkice:right,
+
 #USER root
 ENV HOME /root
 WORKDIR $HOME

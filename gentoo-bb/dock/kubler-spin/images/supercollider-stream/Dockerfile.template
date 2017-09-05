@@ -8,6 +8,8 @@ ADD rootfs/etc/ice.xml    /etc/
 
 RUN ldconfig
 
+EXPOSE 8000 57110 57120
+
 #USER tor
 
 #ENTRYPOINT [ "tor "]

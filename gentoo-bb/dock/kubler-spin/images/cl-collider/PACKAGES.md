@@ -1,7 +1,7 @@
 ### kubler-spin/cl-collider:20170423
 
-Built: Mon Sep  4 05:40:27 ART 2017
-Image Size: 233MB
+Built: Tue Sep  5 07:56:45 ART 2017
+Image Size: 303MB
 
 #### Installed
 Package | USE Flags
@@ -25,11 +25,47 @@ sys-apps/attr-2.4.47-r2 | `-nls -static-libs`
 sys-apps/coreutils-8.25 | `(xattr) -acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static -vanilla`
 sys-apps/file-5.30 | `zlib -python -static-libs`
 sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
-sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
-sys-libs/zlib-1.2.11 | `-minizip -static-libs`
 #### Inherited
 Package | USE Flags
 --------|----------
+**FROM kubler-spin/supercollider-stream** |
+dev-libs/libbsd-0.8.3 | `-static-libs`
+dev-libs/libgcrypt-1.7.8 | `-doc -static-libs`
+dev-libs/libgpg-error-1.27-r1 | `-common-lisp -nls -static-libs`
+dev-libs/libpthread-stubs-0.4 | `-static-libs`
+dev-libs/libxml2-2.9.4-r1 | `-debug -examples -icu -ipv6 -lzma -python -readline -static-libs {-test}`
+dev-libs/libxslt-1.1.29-r1 | `crypt -debug -examples -python -static-libs`
+media-libs/alsa-lib-1.1.2 | `-alisp -debug -doc -python`
+media-libs/flac-1.3.2-r1 | `cxx (-altivec) -debug -ogg -static-libs`
+media-libs/libogg-1.3.2 | `-static-libs`
+media-libs/libsamplerate-0.1.9 | `-sndfile -static-libs`
+media-libs/libsndfile-1.0.28-r1 | `-alsa -minimal -sqlite -static-libs {-test}`
+media-libs/libvorbis-1.3.5 | `-static-libs`
+media-sound/darkice-1.3 | `jack mp3 -aac -aacplus -alsa -debug -libsamplerate -opus -pulseaudio -twolame -vorbis`
+media-sound/jack-audio-connection-kit-0.125.0 | `-alsa (-altivec) (-coreaudio) -debug -doc -examples -oss -pam`
+media-sound/lame-3.99.5-r1 | `frontend -debug -mp3rtp -sndfile -static-libs`
+media-sound/supercollider-3.8.0 | `fftw gpl3 jack server sndfile -avahi -debug -emacs -gedit -native -portaudio -qt5 -static-libs -vim -wiimote`
+media-sound/supercollider-plugins-3.8.0 | `-native`
+net-misc/icecast-2.4.3 | `ssl -kate (-libressl) -logrotate -speex -theora -yp`
+sci-libs/fftw-3.3.4 | `openmp threads (-altivec) -doc -fortran -mpi (-neon) -quad -static-libs {-test} (-zbus)`
+sys-apps/util-linux-2.28.2 | `unicode -build -caps -cramfs -fdformat -kill -ncurses -nls -pam -python -readline (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
+sys-libs/db-5.3.28-r2 | `cxx -doc -examples -java -tcl {-test}`
+sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
+sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
+sys-libs/zlib-1.2.11 | `-minizip -static-libs`
+x11-libs/libICE-1.0.9-r1 | `-doc -ipv6 -static-libs`
+x11-libs/libSM-1.2.2-r1 | `uuid -doc -ipv6 -static-libs`
+x11-libs/libX11-1.6.5 | `-doc -ipv6 -static-libs {-test}`
+x11-libs/libXau-1.0.8 | `-static-libs`
+x11-libs/libxcb-1.12-r2 | `-doc (-selinux) -static-libs {-test} -xkb`
+x11-libs/libXdmcp-1.1.2-r1 | `-doc -static-libs`
+x11-libs/libXt-1.1.5 | `-static-libs {-test}`
+x11-libs/xtrans-1.3.5 | `-doc`
+x11-proto/inputproto-2.3.2 | ``
+x11-proto/kbproto-1.0.7 | ``
+x11-proto/xextproto-7.3.0 | `-doc`
+x11-proto/xf86bigfontproto-1.2.0-r1 | ``
+x11-proto/xproto-7.0.31 | `-doc`
 **FROM kubler-spin/openssl** |
 app-misc/ca-certificates-20161130.3.32 | `-cacert -insecure`
 app-misc/c_rehash-1.7-r1 | ``

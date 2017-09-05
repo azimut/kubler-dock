@@ -1,3 +1,24 @@
+sudo docker run -v /home/sendai/projects/git7/tmp/distfiles/:/data --rm --privileged --ulimit rtprio=95 --ulimit memlock=-1 -p 57120:57120/udp -p 57110:57110/udp -p 8000:8000/tcp -ti --entrypoint=/bin/sh --name sc kubler-spin/supercollider-stream
+
+
+sudo docker run --rm --privileged --ulimit rtprio=95 --ulimit memlock=-1 -p 57110:57110/udp -p 8000:8000/tcp -ti --entrypoint=/bin/sh --name sc kubler-spin/supercollider-stream
+scsynth -u 57110 -a 116 -i 2 -o 2 -b 1026 -R 0 -C 0 -l 1
+
+   -u <udp-port-number>    a port number 0-65535
+   -a <number-of-audio-bus-channels>   (default 1024)
+
+   -i <number-of-input-bus-channels>   (default 8)
+   -o <number-of-output-bus-channels>  (default 8)
+
+   -b <number-of-sample-buffers>       (default 1024)
+
+   -R <publish to Rendezvous? 1 or 0>  (default 1)
+
+   -l <max-logins>                     (default 64)
+          maximum number of named return addresses stored
+          also maximum number of tcp connections accepted
+
+
 ```
 # sudo docker run   --privileged --cap-add=all -p 7771:7771/udp -p 57110:57110/udp -p  57120:57120/udp  -p 3000:3000/udp -p 3001:3001/udp -v /home/sendai/projects/git7/tmp/distfiles/quarks/:/data  --name supercollider   --rm -ti  kubler-spin/supercollide
 
@@ -22,6 +43,9 @@ Commands to send a sin wave to SC
 ```
 s = Server("myServer", NetAddr("127.0.0.1", 3001 ));
 s.boot
+s = Server("myServer", NetAddr("127.0.0.1", 57110 ));
+// b = Buffer.alloc(s,44100 * 2, 2);
+
 ( SynthDef("sine", { arg freq=800; var osc; osc = SinOsc.ar(freq, 0, 0.1); Out.ar(0, osc); }).writeDefFile; )
 s.sendSynthDef("sine");
 s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 0);

@@ -1,14 +1,14 @@
 ### kubler-spin/supercollider-stream:20170423
 
-Built: Tue Aug 22 07:33:33 ART 2017
-Image Size: 68.9MB
+Built: Tue Sep  5 07:46:58 ART 2017
+Image Size: 74.6MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 dev-libs/libbsd-0.8.3 | `-static-libs`
 dev-libs/libgcrypt-1.7.8 | `-doc -static-libs`
-dev-libs/libgpg-error-1.27-r1 | `nls -common-lisp -static-libs`
+dev-libs/libgpg-error-1.27-r1 | `-common-lisp -nls -static-libs`
 dev-libs/libpthread-stubs-0.4 | `-static-libs`
 dev-libs/libxml2-2.9.4-r1 | `-debug -examples -icu -ipv6 -lzma -python -readline -static-libs {-test}`
 dev-libs/libxslt-1.1.29-r1 | `crypt -debug -examples -python -static-libs`
@@ -21,10 +21,11 @@ media-libs/libvorbis-1.3.5 | `-static-libs`
 media-sound/darkice-1.3 | `jack mp3 -aac -aacplus -alsa -debug -libsamplerate -opus -pulseaudio -twolame -vorbis`
 media-sound/jack-audio-connection-kit-0.125.0 | `-alsa (-altivec) (-coreaudio) -debug -doc -examples -oss -pam`
 media-sound/lame-3.99.5-r1 | `frontend -debug -mp3rtp -sndfile -static-libs`
-media-sound/supercollider-3.8.0 | `fftw gpl3 jack server sndfile -avahi -debug -emacs -gedit -portaudio -qt5 -static-libs -vim -wiimote`
+media-sound/supercollider-3.8.0 | `fftw gpl3 jack server sndfile -avahi -debug -emacs -gedit -native -portaudio -qt5 -static-libs -vim -wiimote`
+media-sound/supercollider-plugins-3.8.0 | `-native`
 net-misc/icecast-2.4.3 | `ssl -kate (-libressl) -logrotate -speex -theora -yp`
 sci-libs/fftw-3.3.4 | `openmp threads (-altivec) -doc -fortran -mpi (-neon) -quad -static-libs {-test} (-zbus)`
-sys-apps/util-linux-2.28.2 | `nls unicode -build -caps -cramfs -fdformat -kill -ncurses -pam -python -readline (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
+sys-apps/util-linux-2.28.2 | `unicode -build -caps -cramfs -fdformat -kill -ncurses -nls -pam -python -readline (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
 sys-libs/db-5.3.28-r2 | `cxx -doc -examples -java -tcl {-test}`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
@@ -53,7 +54,7 @@ sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/glibc** |
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r4 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
+sys-libs/timezone-data-2017a | `-leaps`
 **FROM kubler-spin/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged
