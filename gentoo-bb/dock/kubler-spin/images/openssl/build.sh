@@ -7,7 +7,9 @@ _emerge_bin="emerge"
 configure_bob()
 {
     # enable ECDH
-    emerge -C net-misc/openssh
+    #set +x
+    #emerge -C net-misc/openssh
+    #set -x
     update_use 'dev-libs/openssl' '-bindist' '-sslv3' '-zlib' '-tls-heartbeat'
     update_use 'app-misc/ca-certificates' '-cacert' '-insecure_certs'
     update_keywords 'app-misc/ca-certificates' '+~'$(portageq envvar ARCH)
