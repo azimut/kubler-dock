@@ -1,0 +1,16 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar            /
+ADD rootfs/root/.asoundrc /root/
+ADD rootfs/etc/dark.cfg   /etc/
+ADD rootfs/etc/ice.xml    /etc/
+
+RUN ldconfig
+
+EXPOSE 8000 57110 57120
+
+#USER tor
+
+#ENTRYPOINT [ "tor "]
+#CMD [ "-f", "/etc/tor/torrc.default" ]
