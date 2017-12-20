@@ -1,0 +1,18 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /   
+ADD rootfs     /
+
+RUN set -x && \
+    cd / && \
+    /usr/local/bin/lein new tutorial && \
+    cd /tutorial && \
+    cp /overtone2/project.clj . && \
+    /usr/local/bin/lein deps
+
+#EXPOSE 5555 5556
+
+#VOLUME ["/riemann/etc"]
+#ENTRYPOINT ["/riemann/bin/riemann"]
+#CMD ["etc/riemann.config"]
