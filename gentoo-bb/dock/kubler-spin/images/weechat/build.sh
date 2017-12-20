@@ -13,6 +13,9 @@ configure_bob(){
     #[[ ! -d /distfiles/scripts ]] && { cd /distfiles; git clone https://github.com/weechat/scripts; }
     #[[   -d /distfiles/scripts ]] && { cd /distfiles/scripts; git pull --rebase; }
 
+    #layman -a mva
+    #echo "*/*::mva ~$(portageq envvar ARCH)" > /etc/portage/package.accept_keywords/mva
+
     # https://wiki.gentoo.org/wiki/Project:Python/PYTHON_TARGETS
     echo 'PYTHON_TARGETS="python2_7"'       >> /etc/portage/make.conf
     echo 'PYTHON_SINGLE_TARGET="python2_7"' >> /etc/portage/make.conf
@@ -22,7 +25,7 @@ configure_bob(){
 
     # grab latest version
     update_keywords 'net-irc/weechat' '+**'
-    #mask_package '=net-irc/weechat-9999'
+    mask_package '=net-irc/weechat-9999'
 
     update_use 'net-irc/weechat'  -exec -fifo -xfer -spell
     update_use 'sys-libs/ncurses' +minimal
