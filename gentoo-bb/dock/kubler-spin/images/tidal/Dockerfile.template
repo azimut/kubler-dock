@@ -4,6 +4,8 @@ MAINTAINER ${MAINTAINER}
 ADD rootfs.tar /
 # https://raw.githubusercontent.com/tidalcycles/Tidal/master/tidal.el
 ADD rootfs /
+RUN ldconfig && ghc-pkg recache
+#RUN set -x && cabal update && cabal install tidal-0.8
 
 #USER tor
 

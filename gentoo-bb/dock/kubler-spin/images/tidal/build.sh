@@ -1,9 +1,9 @@
 # If we do not set 1 version of ghc it tries to install 2 diff versions...
 _packages="
-dev-haskell/tidal
 =dev-lang/ghc-8.0.1::haskell
 =virtual/emacs-24
 app-emacs/haskell-mode
+dev-haskell/tidal
 sys-devel/gcc"
 
 # force native compilation
@@ -29,5 +29,8 @@ configure_rootfs_build()
 # this method runs in the bb builder container just before tar'ing the rootfs
 #
 finish_rootfs_build(){
-    copy_gcc_libs
+    :
+    # ncurses
+# already on a upper layer
+#    copy_gcc_libs
 }
