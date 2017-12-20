@@ -5,5 +5,5 @@ ADD rootfs.tar /
 
 USER tor
 
-ENTRYPOINT [ "tor "]
+ENTRYPOINT [ "/usr/bin/tor" ]
 CMD [ "-f", "/etc/tor/torrc.default" ]

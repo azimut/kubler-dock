@@ -3,4 +3,10 @@ SocksPort 0.0.0.0:9050
 Log notice stderr
 DataDirectory /var/lib/tor/data
 AvoidDiskWrites 1
-Sandbox 1
+Sandbox 1 
+## FIXME?
+#DNSPort 0.0.0.0:9053 IsolateClientAddr IsolateSOCKSAuth IsolateClientProtocol IsolateDestPort IsolateDestAddr
+#AutomapHostsOnResolve 1
+#AutomapHostsSuffixes .exit, .onion
+##ClientDNSRejectInternalAddresses 1
+##ClientRejectInternalAddresses 1

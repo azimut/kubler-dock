@@ -15,7 +15,8 @@ _emerge_bin="emerge"
 set -x
 
 configure_bob(){
-    update_keywords '=net-vpn/tor-0.3*' '+~'$(portageq envvar ARCH)
+    #update_keywords '=net-vpn/tor-0.3*' '+~'$(portageq envvar ARCH)
+    update_keywords 'net-vpn/tor' '+**'
     update_keywords 'sys-libs/libseccomp' '+~'$(portageq envvar ARCH)
     update_use 'sys-libs/libcap' '-pam'
 }
