@@ -1,7 +1,7 @@
 ### kubler-spin/pychess:20170423
 
-Built: Wed Aug 23 07:38:47 ART 2017
-Image Size: 151MB
+Built: Wed Aug 23 10:21:00 ART 2017
+Image Size: 153MB
 
 #### Installed
 Package | USE Flags
@@ -10,10 +10,11 @@ app-accessibility/at-spi2-atk-2.22.0 | `{-test}`
 app-accessibility/at-spi2-core-2.22.1 | `introspection -`
 app-admin/eselect-1.4.8 | `-doc -emacs -vim-syntax`
 app-eselect/eselect-fontconfig-1.1 | ``
+app-shells/bash-4.3_p48-r1 | ``
 dev-lang/python-2.7.12 | `hardened libressl ncurses readline sqlite ssl (threads) (wide-unicode) xml (-berkdb) -build -doc -examples -gdbm -ipv6 -tk -wininst`
 dev-lang/python-exec-2.4.4 | ` `
-dev-libs/atk-2.22.0 | `introspection nls {-test}`
-dev-libs/glib-2.50.3-r1 | `-dbus -debug (-fam) -mime (-selinux) -static-libs -systemtap {-test} -utils -xattr`
+dev-libs/atk-2.22.0 | `introspection -nls {-test}`
+dev-libs/glib-2.50.3-r1 | `mime -dbus -debug (-fam) (-selinux) -static-libs -systemtap {-test} -utils -xattr`
 dev-libs/gobject-introspection-1.50.0 | `-cairo -doctool {-test}`
 dev-libs/gobject-introspection-common-1.50.0 | ``
 dev-libs/libbsd-0.8.3 | `-static-libs`
@@ -26,9 +27,11 @@ dev-python/pycairo-1.10.0-r5 | `svg -doc -examples {-test} -xcb`
 dev-python/pygobject-3.22.0 | `cairo threads -examples {-test}`
 dev-util/gtk-update-icon-cache-3.22.2 | ``
 dev-util/pkgconfig-0.28-r2 | `hardened -internal-glib`
+games-board/crafty-24.1 | `-no-opts`
 games-board/gnuchess-6.2.4 | ``
 games-board/gnuchess-book-1.02-r1 | ``
 games-board/pychess-0.12.4 | `-gstreamer`
+games-misc/games-envd-0 | ``
 gnome-base/librsvg-2.40.18 | `introspection -tools -vala`
 media-fonts/liberation-fonts-2.00.1-r1 | `-`
 media-gfx/graphite2-1.3.10 | `-perl {-test}`
@@ -37,16 +40,14 @@ media-libs/freetype-2.8 | `adobe-cff bzip2 cleartype`
 media-libs/harfbuzz-1.4.6-r2 | `cairo glib graphite introspection truetype -debug -fontconfig -icu -static-libs {-test}`
 media-libs/libepoxy-1.4.2 | ``
 media-libs/libpng-1.6.29 | `-apng (-neon) -static-libs`
-sys-apps/attr-2.4.47-r2 | `nls -static-libs`
-sys-apps/coreutils-8.25 | `nls (xattr) -acl -caps -gmp -hostname -kill -multicall (-selinux) -static -vanilla`
+sys-apps/attr-2.4.47-r2 | `-nls -static-libs`
+sys-apps/coreutils-8.25 | `(xattr) -acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static -vanilla`
 sys-apps/dbus-1.10.18 | `-`
 sys-apps/file-5.30 | `zlib -python -static-libs`
-sys-apps/sed-4.2.2 | `nls -acl (-selinux) -static`
-sys-apps/util-linux-2.28.2 | `nls unicode -build -caps -cramfs -fdformat -kill -ncurses -pam -python -readline (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
+sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
+sys-apps/util-linux-2.28.2 | `unicode -build -caps -cramfs -fdformat -kill -ncurses -nls -pam -python -readline (-selinux) -slang -static-libs -suid -systemd {-test} -tty-helpers -udev`
 sys-devel/binutils-config-5-r3 | ``
-sys-libs/binutils-libs-2.28-r1 | `nls -64-bit-bfd -multitarget -static-libs`
-sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
-sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
+sys-libs/binutils-libs-2.28-r1 | `-64-bit-bfd -multitarget -nls -static-libs`
 x11-libs/cairo-1.14.8 | ``
 x11-libs/gdk-pixbuf-2.36.6 | `introspection -`
 x11-libs/gtk+-3.22.16 | ``
@@ -102,7 +103,7 @@ sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/glibc** |
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r4 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
+sys-libs/timezone-data-2017a | `-leaps`
 **FROM kubler-spin/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged

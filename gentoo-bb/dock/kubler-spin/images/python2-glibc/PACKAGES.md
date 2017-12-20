@@ -1,6 +1,6 @@
 ### kubler-spin/python2-glibc:20170423
 
-Built: Wed Aug 23 07:21:30 ART 2017
+Built: Wed Aug 23 09:55:30 ART 2017
 Image Size: 30MB
 
 #### Installed
@@ -24,7 +24,7 @@ sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/glibc** |
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r4 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
+sys-libs/timezone-data-2017a | `-leaps`
 **FROM kubler-spin/busybox** |
 sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged

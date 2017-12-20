@@ -1,14 +1,14 @@
 ### kubler-spin/python2:20170423
 
-Built: Sun Jul 16 14:48:21 ART 2017
-Image Size: 21.64 MB
+Built: Sun Aug 20 21:47:47 ART 2017
+Image Size: 21.6MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 app-arch/bzip2-1.0.6-r8 | `-static -static-libs`
 app-misc/mime-types-9 | ``
-dev-db/sqlite-3.17.0 | `-debug -doc -icu -readline -secure-delete -static-libs -tcl {-test} -tools`
+dev-db/sqlite-3.19.3 | `-debug -doc -icu -readline -secure-delete -static-libs -tcl {-test} -tools`
 dev-lang/python-2.7.12 | `hardened libressl sqlite ssl (threads) (wide-unicode) xml (-berkdb) -build -doc -examples -gdbm -ipv6 -ncurses -readline -tk -wininst`
 dev-libs/expat-2.2.1 | `unicode -examples -static-libs`
 dev-libs/libffi-3.2.1 | `pax`
@@ -18,12 +18,11 @@ Package | USE Flags
 --------|----------
 **FROM kubler-spin/libressl-musl** |
 app-misc/c_rehash-1.7-r1 | ``
-app-misc/ca-certificates-20161130.3.30.2 | `-cacert -insecure`
+app-misc/ca-certificates-20161130.3.32 | `-cacert -insecure`
 dev-libs/libressl-2.4.5 | `asm -static-libs`
 sys-apps/debianutils-4.7 | `-static`
 **FROM kubler-spin/musl** |
 sys-libs/musl-1.1.16 | ``
-**FROM kubler-spin/busybox** |
 **FROM kubler-spin/busybox** |
 sys-apps/busybox-1.26.2-r1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
