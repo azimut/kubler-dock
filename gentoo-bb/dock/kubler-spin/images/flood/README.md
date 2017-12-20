@@ -8,7 +8,7 @@ Run this [nodejs][] image with:
                  --tmpfs=/opt/flood/server/temp \
                  -v $HOME/flood/config.js:/opt/flood/config.js:ro \
                  -v $HOME/flood/db:/opt/flood/server/db \
-                 -v /etc/localtime:/etc/localtime:ro
+                 -v /etc/localtime:/etc/localtime:ro \
                  --net=host \
                  -ti kubler-spin/flood
 
