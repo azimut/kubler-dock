@@ -1,33 +1,23 @@
-_packages="media-sound/supercollider =media-sound/jack-audio-connection-kit-0.124.1"
+_packages="
+media-sound/supercollider::azimut
+media-sound/jack-audio-connection-kit
+media-sound/supercollider-plugins::azimut"
 
 # force native compilation
 _emerge_bin="emerge"
 
 set -x
 
-#	url = https://github.com/supercollider-quarks/BatLib.git
-#	url = https://github.com/tidalcycles/Dirt-Samples
-#	url = https://github.com/Qirky/FoxDotQuark.git
-#	url = https://github.com/musikinformatik/SuperDirt
-#	url = https://github.com/supercollider-quarks/Vowel
-
 configure_bob(){
+    add_overlay azimut 'https://github.com/azimut/overlay'
 
-    layman -l | grep -q proaudio && layman -d proaudio
-    layman -a proaudio
-
-    [[ ! -d /distfiles/SuperDirt ]] && { cd /distfiles; git clone https://github.com/musikinformatik/SuperDirt; }
-    [[   -d /distfiles/SuperDirt ]] && { cd /distfiles/SuperDirt; git pull --rebase; }
-
-    update_keywords 'media-sound/supercollider' '+~amd64'
     update_keywords 'media-sound/jack-audio-connection-kit' '+**'
+    update_keywords 'media-sound/supercollider'             '+**'
+    update_keywords 'media-sound/supercollider-plugins'     '+**'
 
-    #update_use 'media-sound/jack-audio-connection-kit'  +alsa
-
-    update_use 'sys-libs/ncurses'          +minimal
-    update_use 'media-sound/supercollider' -portaudio +jack +sndfile +server
-    update_use 'sys-apps/util-linux'       -suid -cramfs -pam
-    update_use 'media-libs/alsa-lib'       -python
+    update_use 'media-libs/alsa-lib'               -python
+    update_use 'media-sound/supercollider'         -portaudio +jack +sndfile +server -native
+    update_use 'media-sound/supercollider-plugins' -native
 }
 
 configure_rootfs_build()
@@ -35,22 +25,9 @@ configure_rootfs_build()
     :
 }
 
-#
-# this method runs in the bb builder container just before tar'ing the rootfs
-#
 finish_rootfs_build(){
+    # ncurses
     copy_gcc_libs
     # lame, need to add the builder
-    cp /usr/lib64/libudev.so ${_EMERGE_ROOT}/usr/lib64/
-    
-    # cp -ar /data/* /usr/share/SuperCollider/SCClassLibrary/
-
-    # https://github.com/supercollider/supercollider/issues/1209
-    # http://supercollider.github.io/development/building-raspberrypi
-    # headless fix
-    mv ${_EMERGE_ROOT}/usr/share/SuperCollider/SCClassLibrary/JITLib/GUI/ \
-       ${_EMERGE_ROOT}/usr/share/SuperCollider/SCClassLibrary/scide_scqt/JITLibGUI
-
-    mv ${_EMERGE_ROOT}/usr/share/SuperCollider/SCClassLibrary/Common/GUI/ \
-       ${_EMERGE_ROOT}/usr/share/SuperCollider/SCClassLibrary/scide_scqt/
+    cp /usr/${_LIB}/libudev.so ${_EMERGE_ROOT}/usr/${_LIB}/
 }
