@@ -2,7 +2,6 @@
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
 _packages="dev-qt/qtcore:5 dev-qt/qtgui:5"
-#_keep_headers=true
 
 #
 # This hook is called just before starting the build of the root fs
@@ -23,22 +22,25 @@ configure_bob(){
 }
 configure_rootfs_build()
 {
-    # skip RDEPEND on eclass for xcb lib
+    # skip RDEPEND on eclass for x11-libs/libxcb
     provide_package dev-lang/python
 }
-
 #
 # This hook is called just before packaging the root fs tar ball, ideal for any post-install tasks, clean up, etc
 #
 finish_rootfs_build()
 {
-    # The idea is that the eselects will run under ROOT but when not needed we can get ride if bash
-    uninstall_package app-shells/bash sys-libs/readline
+    # The idea is that the eselects will run under ROOT but 
+    #   when not needed we can get ride of bash
+    uninstall_package 'app-shells/bash' 'sys-libs/readline'
+
     # ncurses
     copy_gcc_libs
-    #
-    unprovide_package dev-lang/python
-    #
+
+    # unprovide the provided
+    unprovide_package 'dev-lang/python'
+
+    # Needed after we removed bash
     rm ${_EMERGE_ROOT}/bin/sh
     ln -sf /bin/busybox ${_EMERGE_ROOT}/bin/sh
 
