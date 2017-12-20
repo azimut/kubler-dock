@@ -5,8 +5,10 @@
 #
 # This hook can be used to configure the build container itself, install packages, run any command, etc
 #
+set -x
 configure_bob() {
     fix_portage_profile_symlink
+    emerge -C openssh
     # install basics used by helper functions
     emerge app-portage/flaggie app-portage/eix app-portage/gentoolkit
     configure_eix
@@ -24,6 +26,10 @@ configure_bob() {
     update_use 'net-libs/gnutls' -sslv3 -idn
     update_use 'app-shells/bash' -net
     update_use 'dev-libs/glib' -mime
+
+    # http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html
+    # The GNU Readline library provides a set of functions for use by applications
+    # that allow users to edit command lines as they are typed in. 
     echo 'USE="${USE} -xattr -acl -deprecated -readline -bindist -nls"' >> /etc/portage/make.conf
     # install default packages
     update_use 'dev-vcs/git' '-perl'

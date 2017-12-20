@@ -28,6 +28,9 @@ configure_bob() {
     echo 'LANG="en_US.UTF-8"' > /etc/env.d/02locale
     env-update
     source /etc/profile
+    emerge -C net-misc/openssh net-misc/iputils
+    #update_use 'dev-libs/openssl' +bindist +tls-heartbeat
+
     # install default packages
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-crypt/pinentry' '+ncurses'
@@ -41,6 +44,10 @@ configure_bob() {
     update_use 'net-libs/gnutls' -sslv3 -idn
     update_use 'app-shells/bash' -net
     echo 'USE="${USE} -xattr -acl -deprecated -readline -bindist -nls"' >> /etc/portage/make.conf
+
+    emerge -1q openssl
+    #emerge -1q dev-vcs/git
+    revdep-rebuild -L libcrypto.so.1.0.0 -- -Dt
 
     #emerge dev-vcs/git app-portage/layman sys-devel/distcc app-misc/jq # TODO: rm distcc
     emerge dev-vcs/git app-portage/layman app-misc/jq # TODO: rm distcc
