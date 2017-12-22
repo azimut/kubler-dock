@@ -1,0 +1,18 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+# User setup
+USER user
+ENV HOME /home/user
+WORKDIR $HOME
+
+# Python setup
+ENV PYTHONDONTWRITEBYTECODE x
+
+#VOLUME /home/user/.weechat
+#EXPOSE 9001
+
+ENTRYPOINT [ "/usr/bin/spectrum2" ]
+CMD [ "--no-daemonize", "-j", "whatsapp.example.com", "--config", "/etc/spectrum2/transports/whatsapp.cfg" ]
