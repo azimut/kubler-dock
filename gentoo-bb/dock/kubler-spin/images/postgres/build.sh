@@ -14,7 +14,6 @@ configure_rootfs_build()
 
     # Install /bin/sh
     unprovide_package sys-apps/busybox
-    update_use 'sys-libs/ncurses' '+minimal'
 }
 
 #
