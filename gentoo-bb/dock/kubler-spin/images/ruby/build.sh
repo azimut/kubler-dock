@@ -12,6 +12,7 @@ set -x
 configure_bob()
 {
     update_use 'sys-libs/ncurses' +minimal
+    update_use 'dev-lang/ruby' +jemalloc -rdoc
     echo 'RUBY_TARGETS="ruby24"' >> /etc/portage/make.conf
     update_keywords 'dev-lang/ruby' '+~amd64'
     echo "dev-ruby/* ~$(portageq envvar ARCH)" >> /etc/portage/package.accept_keywords/ruby
