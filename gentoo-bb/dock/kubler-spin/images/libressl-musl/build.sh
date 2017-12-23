@@ -36,10 +36,10 @@ configure_bob()
     update_use 'net-misc/curl' '+curl_ssl_libressl' '-curl_ssl_openssl'
     #emerge -1q net-misc/curl
     update_keywords 'net-libs/serf' '+~amd64'
-    revdep-rebuild -L libcrypto.so.1.0.0 -- -Dt
+    #revdep-rebuild -L libcrypto.so.1.0.0 -- -Dt --ignore-default-opts
     #emerge -1q dev-vcs/git net-libs/serf
 
-    emerge -tD -v @preserved-rebuild
+    #emerge -tD -v @preserved-rebuild
 }
 
 #

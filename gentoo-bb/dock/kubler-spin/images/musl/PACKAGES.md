@@ -1,6 +1,6 @@
 ### kubler-spin/musl:20170423
 
-Built: Wed Dec 20 15:19:08 ART 2017
+Built: Fri Dec 22 16:52:14 ART 2017
 Image Size: 1.76MB
 
 #### Installed

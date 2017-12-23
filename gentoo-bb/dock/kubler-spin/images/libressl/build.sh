@@ -36,9 +36,9 @@ configure_bob()
     update_use 'dev-vcs/git' '-perl' '+libressl'
     update_use 'net-misc/curl' '+curl_ssl_libressl' '-curl_ssl_openssl'
     update_keywords 'net-libs/serf' '+~amd64'
-    revdep-rebuild -L libcrypto.so.1.0.0 -- -Dt
+    #revdep-rebuild -L libcrypto.so.1.0.0 -- -Dt
 
-    emerge -tD -v @preserved-rebuild
+    #emerge -tD -v @preserved-rebuild
 }
 
 #
