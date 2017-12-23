@@ -23,7 +23,7 @@ finish_rootfs_build()
     # https://github.com/fluent/fluentd-docker-image/blob/master/v0.12/alpine/Dockerfile
     su - user -s /bin/sh -c 'gem install oj -v 2.18.3 --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install json -v 2.1.0 --no-ri --no-rdoc'
-    su - user -s /bin/sh -c 'gem install fluentd -v 0.12.37 --no-ri --no-rdoc'
+    su - user -s /bin/sh -c 'gem install fluentd -v 0.12.42 --no-ri --no-rdoc'
     #su - user -s /bin/sh -c 'gem install fluentd -v 0.14.18 --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-rss --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-elasticsearch --no-ri --no-rdoc'
@@ -32,6 +32,7 @@ finish_rootfs_build()
     su - user -s /bin/sh -c 'gem install feedjira --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem list'
 
+	# Install gem files to docker $ROOT
     mkdir -p ${_EMERGE_ROOT}/home/user
     cp -r /home/user/.gem  ${_EMERGE_ROOT}/home/user
     chown -R user:user  ${_EMERGE_ROOT}/home/user
