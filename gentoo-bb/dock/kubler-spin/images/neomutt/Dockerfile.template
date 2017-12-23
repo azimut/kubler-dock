@@ -8,4 +8,4 @@ USER user
 ENV HOME /home/user
 WORKDIR $HOME
 
-ENTRYPOINT [ "lynx" ]
+ENTRYPOINT [ "/usr/bin/neomutt" ]

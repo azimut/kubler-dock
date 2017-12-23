@@ -1,19 +1,9 @@
 _packages="mail-client/neomutt"
 
 configure_bob(){
-    rm -rf /distfiles/portage/neomutt
-    cd /distfiles/portage
-    git clone https://github.com/neomutt/gentoo-neomutt neomutt
-
-    cat > /etc/portage/repos.conf/neomutt.conf <<EOF
-[neomutt_gentoo]
-location = /distfiles/portage/neomutt
-masters = gentoo
-auto-sync = no
-EOF
+    add_overlay neomutt_gentoo https://github.com/neomutt/gentoo-neomutt
     update_keywords mail-client/neomutt '+~amd64'
-    update_use mail-client/neomutt +imap +smtp +sidebar +smime
-
+    update_use mail-client/neomutt +smime +doc
 }
 
 configure_rootfs_build()
