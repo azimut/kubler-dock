@@ -35,9 +35,8 @@ configure_bob() {
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-portage/layman' '+subversion'
     update_use 'app-crypt/pinentry' '+ncurses'
-    update_keywords 'app-portage/layman' '+~amd64'
-    update_keywords 'dev-python/ssl-fetch' '+~amd64'
-    #emerge dev-vcs/git app-portage/layman sys-devel/distcc app-misc/jq
+    update_keywords 'app-portage/layman' '+~'$(portageq envvar ARCH)
+    update_keywords 'dev-python/ssl-fetch' '+~'$(portageq envvar ARCH)
     emerge dev-vcs/git app-portage/layman app-misc/jq
     install_git_postsync_hooks
     configure_layman

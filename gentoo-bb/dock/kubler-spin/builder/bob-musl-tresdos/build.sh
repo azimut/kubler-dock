@@ -29,15 +29,15 @@ configure_bob() {
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-crypt/pinentry' '+ncurses'
     update_use 'app-portage/layman' '+subversion'
-    update_keywords 'app-portage/layman' '+~'$(portageq envvar ARCH)
-    update_keywords 'dev-python/ssl-fetch' '+~'$(portageq envvar ARCH)
-    emerge dev-vcs/git app-portage/layman app-misc/jq # TODO: rm distcc
+    #update_keywords 'app-portage/layman' '+~'$(portageq envvar ARCH)
+    #update_keywords 'dev-python/ssl-fetch' '+~'$(portageq envvar ARCH)
+    #emerge dev-vcs/git app-portage/layman app-misc/jq # TODO: rm distcc
     #update_keywords 'app-misc/jq' '+~amd64'
-    install_git_postsync_hooks
-    configure_layman
+    #install_git_postsync_hooks
+    #configure_layman
     # add musl overlay, it may exist already in the shared portage container
-    layman -l | grep -q musl && layman -d musl
-    layman -a musl
+    #layman -l | grep -q musl && layman -d musl
+    #layman -a musl
     ## install go
     #cd ~
     #wget https://raw.githubusercontent.com/docker-library/golang/7e9aedf483dc0a035747f37af37ed260f2a6cf57/1.8/alpine/no-pic.patch
