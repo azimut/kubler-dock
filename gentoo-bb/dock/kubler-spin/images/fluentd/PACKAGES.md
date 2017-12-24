@@ -1,16 +1,11 @@
 ### kubler-spin/fluentd:20170423
 
-Built: Sat Dec 23 08:41:12 ART 2017
-Image Size: 117MB
+Built: Sun Dec 24 02:29:08 ART 2017
+Image Size: 107MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-dev-libs/libgcrypt-1.8.1 | `-doc -static-libs`
-dev-libs/libgpg-error-1.27-r1 | `-common-lisp -nls -static-libs`
-dev-libs/libxml2-2.9.6 | `-debug -examples -icu -ipv6 -lzma -python -readline -static-libs {-test}`
-dev-libs/libxslt-1.1.30-r2 | `crypt -debug -examples -python -static-libs`
-dev-ruby/nokogiri-1.8.1 | `-doc {-test}`
 #### Inherited
 Package | USE Flags
 --------|----------

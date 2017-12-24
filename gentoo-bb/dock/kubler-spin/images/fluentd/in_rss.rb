@@ -2,10 +2,11 @@ require 'rss'
 require 'feedjira'
 #require 'open-uri'
 require 'digest'
+require "fluent/plugin/input"
 
-module Fluent
-  class RSSInput < Fluent::Input
-    Plugin.register_input 'rss', self
+module Fluent::Plugin
+  class RSSInput < Input
+    Fluent::Plugin.register_input('rss', self)
     Encoding.default_internal = nil
 
     config_param :tag, :string
@@ -56,7 +57,7 @@ module Fluent
           else
              time = item.published.to_i
           end
-          Fluent::Engine.emit @tag, time, record
+          @router.emit(@tag, time, record)
         end
       rescue => e
         log.error e
