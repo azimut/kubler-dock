@@ -1,14 +1,14 @@
 ### kubler-spin/glibc-tresdos:20170423
 
-Built: Wed Jul  5 04:00:50 ART 2017
-Image Size: 9.161 MB
+Built: Sat Dec 23 22:59:34 ART 2017
+Image Size: 9.62MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-sys-apps/gentoo-functions-0.10 | ``
-sys-libs/glibc-2.23-r4 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
+sys-apps/gentoo-functions-0.12 | ``
+sys-libs/glibc-2.25-r9 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap (-vanilla)`
+sys-libs/timezone-data-2017c | `nls -leaps`
 #### Inherited
 Package | USE Flags
 --------|----------

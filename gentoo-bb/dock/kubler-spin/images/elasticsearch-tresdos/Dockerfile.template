@@ -16,4 +16,3 @@ ENV ES_CLASSPATH /usr/share/elasticsearch/lib/*
 EXPOSE 9200 9300
 
 CMD ["/etc/service/elasticsearch/run"]
-#CMD ["/bin/s6-svscan", "-t0", "/service"]

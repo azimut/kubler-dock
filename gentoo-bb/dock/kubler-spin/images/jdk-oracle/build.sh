@@ -18,7 +18,6 @@ configure_rootfs_build()
 
     jce_url=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
     [[ ! -f /distfiles/jce_policy-8.zip ]] && download_from_oracle "${jce_url}"
-
     update_use 'dev-java/oracle-jdk-bin' +headless-awt +jce -fontconfig
     # skip python and iced-tea
     provide_package dev-lang/python dev-java/icedtea-bin
@@ -43,5 +42,4 @@ finish_rootfs_build()
     find ${_EMERGE_ROOT}/ -type f -name 'classes.jsa' -delete
     rm -rf ${_EMERGE_ROOT}/opt/oracle-*/man \
            ${_EMERGE_ROOT}/opt/oracle-*/lib/desktop
-
 }

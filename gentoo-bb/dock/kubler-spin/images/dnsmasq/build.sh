@@ -39,7 +39,6 @@ no-daemon
 no-hosts
 no-poll
 no-resolv
-port=5353
 proxy-dnssec
 EOF
 
