@@ -1,8 +1,6 @@
 #!/bin/sh
 # adapted from: https://github.com/docker-library/postgres/blob/e616341507a7beec3a161b0a366ba0d3400328fd/9.4/docker-entrypoint.sh
 
-postgresql-config set 9.5
-
 chown -R postgres "$PGDATA"
 
 mkdir -p /run/postgresql
@@ -10,7 +8,7 @@ chmod g+s /run/postgresql
 chown -R postgres:postgres /run/postgresql
 
 if [ -z "$(ls -A "$PGDATA")" ]; then
-    su-exec postgres initdb
+    su-exec postgres initdb96
 
     sed -ri "s/^#(listen_addresses\s*=\s*)\S+/\1'*'/" "$PGDATA"/postgresql.conf
 
@@ -29,7 +27,7 @@ if [ -z "$(ls -A "$PGDATA")" ]; then
     : ${POSTGRES_DB:=$POSTGRES_USER}
 
     if [ "$POSTGRES_DB" != 'postgres' ]; then
-        su-exec postgres postgres --single -jE << EOSQL
+        su-exec postgres postgres96 --single -jE << EOSQL
 CREATE DATABASE "$POSTGRES_DB" ;
 EOSQL
         echo
@@ -41,7 +39,7 @@ EOSQL
         op='CREATE'
     fi
 
-    su-exec postgres postgres --single -jE << EOSQL
+    su-exec postgres postgres96 --single -jE << EOSQL
 $op USER "$POSTGRES_USER" WITH SUPERUSER $pass ;
 EOSQL
     echo
@@ -55,4 +53,4 @@ fi
     chown postgres:postgres /backup
 
 exec 2>&1
-su-exec postgres postgres
+su-exec postgres postgres96

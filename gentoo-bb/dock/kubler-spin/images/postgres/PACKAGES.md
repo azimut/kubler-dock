@@ -1,7 +1,8 @@
 ### kubler-spin/postgres:20170423
 
-Built: Fri Dec 22 13:20:04 ART 2017
-Image Size: 36.5MB
+Built: Sat Dec 23 20:07:19 ART 2017
+Image Size: 34.8MB
+
 
 #### Installed
 Package | USE Flags
@@ -16,6 +17,7 @@ sys-apps/file-5.32 | `zlib -python -static-libs`
 sys-apps/less-487 | `pcre unicode`
 sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode (-ada) -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
+sys-libs/timezone-data-2017c | `-leaps`
 sys-libs/zlib-1.2.11-r1 | `-minizip -static-libs`
 *manual install*: su-exec-0.2 | https://github.com/ncopa/su-exec/
 #### Inherited
