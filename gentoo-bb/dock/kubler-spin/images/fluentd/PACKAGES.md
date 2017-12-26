@@ -1,6 +1,6 @@
 ### kubler-spin/fluentd:20170423
 
-Built: Sun Dec 24 02:29:08 ART 2017
+Built: Mon Dec 25 22:37:40 ART 2017
 Image Size: 107MB
 
 #### Installed

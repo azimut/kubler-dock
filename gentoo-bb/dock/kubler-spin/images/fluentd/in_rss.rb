@@ -54,8 +54,10 @@ module Fluent::Plugin
           record['url'] = item.url
           if item.published.nil?
              time = @current_time.to_i
+             record['published'] = @current_time.strftime("%Y-%m-%d %H:%M:%S")
           else
              time = item.published.to_i
+             record['published'] = item.published.strftime("%Y-%m-%d %H:%M:%S")
           end
           @router.emit(@tag, time, record)
         end
