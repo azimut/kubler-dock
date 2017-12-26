@@ -1,7 +1,7 @@
 #
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
-_packages="dev-lang/python"
+_packages="dev-lang/python:3.4"
 #_keep_headers=true
 
 #
@@ -13,7 +13,7 @@ configure_bob(){
     echo 'USE_PYTHON="3.4"'                 >> /etc/portage/make.conf
     echo 'USE="${USE} sqlite -readline"'           >> /etc/portage/make.conf
     update_use 'sys-apps/coreutils' '-xattr'
-    emerge -q1 dev-lang/python dev-python/pip dev-python/virtualenv
+    emerge -q1 dev-lang/python:3.4 dev-python/pip dev-python/virtualenv
 }
 configure_rootfs_build()
 {
