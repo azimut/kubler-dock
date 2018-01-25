@@ -3,4 +3,5 @@ MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
 
-#RUN ldconfig
+ENTRYPOINT ["rtorrent"]
+CMD [ "-o", "scgi_port=0.0.0.0:5000", "-n", "-o", "directory.default.set=/opt" ]

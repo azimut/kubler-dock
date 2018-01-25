@@ -29,6 +29,7 @@ finish_rootfs_build()
     su - user -s /bin/sh -c 'gem install fluent-plugin-rss --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-elasticsearch --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-sql --no-ri --no-rdoc'
+    su - user -s /bin/sh -c 'gem install fluent-plugin-rewrite-tag-filter --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install pg --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install feedjira --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem list'

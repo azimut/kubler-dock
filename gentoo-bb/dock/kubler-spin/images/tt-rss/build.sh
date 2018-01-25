@@ -59,13 +59,9 @@ configure_bob(){
     
     update_use 'www-servers/apache' ${a2m[@]}
     update_use 'dev-lang/php'       ${p2u[@]}
-
-    update_use 'sys-libs/ncurses'        +minimal
-    update_use 'sys-apps/util-linux'     -suid -cramfs -pam
     update_use 'app-eselect/eselect-php' +apache2
     update_use 'dev-db/postgresql'       -server
 
-    echo 'USE="${USE} -xattr -acl -deprecated -readline"' >> /etc/portage/make.conf
     echo 'USE="${USE} gd"' >> /etc/portage/make.conf
 
     # we emerge here first to skip perl after

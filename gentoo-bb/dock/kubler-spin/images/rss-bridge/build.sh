@@ -98,7 +98,12 @@ YoutubeBridge
 MeetupBridge
 EOF
     chmod 444 ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/whitelist.txt
-    find ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/bridges/ -type f \! \( -name TwitterBridge.php -o -name InstagramBridge.php -o -name DuckDuckGoBridge.php -o -name GoogleSearchBridge.php -o -name YoutubeBridge.php \) -delete
+    find ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/bridges/ \
+        -type f \! \( -name TwitterBridge.php -o \
+        -name InstagramBridge.php -o \
+        -name DuckDuckGoBridge.php -o \
+        -name GoogleSearchBridge.php -o \
+        -name YoutubeBridge.php \) -delete
 
     cp /config/MeetupBridge.php ${_EMERGE_ROOT}/var/www/localhost/htdocs/rss-bridge/bridges/
     # apache pthreads
