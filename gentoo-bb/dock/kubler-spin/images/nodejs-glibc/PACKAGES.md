@@ -1,29 +1,29 @@
-### kubler-spin/nodejs-glibc:20170326
+### kubler-spin/nodejs-glibc:20180127
 
-Built: Sat Apr 22 19:52:12 ART 2017
-Image Size: 46.67 MB
+Built: mié ene 31 01:18:25 -03 2018
+Image Size: 46.2MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-dev-libs/libuv-1.10.2 | `-static-libs`
-net-libs/http-parser-2.6.2 | `-static-libs`
-net-libs/nodejs-6.10.2 | `npm snapshot ssl -debug -doc -icu {-test}`
-sys-libs/zlib-1.2.11 | `-minizip -static-libs`
+dev-libs/libuv-1.19.1 | `-static-libs`
+net-libs/http-parser-2.7.1 | `-static-libs`
+net-libs/nodejs-6.12.3 | `npm snapshot ssl -debug -doc -icu -inspector {-test}`
+sys-libs/zlib-1.2.11-r1 | `-minizip -static-libs`
 #### Inherited
 Package | USE Flags
 --------|----------
-**FROM kubler-spin/openssl-glibc** |
-app-misc/ca-certificates-20161130.3.30.1 | `-cacert -insecure`
+**FROM kubler-spin/openssl** |
+app-misc/ca-certificates-20170717.3.35 | `-cacert -insecure`
 app-misc/c_rehash-1.7-r1 | ``
-dev-libs/openssl-1.0.2k | `asm -bindist -gmp -kerberos -rfc3779 -sctp -sslv2 -sslv3 -static-libs {-test} -tls-heartbeat -vanilla -zlib`
-sys-apps/debianutils-4.7 | `-static`
+dev-libs/openssl-1.0.2n | `asm -bindist -gmp -kerberos -rfc3779 -sctp -sslv2 -sslv3 -static-libs {-test} -tls-heartbeat -vanilla -zlib`
+sys-apps/debianutils-4.8.3 | `-static`
 **FROM kubler-spin/glibc** |
-sys-apps/gentoo-functions-0.10 | ``
-sys-libs/glibc-2.23-r3 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
-**FROM gentoobb/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
+sys-apps/gentoo-functions-0.12 | ``
+sys-libs/glibc-2.25-r9 | `hardened rpc -audit -caps -debug -gd -headers-only (-multilib) -nscd (-profile) (-selinux) -suid -systemtap (-vanilla)`
+sys-libs/timezone-data-2017c | `-leaps`
+**FROM kubler-spin/busybox** |
+sys-apps/busybox-1.28.0 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged
 - [x] Headers
 - [x] Static Libs

@@ -1,17 +1,18 @@
-### kubler-spin/weechat:20170423
+### kubler-spin/weechat:20171228
 
-Built: Fri Dec 22 12:05:57 ART 2017
-Image Size: 70.1MB
+Built: sáb ene 27 21:08:15 -03 2018
+Image Size: 73.3MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 app-arch/bzip2-1.0.6-r8 | `-static -static-libs`
 app-misc/mime-types-9 | ``
+dev-db/sqlite-3.20.1-r1 | `-debug -doc -icu -readline -secure-delete -static-libs -tcl {-test} -tools`
 dev-lang/perl-5.24.3 | `-berkdb -debug -doc -gdbm -ithreads`
-dev-lang/python-2.7.14-r1 | `hardened libressl ssl (threads) (wide-unicode) xml (-berkdb) -build -doc -examples -gdbm -ipv6 -ncurses -readline -sqlite -tk -wininst`
+dev-lang/python-2.7.14-r1 | `hardened libressl sqlite ssl (threads) (wide-unicode) xml (-berkdb) -build -doc -examples -gdbm -ipv6 -ncurses -readline -tk -wininst`
 dev-lang/python-exec-2.4.5 | ` `
-dev-libs/expat-2.2.1 | `unicode -examples -static-libs`
+dev-libs/expat-2.2.5 | `unicode -examples -static-libs`
 dev-libs/gmp-6.1.2 | `asm cxx -doc -pgo -static-libs`
 dev-libs/libffi-3.2.1 | `-debug -pax`
 dev-libs/libgcrypt-1.8.1 | `-doc -static-libs`
@@ -23,7 +24,7 @@ dev-python/backports-1.0 | ` `
 dev-python/backports-ssl-match-hostname-3.5.0.1-r1 | ` `
 dev-python/six-1.10.0 | `-doc {-test}`
 dev-python/websocket-client-0.37.0 | `-examples`
-net-irc/weechat-2.0 | `alias buflist charset fset irc logger perl python relay scripts ssl trigger -doc -exec -fifo -guile -lua -nls -php -ruby -spell -tcl {-test} -xfer`
+net-irc/weechat-2.0.1 | `alias buflist charset fset irc logger perl python relay scripts ssl trigger -doc -exec -fifo -guile -lua -nls -php -ruby -spell -tcl {-test} -xfer`
 net-libs/gnutls-3.5.15 | `cxx openssl seccomp tls-heartbeat zlib (-dane) -doc -examples -guile -idn -nls -openpgp -pkcs11 -sslv2 -sslv3 -static-libs {-test} (-test-full) -tools -valgrind`
 net-misc/curl-7.57.0 | `ssl threads -adns -http2 -idn -ipv6 -kerberos -ldap -metalink -rtmp -samba -ssh -static-libs {-test}`
 perl-core/File-Path-2.130.0 | ``
@@ -35,13 +36,13 @@ Package | USE Flags
 --------|----------
 **FROM kubler-spin/libressl-musl** |
 app-misc/c_rehash-1.7-r1 | ``
-app-misc/ca-certificates-20170717.3.34.1 | `-cacert -insecure`
+app-misc/ca-certificates-20170717.3.35 | `-cacert -insecure`
 dev-libs/libressl-2.6.0 | `asm -static-libs`
-sys-apps/debianutils-4.7 | `-static`
+sys-apps/debianutils-4.8.3 | `-static`
 **FROM kubler-spin/musl** |
-sys-libs/musl-1.1.18 | ``
+sys-libs/musl-1.1.18 | `-headers-only`
 **FROM kubler-spin/busybox** |
-sys-apps/busybox-1.27.2 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
+sys-apps/busybox-1.28.0 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
 - [x] Headers
 - [x] Static Libs

@@ -7,6 +7,7 @@
 #
 set -x
 configure_bob() {
+    update-ca-certificates
     fix_portage_profile_symlink
     emerge -C openssh
     # install basics used by helper functions

@@ -1,9 +1,9 @@
 _packages="mail-client/neomutt"
 
 configure_bob(){
-    add_overlay neomutt_gentoo https://github.com/neomutt/gentoo-neomutt
+#    add_overlay neomutt_gentoo https://github.com/neomutt/gentoo-neomutt
     update_keywords mail-client/neomutt '+~amd64'
-    update_use mail-client/neomutt +smime +doc
+    update_use mail-client/neomutt +smime +doc +lmdb
 }
 
 configure_rootfs_build()

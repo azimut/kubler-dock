@@ -15,7 +15,7 @@ configure_rootfs_build()
 
     # davmail
     mkdir -p ${_EMERGE_ROOT}/opt/davmail
-    tar xzf /distfiles/davmail-linux-x86_64-4.8.0-2479.tgz -C ${_EMERGE_ROOT}/opt/davmail --strip-components=1
+    tar xzf /distfiles/davmail-linux-x86_64-4.8.3-2554.tgz -C ${_EMERGE_ROOT}/opt/davmail --strip-components=1
 
     # add properties
     mkdir -p  ${_EMERGE_ROOT}/opt/davmail/conf

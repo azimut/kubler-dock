@@ -1,36 +1,43 @@
-### kubler-spin/davmail:20170423
+### kubler-spin/davmail:20180127
 
-Built: Sun Jun 18 00:29:47 ART 2017
-Image Size: 146.4 MB
+Built: mar ene 30 13:01:03 -03 2018
+Image Size: 164MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-sys-apps/baselayout-2.3 | `-build`
+sys-apps/baselayout-2.4.1-r2 | `-build`
 #### Inherited
 Package | USE Flags
 --------|----------
 **FROM kubler-spin/jre-oracle** |
-app-admin/eselect-1.4.8 | `-doc -emacs -vim-syntax`
+app-admin/eselect-1.4.11 | `-doc -emacs -vim-syntax`
+app-arch/tar-1.29-r3 | `(xattr) -acl -minimal -nls (-selinux) -static`
 app-eselect/eselect-java-0.3.0 | ``
-app-shells/bash-4.3_p48-r1 | `net nls (readline) -afs -bashlogger -examples -mem-scramble -plugins`
+app-misc/pax-utils-1.1.7 | `seccomp -caps -debug -python`
+app-shells/bash-4.4_p12 | `(readline) -afs -bashlogger -examples -mem-scramble -net -nls -plugins`
 dev-java/java-config-2.2.0-r3 | `{-test}`
-dev-java/oracle-jre-bin-1.8.0.131 | `headless-awt jce -alsa -commercial -cups -fontconfig -javafx -nsplugin (-selinux)`
-sys-apps/acl-2.2.52-r1 | `nls -static-libs`
-sys-apps/attr-2.4.47-r2 | `nls -static-libs`
+dev-java/oracle-jre-bin-1.8.0.162 | `headless-awt jce -alsa -commercial -cups -fontconfig -javafx -nsplugin (-selinux)`
+dev-libs/popt-1.16-r2 | `-nls -static-libs`
+dev-python/pyblake2-1.1.0 | ` `
+dev-python/pyxattr-0.5.5 | `-doc {-test}`
+net-misc/rsync-3.1.2-r2 | `iconv -acl -examples -ipv6 -static -stunnel -xattr`
+sys-apps/attr-2.4.47-r2 | `-nls -static-libs`
 sys-apps/baselayout-java-0.1.0 | ``
-sys-apps/coreutils-8.25 | `acl nls (xattr) -caps -gmp -hostname -kill -multicall (-selinux) -static -vanilla`
-sys-apps/file-5.30 | `zlib -python -static-libs`
-sys-apps/sed-4.2.2 | `acl nls (-selinux) -static`
+sys-apps/coreutils-8.28-r1 | `(xattr) -acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static {-test} -vanilla`
+sys-apps/file-5.32 | `zlib -python -static-libs`
+sys-apps/gentoo-functions-0.12 | ``
+sys-apps/install-xattr-0.5 | ``
+sys-apps/portage-2.3.19-r1 | `(ipc) native-extensions (xattr) -build -doc -epydoc (-selinux)`
+sys-apps/sandbox-2.12 | ``
+sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
+sys-libs/glibc-2.25-r9 | `hardened rpc -audit -caps -debug -gd -headers-only (-multilib) -nscd (-profile) (-selinux) -suid -systemtap (-vanilla)`
+sys-libs/libseccomp-2.3.2 | `-static-libs`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
-sys-libs/readline-6.3_p8-r3 | `-static-libs -utils`
-sys-libs/zlib-1.2.11 | `-minizip -static-libs`
-**FROM kubler-spin/glibc** |
-sys-apps/gentoo-functions-0.10 | ``
-sys-libs/glibc-2.23-r3 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
-sys-libs/timezone-data-2017a | `nls -leaps`
-**FROM kubler-spin/busybox** |
-sys-apps/busybox-1.25.1 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
+sys-libs/readline-7.0_p3 | `-static-libs -utils`
+sys-libs/timezone-data-2017c | `-leaps`
+sys-libs/zlib-1.2.11-r1 | `-minizip -static-libs`
+
 #### Purged
 - [x] Headers
 - [x] Static Libs

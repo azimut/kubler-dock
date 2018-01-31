@@ -8,11 +8,12 @@ set -x
 # this hook can be used to configure the build container itself, install packages, etc
 #
 configure_bob() {
+    update-ca-certificates
     #echo 'CURRENT=x86_64-gentoo-linux-musl-4.9.4' > /etc/env.d/gcc/config-x86_64-pc-linux-musl
     eselect profile list; ls -l /etc/env.d/gcc/ ;
     ls -l /etc/portage/profile
     #gcc-config -f x86_64-gentoo-linux-musl-5.4.0;
-    source /etc/profile ; gcc-config -l
+    #source /etc/profile ; gcc-config -l
     # eselect profile set hardened/linux/musl/arm/armv7a
     fix_portage_profile_symlink
     # install basics used by helper functions

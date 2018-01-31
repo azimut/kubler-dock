@@ -1,7 +1,7 @@
 #
 # build config
 #
-_packages=""
+_packages="media-video/mediainfo"
 _emerge_bin="emerge"
 
 set -x
@@ -10,13 +10,10 @@ configure_bob()
     mkdir -p /distfiles/npm-cache
     npm config set cache /distfiles/npm-cache/.npm
 
-    if [[ -d /distfiles/flood ]]; then
-        cd /distfiles/flood
-        git pull --rebase
-    else
-        cd /distfiles
-        git clone https://github.com/jfurrow/flood
-    fi
+    local repo_url=https://github.com/jfurrow/flood
+    local name=${repo_url##*/}
+    [[ ! -d /distfiles/${name} ]] && ( cd /distfiles; git clone ${repo_url}; )
+    [[   -d /distfiles/${name} ]] && ( cd /distfiles/${name}; git pull --rebase; )
 
     mkdir -p ${_EMERGE_ROOT}/opt/flood
     rsync --delete -av --exclude=.git /distfiles/flood ${_EMERGE_ROOT}/opt/

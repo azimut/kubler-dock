@@ -26,7 +26,6 @@ configure_bob(){
     mask_package '=net-irc/weechat-9999'
 
     update_use 'net-irc/weechat'  -exec -fifo -xfer -spell
-    update_use 'sys-libs/ncurses' +minimal
 
     # perl get's a new version every new day and break libperl...
     #   current stage3 has 5.22 but one of the new virtual/perl-Data-Dumper needs 5.24
