@@ -1,6 +1,6 @@
 # kubler-dock
 
-Kubler namespace(s) for several images I use from time to time.
+[Kubler](https://github.com/edannenberg/kubler) namespace(s) for several images I use from time to time.
 
 To use it, for example to build `dnscrypt-proxy2` image, do on the kubler working directory:
 ```
