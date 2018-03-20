@@ -1,0 +1,10 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+
+USER plex
+ENV HOME /var/lib/plexmediaserver
+WORKDIR $HOME
+
+ENTRYPOINT ["/usr/sbin/start_pms"]
