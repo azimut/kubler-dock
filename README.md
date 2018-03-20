@@ -4,7 +4,7 @@
 
 To use it, for example to build `dnscrypt-proxy2` image, do on the kubler working directory:
 ```
-$ sudo bash kubler.sh build -w $THISREPO/kubler kubler-spin/dnscrypt-proxy2
+$ sudo bash kubler.sh -w $THISREPO/kubler-dock/dock/kubler-spin build kubler-spin/dnscrypt-proxy2
 ```
 
 Some arm support might come at some point. Previously had it with the folling changes on kubler.

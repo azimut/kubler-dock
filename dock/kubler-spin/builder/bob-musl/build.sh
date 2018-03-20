@@ -37,6 +37,7 @@ configure_bob() {
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-crypt/pinentry' '+ncurses'
     update_use 'app-portage/layman' '+subversion'
+    update_use 'dev-libs/libpcre2' +jit
     update_keywords 'app-portage/layman' '+~amd64'
     update_keywords 'dev-python/ssl-fetch' '+~amd64'
 
@@ -59,6 +60,9 @@ configure_bob() {
     # add musl overlay, it may exist already in the shared portage container
     layman -l | grep -q musl && layman -d musl
     layman -a musl
+
+    # https://github.com/gentoo/musl/issues/85
+    echo 'dev-libs/elfutils::musl' > /etc/portage/package.unmask/musl
     ## install go
     #cd ~
     #wget https://raw.githubusercontent.com/docker-library/golang/7e9aedf483dc0a035747f37af37ed260f2a6cf57/1.8/alpine/no-pic.patch

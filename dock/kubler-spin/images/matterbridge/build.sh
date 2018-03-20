@@ -16,7 +16,7 @@ finish_rootfs_build()
 #    mkdir -p "${_EMERGE_ROOT}"/etc
 #    cp -f /etc/{passwd,group} "${_EMERGE_ROOT}/etc"
 
-    V="v1.7.1"
+    V="v1.9.0"
     D=${_EMERGE_ROOT}/opt/matterbridge/
 
     cd /distfiles

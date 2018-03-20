@@ -15,7 +15,7 @@ finish_rootfs_build()
     mkdir -p "${_EMERGE_ROOT}"/etc
     cp -f /etc/{passwd,group} "${_EMERGE_ROOT}/etc"
 
-    V="2.0.0beta12"
+    V="2.0.6"
     U="https://github.com/jedisct1/dnscrypt-proxy/releases/download/${V}/dnscrypt-proxy-linux_x86_64-${V}.tar.gz"
     F="${U##*/}"
     D=${_EMERGE_ROOT}/opt/dnscrypt-proxy2/
