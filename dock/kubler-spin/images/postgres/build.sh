@@ -1,7 +1,10 @@
 #
 # build config
 #
-_packages="sys-apps/busybox dev-db/postgresql:9.6 sys-libs/timezone-data"
+_packages="
+sys-apps/busybox
+dev-db/postgresql:10
+sys-libs/timezone-data"
 
 _emerge_bin="emerge"
 
@@ -11,7 +14,7 @@ _emerge_bin="emerge"
 configure_rootfs_build()
 {
     update_use 'dev-db/postgresql' +server
-    update_keywords 'dev-db/postgresql:9.6' '+~'$(portageq envvar ARCH)
+    update_keywords 'dev-db/postgresql' '+~'$(portageq envvar ARCH)
 
     # Install /bin/sh
     unprovide_package sys-apps/busybox

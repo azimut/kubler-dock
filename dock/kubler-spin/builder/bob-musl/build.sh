@@ -8,6 +8,7 @@ set -x
 # this hook can be used to configure the build container itself, install packages, etc
 #
 configure_bob() {
+    env | sort
     ls -l /usr/local/share/ca-certificates
     update-ca-certificates
     #echo 'CURRENT=x86_64-gentoo-linux-musl-4.9.4' > /etc/env.d/gcc/config-x86_64-pc-linux-musl
