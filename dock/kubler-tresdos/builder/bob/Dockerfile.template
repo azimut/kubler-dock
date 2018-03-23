@@ -1,4 +1,4 @@
-FROM ${NAMESPACE}/bob-tresdos
+FROM ${NAMESPACE}/bob
 LABEL maintainer ${MAINTAINER}
 
 CMD ["/bin/bash"]

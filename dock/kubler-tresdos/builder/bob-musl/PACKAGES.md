@@ -1,7 +1,7 @@
-### kubler-spin/bob-tresdos:20170423
+### kubler-tresdos/bob-musl:20180227
 
-Built: Wed Jul  5 03:43:18 ART 2017
-Image Size: 893.2 MB
+Built: Tue Mar 20 18:53:41 EDT 2018
+Image Size: 571MB
 
 #### Installed
 None.

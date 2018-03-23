@@ -1,7 +1,7 @@
 #
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
-_packages="app-shells/bash app-misc/elasticsearch"
+_packages="app-shells/bash =app-misc/elasticsearch-5*"
 
 #
 # This hook is called just before starting the build of the root fs

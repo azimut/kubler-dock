@@ -7,6 +7,7 @@
 #
 set -x
 configure_bob() {
+    env | sort
     fix_portage_profile_symlink
     emerge -C openssh
     # install basics used by helper functions
@@ -23,6 +24,7 @@ configure_bob() {
 
     update_use 'sys-apps/util-linux' -suid -cramfs -pam
     update_use 'sys-libs/ncurses' +minimal
+    update_use 'dev-libs/libpcre2' +jit
     update_use 'net-libs/gnutls' -sslv3 -idn
     update_use 'app-shells/bash' -net
     update_use 'dev-libs/glib' -mime

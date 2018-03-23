@@ -4,7 +4,7 @@
 _packages="sys-apps/busybox"
 _emerge_bin=emerge
 configure_bob(){
-    :
+    env | sort
 }
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
