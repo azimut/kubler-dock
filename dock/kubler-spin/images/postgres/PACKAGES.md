@@ -1,7 +1,7 @@
 ### kubler-spin/postgres:20180227
 
-Built: Tue Mar 20 22:51:49 EDT 2018
-Image Size: 40.1MB
+Built: Sat Mar 24 22:00:10 EDT 2018
+Image Size: 37.4MB
 
 #### Installed
 Package | USE Flags
