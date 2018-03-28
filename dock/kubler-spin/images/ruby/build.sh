@@ -13,8 +13,9 @@ configure_bob()
 {
     update_use 'sys-libs/ncurses' +minimal
     update_use 'dev-lang/ruby' +jemalloc -rdoc
-    echo 'RUBY_TARGETS="ruby24"' >> /etc/portage/make.conf
-    update_keywords 'dev-lang/ruby' '+~amd64'
+    echo 'RUBY_TARGETS="ruby25"' >> /etc/portage/make.conf
+    update_keywords 'dev-lang/ruby' +~amd64
+    update_keywords 'app-eselect/eselect-ruby' +~amd64
     echo "dev-ruby/* ~$(portageq envvar ARCH)" >> /etc/portage/package.accept_keywords/ruby
     echo "virtual/rubygems ~$(portageq envvar ARCH)" >> /etc/portage/package.accept_keywords/ruby
     emerge ${_packages}
@@ -27,6 +28,6 @@ finish_rootfs_build()
 {
 
     # already happens elsewhere ?
-    ROOT=/emerge-root eselect ruby set ruby24
+    ROOT=/emerge-root eselect ruby set ruby25
     find ${_EMERGE_ROOT}/ -name '*.[hc]' -delete -print
 }

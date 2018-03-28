@@ -1,17 +1,22 @@
 ### kubler-spin/scrapyd:20180227
 
-Built: Wed Mar 21 17:44:01 EDT 2018
-Image Size: 124MB
+Built: Wed Mar 28 02:58:43 EDT 2018
+Image Size: 148MB
 
 #### Installed
 Package | USE Flags
 --------|----------
+app-admin/eselect-1.4.11 | `-doc -emacs -vim-syntax`
+app-eselect/eselect-postgresql-2.3 | ``
+app-misc/editor-wrapper-4 | ``
 app-text/tesseract-3.05.01 | `-doc -examples -jpeg -math -opencl -osd -png -scrollview -static-libs -tiff -training -webp`
 dev-cpp/tbb-2017.20161128 | `-debug -doc -examples`
+dev-db/postgresql-10.3 | `libressl ssl threads zlib -doc -kerberos -ldap -nls -pam -perl -python -readline (-selinux) -server -static-libs -systemd -tcl -uuid -xml`
 dev-lang/python-exec-2.4.5 | ` `
 dev-libs/gmp-6.1.2 | `asm cxx -doc -pgo -static-libs`
 dev-libs/libgcrypt-1.8.1 | `-doc -static-libs`
 dev-libs/libgpg-error-1.27-r1 | `-common-lisp -nls -static-libs`
+dev-libs/libpcre-8.41-r1 | `bzip2 cxx recursion-limit (unicode) zlib -jit -libedit -pcre16 -pcre32 -readline -static-libs`
 dev-libs/libxml2-2.9.7 | `python -debug -examples -icu -ipv6 -lzma -readline -static-libs {-test}`
 dev-libs/libxslt-1.1.30-r2 | `crypt -debug -examples -python -static-libs`
 dev-python/asn1crypto-0.22.0 | `{-test}`
@@ -24,9 +29,10 @@ dev-python/enum34-1.1.6 | `-doc`
 dev-python/idna-2.5 | ` `
 dev-python/ipaddress-1.0.18 | ` `
 dev-python/lxml-3.8.0 | `threads -doc -examples {-test}`
-dev-python/numpy-1.10.4 | `-doc -lapack {-test}`
+dev-python/numpy-1.13.3 | `-doc -lapack {-test}`
 dev-python/pillow-3.4.2-r1 | `zlib -doc -examples -jpeg -jpeg2k -lcms {-test} -tiff -tk -truetype -webp`
 dev-python/ply-3.9 | `-examples`
+dev-python/psycopg-2.7.3 | `-debug -doc -examples`
 dev-python/pyasn1-0.2.3 | `-doc`
 dev-python/pyasn1-modules-0.0.8 | ` `
 dev-python/pycparser-2.14 | `{-test}`
@@ -44,10 +50,18 @@ dev-python/twisted-core-13.2.0 | `crypt -gtk -serial`
 dev-python/twisted-mail-13.2.0 | ` `
 dev-python/twisted-names-13.2.0 | ` `
 dev-python/twisted-web-13.2.0 | `-soap`
+dev-python/unidecode-0.04.20 | ` `
 dev-python/w3lib-1.18.0 | ` `
 dev-python/zope-interface-4.3.2 | `{-test}`
 media-libs/leptonica-1.74.4 | `zlib -gif -jpeg -jpeg2k -png -static-libs {-test} -tiff -utils -webp`
 media-libs/opencv-2.4.13-r3 | `eigen openmp python threads (-cuda) -examples -ffmpeg -gstreamer -gtk -ieee1394 (-ipp) -java -jpeg -jpeg2k -libav -opencl -openexr -opengl (-pch) -png -qt5 -testprograms -tiff -v4l (-vtk) -xine`
+net-proxy/torsocks-2.2.0 | `-static-libs`
+sys-apps/attr-2.4.47-r2 | `-nls -static-libs`
+sys-apps/coreutils-8.28-r1 | `(xattr) -acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static {-test} -vanilla`
+sys-apps/file-5.32 | `zlib -python -static-libs`
+sys-apps/less-529 | `pcre unicode`
+sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
+sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode -ada -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 #### Inherited
 Package | USE Flags
 --------|----------

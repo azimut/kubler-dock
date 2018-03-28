@@ -6,5 +6,6 @@ ADD rootfs.tar /
 USER user
 ENV HOME /home/user
 WORKDIR $HOME
-#ENTRYPOINT ["/opt/flexget/bin/flexget"]
-#CMD ["-L","debug","-l","/dev/null","daemon","start"]
+
+ENTRYPOINT ["/usr/bin/scrapyd"]
+CMD ["--pidfile="]

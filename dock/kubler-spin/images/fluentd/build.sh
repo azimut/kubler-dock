@@ -1,15 +1,15 @@
 #
 # Kubler phase 1 config, pick installed packages and/or customize the build
 #
-_packages="dev-ruby/nokogiri dev-db/postgresql:9.6"
+_packages="dev-ruby/nokogiri dev-db/postgresql:10"
 set -x
 
 configure_bob()
 {
     update_use 'dev-db/postgresql' -server -perl -python
     update_keywords 'dev-ruby/nokogiri' +** 
-    echo 'dev-db/postgresql:9.6 ~'$(portageq envvar ARCH) >> /etc/portage/package.accept_keywords/bb
-    emerge -1q dev-db/postgresql:9.6
+    echo 'dev-db/postgresql:10 ~'$(portageq envvar ARCH) >> /etc/portage/package.accept_keywords/bb
+    emerge -1q dev-db/postgresql:10
 }
 configure_rootfs_build()
 {
@@ -27,7 +27,7 @@ finish_rootfs_build()
     #su - user -s /bin/sh -c 'gem install fluentd -v 0.12.42 --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluentd -v 0.14.25 --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-rss --no-ri --no-rdoc'
-    su - user -s /bin/sh -c 'gem install fluent-plugin-elasticsearch --no-ri --no-rdoc'
+    #su - user -s /bin/sh -c 'gem install fluent-plugin-elasticsearch --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-sql --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install fluent-plugin-rewrite-tag-filter --no-ri --no-rdoc'
     su - user -s /bin/sh -c 'gem install pg --no-ri --no-rdoc'
@@ -36,6 +36,7 @@ finish_rootfs_build()
 
     # Cleanup gems cache
     rm -v /home/user/.gem/ruby/2.4.0/cache/*.gem
+
 	# Install gem files to docker $ROOT
     mkdir -p ${_EMERGE_ROOT}/home/user
     cp -r /home/user/.gem  ${_EMERGE_ROOT}/home/user
