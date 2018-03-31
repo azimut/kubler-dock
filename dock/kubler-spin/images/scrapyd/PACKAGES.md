@@ -1,6 +1,6 @@
 ### kubler-spin/scrapyd:20180227
 
-Built: Wed Mar 28 02:58:43 EDT 2018
+Built: Fri Mar 30 02:07:26 EDT 2018
 Image Size: 148MB
 
 #### Installed
@@ -42,7 +42,7 @@ dev-python/pytesseract-0.2.1 | ` `
 dev-python/queuelib-1.1.1 | `{-test}`
 dev-python/scrapy-1.0.3 | `ssl -boto -doc -ibl {-test}`
 dev-python/scrapyd-1.2.0 | `-doc`
-dev-python/service_identity-16.0.0 | `-doc {-test}`
+dev-python/service_identity-17.0.0-r1 | `-doc {-test}`
 dev-python/setuptools-36.7.2 | `{-test}`
 dev-python/six-1.10.0 | `-doc {-test}`
 dev-python/twisted-conch-13.2.0 | ` `
@@ -55,7 +55,7 @@ dev-python/w3lib-1.18.0 | ` `
 dev-python/zope-interface-4.3.2 | `{-test}`
 media-libs/leptonica-1.74.4 | `zlib -gif -jpeg -jpeg2k -png -static-libs {-test} -tiff -utils -webp`
 media-libs/opencv-2.4.13-r3 | `eigen openmp python threads (-cuda) -examples -ffmpeg -gstreamer -gtk -ieee1394 (-ipp) -java -jpeg -jpeg2k -libav -opencl -openexr -opengl (-pch) -png -qt5 -testprograms -tiff -v4l (-vtk) -xine`
-net-proxy/torsocks-2.2.0 | `-static-libs`
+net-proxy/tsocks-1.8_beta5-r8 | `-dns -envconf -server-lookups -tordns`
 sys-apps/attr-2.4.47-r2 | `-nls -static-libs`
 sys-apps/coreutils-8.28-r1 | `(xattr) -acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static {-test} -vanilla`
 sys-apps/file-5.32 | `zlib -python -static-libs`

@@ -3,7 +3,7 @@
 #
 _packages="
 media-libs/opencv
-net-proxy/torsocks
+net-proxy/tsocks
 dev-python/unidecode
 dev-python/psycopg:2
 dev-python/pytesseract::azimut
@@ -15,6 +15,7 @@ configure_bob(){
     update_keywords 'dev-python/scrapy'  +~amd64
     update_keywords 'dev-python/scrapyd' +~amd64
     update_keywords 'dev-python/numpy' +~amd64
+    update_keywords 'dev-python/service_identity' +~amd64
     update_use 'dev-libs/libxml2' +python
 
     update_use 'dev-db/postgresql' -server -perl -python
@@ -36,12 +37,11 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     copy_gcc_libs
-    find /usr/lib64/gcc/x86_64-pc-linux-gnu -name libgomp.so.* -exec cp {} "${_EMERGE_ROOT}"/usr/lib64/ \;
-    cat > ${_EMERGE_ROOT}/etc/tor/torsocks.conf <<EOF
-TorAddress 127.0.0.1
-TorPort 9050
-OnionAddrRange 127.42.42.0/24
-AllowOutboundLocalhost 1
+    find /usr/lib64/gcc/x86_64-pc-linux-gnu -name 'libgomp.so.*' -exec cp {} "${_EMERGE_ROOT}"/usr/lib64/ \;
+    cat > ${_EMERGE_ROOT}/etc/socks/tsocks.conf <<EOF
+server = 127.0.0.1
+server_type = 4
+server_port = 9050
 EOF
     cat > ${_EMERGE_ROOT}/home/user/.scrapyd.conf <<EOF
 [scrapyd]
