@@ -1,0 +1,11 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+ADD --chown=znc:znc rootfs /
+
+USER znc
+ENV HOME /var/lib/znc
+
+ENTRYPOINT [ "/usr/bin/znc" ]
+CMD ["-f"]
