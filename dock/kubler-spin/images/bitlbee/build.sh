@@ -1,8 +1,5 @@
-#
-# build config
-#
-
-_packages="x11-plugins/pidgin-skypeweb
+_packages="x11-plugins/purple-rocketchat
+           x11-plugins/purple-discord
            net-im/bitlbee"
 
 # force native build
@@ -11,22 +8,19 @@ _emerge_bin="emerge"
 set -x
 
 configure_bob(){
+    add_overlay azimut 'https://github.com/azimut/overlay'
 
     mask_package '=net-im/bitlbee-9999'
-    #mask_package '=x11-plugins/pidgin-skypeweb-9999'
 
     provide_package 'dev-util/desktop-file-utils'
     provide_package 'virtual/logger'
+    
+    update_keywords 'net-im/bitlbee'                '+**'
+    update_keywords 'x11-plugins/purple-rocketchat' '+**'
+    update_keywords 'x11-plugins/purple-discord'    '+**'
 
-    # core
-    update_keywords 'net-im/bitlbee'              '+**'
-    update_keywords 'x11-plugins/pidgin-skypeweb' '+**'
-
-    # core
     update_use 'net-im/bitlbee'      -gnutls +plugins +purple +xmpp
     update_use 'net-im/pidgin'       -xscreensaver -gstreamer
-
-    # misc
     update_use 'dev-libs/json-glib'  -introspection
 
     # pkg-postinstall of nss needs a binary of the same package. Not a bug
@@ -55,7 +49,8 @@ finish_rootfs_build()
             "${_EMERGE_ROOT}"/usr/share/pixmaps \
             "${_EMERGE_ROOT}"/usr/lib/systemd/ 
 
-    find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ -type f -name '*.[ah]' -delete -print
+    find "${_EMERGE_ROOT}"/lib/ "${_EMERGE_ROOT}"/usr/lib/ \
+         -type f -name '*.[ah]' -delete -print
 
     # When mounting a docker volume we need this gone
     rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
@@ -64,7 +59,7 @@ finish_rootfs_build()
     # Note: You cannot enable ssl CA authentication without gnutls
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
-Protocols = hipchat skypeweb jabber
+Protocols = discord rocketchat
 [defaults]
 EOF
 
