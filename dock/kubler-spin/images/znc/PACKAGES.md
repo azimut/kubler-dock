@@ -1,7 +1,7 @@
 ### kubler-spin/znc:20180227
 
-Built: Mon Apr  2 11:36:47 EDT 2018
-Image Size: 88.9MB
+Built: Thu Apr  5 23:23:37 EDT 2018
+Image Size: 89.6MB
 
 #### Installed
 Package | USE Flags
@@ -11,10 +11,12 @@ app-eselect/eselect-postgresql-2.3 | ``
 app-misc/editor-wrapper-4 | ``
 dev-db/postgresql-10.3 | `libressl ssl threads zlib -doc -kerberos -ldap -nls -pam -perl -python -readline (-selinux) -server -static-libs (-systemd) -tcl -uuid -xml`
 dev-lang/python-exec-2.4.5 | ` `
+dev-libs/cyrus-sasl-2.1.26-r11 | `libressl sqlite ssl -authdaemond -berkdb -gdbm -java -kerberos -ldapdb -mysql -openldap -pam -postgres -sample (-selinux) -srp -static-libs -urandom`
 dev-libs/icu-60.2 | `-debug -doc -examples -static-libs`
 dev-libs/libpcre-8.41-r1 | `cxx recursion-limit (unicode) zlib -bzip2 -jit -libedit -pcre16 -pcre32 -readline -static-libs`
 dev-python/psycopg-2.7.3 | `-debug -doc -examples`
-net-irc/znc-1.6.5 | `daemon icu libressl python ssl zlib -debug -ipv6 -perl -sasl -tcl {-test}`
+net-irc/znc-1.6.5 | `daemon icu libressl python sasl ssl zlib -debug -ipv6 -perl -tcl {-test}`
+net-mail/mailbase-1.1 | `-pam`
 sys-apps/coreutils-8.28-r1 | `-acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static {-test} -vanilla -xattr`
 sys-apps/file-5.32 | `zlib -python -static-libs`
 sys-apps/less-529 | `pcre unicode`

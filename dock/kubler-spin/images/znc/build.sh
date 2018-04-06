@@ -11,8 +11,9 @@ dev-python/psycopg:2"
 _emerge_bin="emerge"
 
 configure_bob(){
-    update_use net-irc/znc +python +daemon
+    update_use net-irc/znc +python +daemon +sasl
     update_use dev-db/postgresql -server
+    update_keywords dev-libs/cyrus-sasl +**
     unprovide_package sys-apps/busybox
     # Need it on BOB to use eselect after
     emerge -1q dev-db/postgresql

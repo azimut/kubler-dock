@@ -59,7 +59,7 @@ finish_rootfs_build()
     # Note: You cannot enable ssl CA authentication without gnutls
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
-Protocols = discord rocketchat
+Protocols = eionrobb-discord eionrobb-rocketchat
 [defaults]
 EOF
 
