@@ -19,7 +19,7 @@ configure_bob(){
     update_keywords 'x11-plugins/purple-rocketchat' '+**'
     update_keywords 'x11-plugins/purple-discord'    '+**'
 
-    update_use 'net-im/bitlbee'      -gnutls +plugins +purple +xmpp
+    update_use 'net-im/bitlbee'      -gnutls +plugins +purple -xmpp +twitter
     update_use 'net-im/pidgin'       -xscreensaver -gstreamer
     update_use 'dev-libs/json-glib'  -introspection
 
@@ -59,7 +59,7 @@ finish_rootfs_build()
     # Note: You cannot enable ssl CA authentication without gnutls
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
-Protocols = eionrobb-discord eionrobb-rocketchat
+Protocols = eionrobb-discord eionrobb-rocketchat twitter
 [defaults]
 EOF
 

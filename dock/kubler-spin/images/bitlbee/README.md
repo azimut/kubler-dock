@@ -1,6 +1,6 @@
 # Bitlbee
 
-This image has discord and rocketchat support.
+This image has discord, twitter and rocketchat support.
 
 ```
 docker run --name bitlbee --cap-drop=ALL --rm --read-only --dns 8.8.8.8 -p 127.0.0.1:6667:6667 -v /etc/localtime:/etc/localtime:ro -v $HOME:/var/lib/bitlbee/ -ti kubler-spin/bitlbee

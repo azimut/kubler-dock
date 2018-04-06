@@ -1,6 +1,6 @@
 ### kubler-spin/bitlbee:20180227
 
-Built: Thu Apr  5 20:27:21 EDT 2018
+Built: Fri Apr  6 14:20:37 EDT 2018
 Image Size: 27.1MB
 
 #### Installed
@@ -15,7 +15,7 @@ dev-libs/libpcre-8.41-r1 | `cxx recursion-limit (unicode) zlib -bzip2 -jit -libe
 dev-libs/libxml2-2.9.7 | `-debug -examples -icu -ipv6 -lzma -python -readline -static-libs {-test}`
 dev-libs/nspr-4.13.1 | `-debug`
 dev-libs/nss-3.29.5 | `nss-pem -cacert -utils`
-net-im/bitlbee-3.5.1 | `libressl plugins purple xmpp -debug -gnutls -ipv6 -libevent -msn -nss -oscar -otr (-selinux) {-test} -twitter -xinetd`
+net-im/bitlbee-3.5.1 | `libressl plugins purple twitter -debug -gnutls -ipv6 -libevent -msn -nss -oscar -otr (-selinux) {-test} -xinetd -xmpp`
 net-im/pidgin-2.12.0 | `(pie) (-aqua) -dbus -debug -doc -eds -gadu -gnutls -groupwise -gstreamer -gtk -idn -meanwhile -ncurses -networkmanager -nls -perl -prediction -python -sasl -silc -spell -tcl -tk -xscreensaver -zephyr -zeroconf`
 sys-apps/util-linux-2.30.2-r1 | `static-libs unicode -build -caps -cramfs -fdformat -kill -ncurses -nls -pam -python -readline (-selinux) -slang -suid (-systemd) {-test} -tty-helpers -udev`
 sys-libs/zlib-1.2.11-r1 | `-minizip -static-libs`
