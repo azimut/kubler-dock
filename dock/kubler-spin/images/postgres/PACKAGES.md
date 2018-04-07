@@ -1,20 +1,15 @@
 ### kubler-spin/postgres:20180227
 
-Built: Sun Mar 25 18:54:04 EDT 2018
-Image Size: 37.4MB
+Built: Fri Apr  6 22:04:21 -03 2018
+Image Size: 28.3MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-app-admin/eselect-1.4.11 | `-doc -emacs -vim-syntax`
-app-eselect/eselect-postgresql-2.3 | ``
 app-misc/editor-wrapper-4 | ``
 dev-db/postgresql-10.3 | `libressl server ssl threads zlib -doc -kerberos -ldap -nls -pam -perl -python -readline (-selinux) -static-libs (-systemd) -tcl -uuid -xml`
 dev-libs/libpcre-8.41-r1 | `cxx recursion-limit (unicode) zlib -bzip2 -jit -libedit -pcre16 -pcre32 -readline -static-libs`
-sys-apps/coreutils-8.28-r1 | `-acl -caps -gmp -hostname -kill -multicall -nls (-selinux) -static {-test} -vanilla -xattr`
-sys-apps/file-5.32 | `zlib -python -static-libs`
 sys-apps/less-529 | `pcre unicode`
-sys-apps/sed-4.2.2 | `-acl -nls (-selinux) -static`
 sys-libs/ncurses-6.0-r1 | `cxx minimal threads unicode (-ada) -debug -doc -gpm (-profile) -static-libs {-test} -tinfo -trace`
 sys-libs/timezone-data-2017c | `-leaps`
 sys-libs/zlib-1.2.11-r1 | `-minizip -static-libs`

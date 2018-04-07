@@ -11,8 +11,9 @@ dev-python/psycopg:2"
 _emerge_bin="emerge"
 
 configure_bob(){
-    update_use net-irc/znc +python +daemon +sasl
-    update_use dev-db/postgresql -server
+    update_use 'net-irc/znc'       +python +daemon +sasl
+    update_use 'dev-db/postgresql' -server
+    update_use 'sys-apps/less'     -pcre
     update_keywords dev-libs/cyrus-sasl +**
     unprovide_package sys-apps/busybox
     # Need it on BOB to use eselect after
@@ -21,7 +22,8 @@ configure_bob(){
 
 configure_rootfs_build()
 {
-    :
+    # Avoid installing on ROOT eselect deps (sed,file,ncurses)
+    provide_package app-admin/eselect app-eselect/eselect-postgresql
 }
 
 finish_rootfs_build()
