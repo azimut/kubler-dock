@@ -8,7 +8,6 @@ set -x
 # this hook can be used to configure the build container itself, install packages, etc
 #
 configure_bob() {
-    env | sort
     ls -l /usr/local/share/ca-certificates
     update-ca-certificates
     #echo 'CURRENT=x86_64-gentoo-linux-musl-4.9.4' > /etc/env.d/gcc/config-x86_64-pc-linux-musl
@@ -18,6 +17,7 @@ configure_bob() {
     #source /etc/profile ; gcc-config -l
     # eselect profile set hardened/linux/musl/arm/armv7a
     fix_portage_profile_symlink
+    emerge -C net-misc/openssh net-misc/iputils
     # install basics used by helper functions
     emerge app-portage/flaggie app-portage/eix app-portage/gentoolkit
     configure_eix
@@ -31,7 +31,6 @@ configure_bob() {
     echo 'LANG="en_US.UTF-8"' > /etc/env.d/02locale
     env-update
     source /etc/profile
-    emerge -C net-misc/openssh net-misc/iputils
     #update_use 'dev-libs/openssl' +bindist +tls-heartbeat
 
     # install default packages
@@ -43,10 +42,14 @@ configure_bob() {
     update_keywords 'dev-python/ssl-fetch' '+~amd64'
 
     update_use 'dev-libs/glib' -mime
+    update_use 'sys-apps/less' -pcre
     update_use 'sys-apps/util-linux' -suid -cramfs -pam
     update_use 'sys-libs/ncurses' +minimal
     update_use 'net-libs/gnutls' -sslv3 -idn
     update_use 'app-shells/bash' -net
+    # http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html
+    # The GNU Readline library provides a set of functions for use by applications
+    # that allow users to edit command lines as they are typed in. 
     echo 'USE="${USE} -xattr -acl -deprecated -readline -bindist -nls"' >> /etc/portage/make.conf
 
     emerge -1q openssl

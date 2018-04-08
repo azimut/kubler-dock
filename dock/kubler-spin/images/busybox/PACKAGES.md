@@ -1,6 +1,6 @@
 ### kubler-spin/busybox:20180227
 
-Built: Thu Apr  5 18:06:03 EDT 2018
+Built: Sat Apr  7 20:17:19 -03 2018
 Image Size: 1.22MB
 
 #### Installed
