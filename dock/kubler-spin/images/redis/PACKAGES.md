@@ -1,6 +1,6 @@
 ### kubler-spin/redis:20180227
 
-Built: Sat Apr  7 20:39:22 -03 2018
+Built: Sat Apr  7 21:57:06 -03 2018
 Image Size: 6.06MB
 
 #### Installed
