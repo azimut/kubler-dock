@@ -19,6 +19,7 @@ configure_bob(){
     update_keywords 'x11-plugins/purple-rocketchat' '+**'
     update_keywords 'x11-plugins/purple-discord'    '+**'
 
+    # Note: You cannot enable ssl CA authentication without gnutls
     update_use 'net-im/bitlbee'      -gnutls +plugins +purple -xmpp +twitter
     update_use 'net-im/pidgin'       -xscreensaver -gstreamer
     update_use 'dev-libs/json-glib'  -introspection
@@ -54,9 +55,7 @@ finish_rootfs_build()
 
     # When mounting a docker volume we need this gone
     rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
-    #cp -a "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf \
-    #       "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.default.conf
-    # Note: You cannot enable ssl CA authentication without gnutls
+    >${_EMERGE_ROOT}/etc/bitlbee/motd.txt
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
 Protocols = eionrobb-discord eionrobb-rocketchat twitter
