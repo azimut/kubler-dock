@@ -1,5 +1,5 @@
-_packages="x11-plugins/purple-rocketchat
-           x11-plugins/purple-discord
+_packages="x11-plugins/purple-rocketchat::azimut
+           x11-plugins/purple-hangouts
            net-im/bitlbee"
 
 # force native build
@@ -17,16 +17,14 @@ configure_bob(){
     
     update_keywords 'net-im/bitlbee'                '+**'
     update_keywords 'x11-plugins/purple-rocketchat' '+**'
-    update_keywords 'x11-plugins/purple-discord'    '+**'
+    update_keywords 'x11-plugins/purple-hangouts'   '+**'
 
     # Note: You cannot enable ssl CA authentication without gnutls
-    update_use 'net-im/bitlbee'      -gnutls +plugins +purple -xmpp +twitter
-    update_use 'net-im/pidgin'       -xscreensaver -gstreamer
-    update_use 'dev-libs/json-glib'  -introspection
+    update_use 'net-im/bitlbee'     -gnutls +plugins +purple -xmpp +twitter
+    update_use 'net-im/pidgin'      -xscreensaver -gstreamer
+    update_use 'dev-libs/json-glib' -introspection
 
-    # pkg-postinstall of nss needs a binary of the same package. Not a bug
-    #   in itself but it doesn't play well with ROOT and precompiled binaries.
-    #   Might be something needs to be fixed on ROOT to have work properly.
+    # needed? yes
     emerge -1q dev-libs/nss
 }
 #
@@ -58,7 +56,7 @@ finish_rootfs_build()
     >${_EMERGE_ROOT}/etc/bitlbee/motd.txt
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
-Protocols = eionrobb-discord eionrobb-rocketchat twitter
+Protocols = telegram eionrobb-rocketchat twitter
 [defaults]
 EOF
 
