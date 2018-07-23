@@ -1,0 +1,14 @@
+FROM ${IMAGE_PARENT}
+LABEL maintainer ${MAINTAINER}
+
+ADD rootfs.tar /
+ADD rootfs /
+
+USER mpd
+ENV HOME /var/lib/mpd
+
+VOLUME /var/lib/mpd
+VOLUME /music
+
+ENTRYPOINT ["/usr/bin/mpd"]
+CMD ["--no-daemon", "-v"]
