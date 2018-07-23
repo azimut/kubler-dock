@@ -17,6 +17,4 @@ configure_rootfs_build()
 finish_rootfs_build(){
     # ncurses
     copy_gcc_libs
-    # lame, need to add the builder
-    #cp /usr/${_LIB}/libudev.so ${_EMERGE_ROOT}/usr/${_LIB}/
 }

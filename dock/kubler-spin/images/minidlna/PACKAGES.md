@@ -1,6 +1,6 @@
 ### kubler-spin/minidlna:20180227
 
-Built: Wed Mar 14 20:31:31 EDT 2018
+Built: Mon Jun 18 21:05:14 -03 2018
 Image Size: 42.9MB
 
 #### Installed

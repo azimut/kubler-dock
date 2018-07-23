@@ -2,10 +2,11 @@ FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
 ADD rootfs.tar /
+ADD rootfs /
 
 RUN ldconfig
 
 #USER tor
 
-#ENTRYPOINT [ "tor "]
-#CMD [ "-f", "/etc/tor/torrc.default" ]
+ENTRYPOINT [ "/usr/bin/minidlna" ]
+CMD [ "-d", "-f", "/etc/minidlna-custom.conf" ]
