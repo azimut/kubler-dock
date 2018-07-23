@@ -15,6 +15,8 @@ configure_bob(){
     update_use 'dev-db/postgresql' -server
     update_use 'sys-apps/less'     -pcre
     update_keywords dev-libs/cyrus-sasl +**
+    update_keywords 'net-irc/znc' '+**'
+    mask_package '=net-irc/znc-9999'
     unprovide_package sys-apps/busybox
     # Need it on BOB to use eselect after
     emerge -1q dev-db/postgresql
