@@ -1,14 +1,14 @@
-### kubler-spin/glibc:20180227
+### kubler-spin/glibc:20180628
 
-Built: Sun May 20 20:50:13 -03 2018
-Image Size: 10.7MB
+Built: Sat Jul 21 02:24:37 -03 2018
+Image Size: 10.4MB
 
 #### Installed
 Package | USE Flags
 --------|----------
 sys-apps/gentoo-functions-0.12 | ``
-sys-libs/glibc-2.25-r10 | `hardened rpc -audit -caps -debug -gd -headers-only (-multilib) -nscd (-profile) (-selinux) -suid -systemtap (-vanilla)`
-sys-libs/timezone-data-2017c | `-leaps`
+sys-libs/glibc-2.26-r7 | `hardened -audit -caps -debug -doc -gd -headers-only (-multilib) -nscd (-profile) (-selinux) -suid -systemtap (-vanilla)`
+sys-libs/timezone-data-2018d | `-leaps`
 #### Inherited
 Package | USE Flags
 --------|----------

@@ -1,12 +1,12 @@
-### kubler-spin/busybox:20180227
+### kubler-spin/busybox:20180628
 
-Built: Mon May 21 21:19:39 -03 2018
+Built: Sun Jul 22 21:52:27 -03 2018
 Image Size: 1.22MB
 
 #### Installed
 Package | USE Flags
 --------|----------
-sys-apps/busybox-1.28.0 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
+sys-apps/busybox-1.28.4 | `make-symlinks static -debug -ipv6 -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Inherited
 Package | USE Flags
 --------|----------

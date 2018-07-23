@@ -1,7 +1,7 @@
 #
 # build config
 #
-_packages="dev-libs/libressl:0/39"
+_packages="dev-libs/libressl"
 _emerge_bin="emerge"
 
 set -x
@@ -16,8 +16,8 @@ configure_bob()
     echo "-libressl"               >> /etc/portage/profile/use.stable.mask 
     echo "-curl_ssl_libressl"      >> /etc/portage/profile/use.stable.mask 
     echo "dev-libs/openssl"        >> /etc/portage/package.mask/openssl
-    #echo ">=dev-libs/libressl-2.5"        >> /etc/portage/package.mask/openssl
-    echo "=dev-libs/libressl-2.4*" >> /etc/portage/package.accept_keywords/libressl
+    #echo ">=dev-libs/libressl-2.6"        >> /etc/portage/package.mask/openssl
+    echo ">=dev-libs/libressl-2.4*" >> /etc/portage/package.accept_keywords/libressl
     emerge -f ${_packages}
     emerge -C openssl openssh
     emerge -1q ${_packages}
