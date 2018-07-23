@@ -10,8 +10,6 @@ _emerge_bin="emerge"
 set -x
 
 configure_bob(){
-    #[[ ! -d /distfiles/scripts ]] && { cd /distfiles; git clone https://github.com/weechat/scripts; }
-    #[[   -d /distfiles/scripts ]] && { cd /distfiles/scripts; git pull --rebase; }
 
     # https://wiki.gentoo.org/wiki/Project:Python/PYTHON_TARGETS
     echo 'PYTHON_TARGETS="python2_7"'       >> /etc/portage/make.conf
@@ -65,10 +63,10 @@ finish_rootfs_build()
     # autobuild
     rm -rf ${_EMERGE_ROOT}/usr/share/{autogen,aclocal,pkgconfig}
     # python-cleanup
-	find ${_EMERGE_ROOT}/ -depth \
-			\( \
-				\( -type d -a -name test -o -name tests -o -name testing \) \
-				-o \
-				\( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
-	        \) -print -exec rm -rf '{}' + 
+    find ${_EMERGE_ROOT}/ -depth \
+	 \( \
+	 \( -type d -a -name test -o -name tests -o -name testing \) \
+	 -o \
+	 \( -type f -a -name '*.pyo' -o -name '*.pyc' -o -name '*.whl' \) \
+	 \) -print -exec rm -rf '{}' + 
 }
