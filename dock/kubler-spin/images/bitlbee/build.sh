@@ -1,4 +1,5 @@
 _packages="x11-plugins/purple-rocketchat::azimut
+           x11-plugins/purple-discord::azimut
            x11-plugins/purple-hangouts
            net-im/bitlbee"
 
@@ -18,6 +19,7 @@ configure_bob(){
     update_keywords 'net-im/bitlbee'                '+**'
     update_keywords 'x11-plugins/purple-rocketchat' '+**'
     update_keywords 'x11-plugins/purple-hangouts'   '+**'
+    update_keywords 'x11-plugins/purple-discord'    '+**'
 
     # Note: You cannot enable ssl CA authentication without gnutls
     update_use 'net-im/bitlbee'     -gnutls +plugins +purple -xmpp +twitter
@@ -53,10 +55,12 @@ finish_rootfs_build()
 
     # When mounting a docker volume we need this gone
     rm -rvf "${_EMERGE_ROOT}"/var/lib/bitlbee/purple
+    # NO motd
     >${_EMERGE_ROOT}/etc/bitlbee/motd.txt
+    # Config
     cat > "${_EMERGE_ROOT}"/etc/bitlbee/bitlbee.conf <<EOF
 [settings]
-Protocols = telegram eionrobb-rocketchat twitter
+Protocols = hangouts eionrobb-rocketchat twitter eionrobb-discord
 [defaults]
 EOF
 
